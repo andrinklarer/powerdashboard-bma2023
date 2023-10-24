@@ -12,6 +12,10 @@ export const powerProductionRouter = createTRPCRouter({
       _sum: {
         production: true,
       },
+      orderBy: {
+        date: "desc",
+      },
+      take: 10,
     });
     return data.map((entry) => ({
       date: `${entry.date.getDate()}.${entry.date.getMonth()}`,
@@ -20,7 +24,7 @@ export const powerProductionRouter = createTRPCRouter({
   }),
 
   getAllSeperated: publicProcedure.query(async ({ ctx }) => {
-    const fullData = await ctx.db.powerProduction.findMany();
+    const fullData = await ctx.db.powerProduction.findMany({ take: 10 });
 
     const filteredDates = await ctx.db.powerProduction.groupBy({
       by: ["date"],
