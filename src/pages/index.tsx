@@ -43,7 +43,9 @@ export default function Home() {
               </div>
             </Link>
           </div>
-          <div>{data?.map((prod) => <div>{prod.amount}</div>)}</div>
+          <div>
+            {data?.map((prod, index) => <div key={index}>{prod.amount}</div>)}
+          </div>
         </div>
       </main>
     </>
