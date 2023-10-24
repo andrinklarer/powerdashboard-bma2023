@@ -10,12 +10,12 @@ export const powerProductionRouter = createTRPCRouter({
     const data = await ctx.db.powerProduction.groupBy({
       by: ["date"],
       _sum: {
-        amount: true,
+        production: true,
       },
     });
     return data.map((entry) => ({
       date: `${entry.date.getDate()}.${entry.date.getMonth()}`,
-      amount: entry._sum.amount,
+      production: entry._sum.production,
     }));
   }),
 
@@ -32,32 +32,32 @@ export const powerProductionRouter = createTRPCRouter({
         (pred) =>
           pred.date.toDateString() == entry.date.toDateString() &&
           pred.type === "Photovoltaik",
-      )?.amount,
+      )!.production,
       Wind: fullData.findLast(
         (pred) =>
           pred.date.toDateString() == entry.date.toDateString() &&
           pred.type === "Wind",
-      )?.amount,
+      )!.production,
       Thermische: fullData.findLast(
         (pred) =>
           pred.date.toDateString() == entry.date.toDateString() &&
           pred.type === "Thermische",
-      )?.amount,
+      )!.production,
       Speicherkraft: fullData.findLast(
         (pred) =>
           pred.date.toDateString() == entry.date.toDateString() &&
           pred.type === "Speicherkraft",
-      )?.amount,
+      )!.production,
       Kernkraft: fullData.findLast(
         (pred) =>
           pred.date.toDateString() == entry.date.toDateString() &&
           pred.type === "Kernkraft",
-      )?.amount,
+      )!.production,
       Flusskraft: fullData.findLast(
         (pred) =>
           pred.date.toDateString() == entry.date.toDateString() &&
           pred.type === "Flusskraft",
-      )?.amount,
+      )!.production,
     }));
   }),
 });

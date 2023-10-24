@@ -12,8 +12,15 @@ generator client {
 }
 
 model PowerProduction {
-    id     Int      @id @default(autoincrement())
-    date   DateTime @default(now())
-    type   String
-    amount Float
+    id         Int      @id @default(autoincrement())
+    date       DateTime @default(now())
+    type       String
+    production Float
+}
+
+model PowerConsumption {
+    id          Int      @id @default(autoincrement())
+    date        DateTime @default(now())
+    consumption Int
+    lossless    Int
 }

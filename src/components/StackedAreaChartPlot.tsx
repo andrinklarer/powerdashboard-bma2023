@@ -11,6 +11,10 @@ import { api } from "~/utils/api";
 
 const StackedAreaChartPlot = () => {
   const { data } = api.powerProduction.getAllSeperated.useQuery();
+  if (!data) return;
+  if (!data.at(0)) return;
+
+  data.at(0)!.Flusskraft = 2;
 
   console.log(data);
 
@@ -36,6 +40,8 @@ const StackedAreaChartPlot = () => {
           <XAxis dataKey="date" stroke="#D3D3D3" />
           <YAxis stroke="#D3D3D3" />
           <Tooltip
+            labelFormatter={(name) => "Datum: " + name}
+            labelStyle={{ fontWeight: "bold", borderBottom: "solid" }}
             itemSorter={(i) =>
               [
                 "Wind",
