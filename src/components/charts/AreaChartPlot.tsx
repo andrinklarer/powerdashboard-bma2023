@@ -5,12 +5,13 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  CartesianGrid,
 } from "recharts";
 import { api } from "~/utils/api";
 
 const AreaChartPlot = () => {
-  const { data } = api.powerProduction.getAllGroupedByDate.useQuery();
+  const { data } = api.powerProduction.getAllGroupedByDate.useQuery({
+    amount: 100,
+  });
 
   return (
     <>
@@ -36,7 +37,7 @@ const AreaChartPlot = () => {
           <Tooltip />
           <Area
             type="monotone"
-            dataKey="amount"
+            dataKey="production"
             stroke="#8884d8"
             fillOpacity={1}
             fill="url(#colorUv)"

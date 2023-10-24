@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar";
-import Charts from "../components/Charts";
+import Charts from "../components/charts/Charts";
 
 export default function Home() {
   return (
