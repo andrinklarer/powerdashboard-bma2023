@@ -40,6 +40,7 @@ interface QuantityInputProps {
   min?: number;
   max?: number;
   defaultValue?: number;
+  step?: number;
 }
 
 export default function QuantityInput({
@@ -47,6 +48,7 @@ export default function QuantityInput({
   min = 0,
   max = 100,
   defaultValue = 0,
+  step = 1,
 }: QuantityInputProps) {
   return (
     <NumberInput
@@ -56,6 +58,7 @@ export default function QuantityInput({
       aria-label="Quantity Input"
       min={min}
       max={max}
+      step={step}
       defaultValue={defaultValue}
     />
   );

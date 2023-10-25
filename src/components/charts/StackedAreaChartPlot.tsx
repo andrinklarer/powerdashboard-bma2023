@@ -6,7 +6,12 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { amountOfNuclearPowerPlants, defaultChartSize } from "~/lib/consts";
+import {
+  amountOfNuclearPowerPlants,
+  amountOfWindTurbines,
+  defaultChartSize,
+  efficiencyOfSolarPanels,
+} from "~/lib/consts";
 import { api } from "~/utils/api";
 
 const DetailedConsumptionData = (amount: number) =>
@@ -37,6 +42,8 @@ interface StackedAreaChartPlotProps {
   showWater?: boolean;
   showLosses?: boolean;
   nuclearModifier?: number;
+  solarEfficiency?: number;
+  windTurbines?: number;
 }
 
 const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
@@ -46,25 +53,26 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   showWater = true,
   showLosses = false,
   nuclearModifier = amountOfNuclearPowerPlants,
+  solarEfficiency = efficiencyOfSolarPanels,
+  windTurbines = amountOfWindTurbines,
 }) => {
-  const detailedProductionData = DetailedProductionData(amount);
-  const detailedConsumptionData = DetailedConsumptionData(amount);
-  const consumptionData = ConsumptionData(amount);
-  const productionData = TotalProductionData(amount);
+  // const detailedProductionData = DetailedProductionData(amount);
+  // const detailedConsumptionData = DetailedConsumptionData(amount);
+  // const consumptionData = ConsumptionData(amount);
+  // const productionData = TotalProductionData(amount);
   const powerDashboard = PowerDashboardData(amount);
 
   if (!powerDashboard.data) {
     return <div>Data still loading!</div>;
   }
 
-  if (!consumptionData) return;
-
-  console.log(nuclearModifier);
-
   /* Kernkraft */
   const calculateNuclear = (value: number) =>
-    Math.round((value / amountOfNuclearPowerPlants) * nuclearModifier * 10) /
-    10;
+    hideNuclear
+      ? 0
+      : Math.round(
+          (value / amountOfNuclearPowerPlants) * nuclearModifier * 10,
+        ) / 10;
 
   /* Kernkraft */
   const calculateRiver = (value: number) => value;
@@ -76,10 +84,12 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   const calculateThermic = (value: number) => value;
 
   /* Photovoltaik */
-  const calculateSolar = (value: number) => value;
+  const calculateSolar = (value: number) =>
+    Math.round((value / efficiencyOfSolarPanels) * solarEfficiency * 10) / 10;
 
   /* Wind */
-  const calculateWind = (value: number) => value;
+  const calculateWind = (value: number) =>
+    Math.round((value / amountOfWindTurbines) * windTurbines * 10) / 10;
 
   const calculateTotalProduction = (item: {
     id: number;
@@ -94,12 +104,15 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     Verbrauch: number;
   }) => {
     return (
-      calculateRiver(item.Flusskraft) +
-      calculateNuclear(item.Kernkraft) +
-      calculateStoragePower(item.Speicherkraft) +
-      calculateThermic(item.Thermische) +
-      calculateSolar(item.Photovoltaik) +
-      calculateWind(item.Wind)
+      Math.round(
+        (calculateRiver(item.Flusskraft) +
+          calculateNuclear(item.Kernkraft) +
+          calculateStoragePower(item.Speicherkraft) +
+          calculateThermic(item.Thermische) +
+          calculateSolar(item.Photovoltaik) +
+          calculateWind(item.Wind)) *
+          10,
+      ) / 10
     );
   };
 

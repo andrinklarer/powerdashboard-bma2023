@@ -1,17 +1,22 @@
 import { HoverTooltip } from "./HoverTooltip";
 import QuantityInput from "./NumberInput";
 
-interface Props {
+interface ProductionOptionsProps {
   setAmount: React.Dispatch<React.SetStateAction<number>>;
   iconPath: string;
   text: string;
   tooltip: string;
-  min: number;
+  min?: number;
   max: number;
   defaultValue: number;
+  step?: number;
 }
 
-const ProductionOptions: React.FC<Props> = (props) => {
+const ProductionOptions: React.FC<ProductionOptionsProps> = ({
+  step = 1,
+  min = 0,
+  ...props
+}: ProductionOptionsProps) => {
   return (
     <div className="sheet flex flex-row items-center justify-between rounded-lg border bg-slate-200 p-4 ">
       <div className="flex items-center space-x-8">
@@ -25,8 +30,9 @@ const ProductionOptions: React.FC<Props> = (props) => {
         </div>
       </div>
       <QuantityInput
-        min={props.min}
+        min={min}
         max={props.max}
+        step={step}
         setValue={props.setAmount}
         defaultValue={props.defaultValue}
       ></QuantityInput>
