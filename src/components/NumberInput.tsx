@@ -44,7 +44,7 @@ export default function QuantityInput({ setValue }: QuantityInputProps) {
     <NumberInput
       onChange={(_event, value) => {
         console.log(value);
-        setValue(value as number);
+        setValue(value!);
       }}
       aria-label="Quantity Input"
       min={0}

@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import { Switch } from "~/components/ui/switch";
 import StackedAreaChartPlot from "./StackedAreaChartPlot";
 import AreaChartPlot from "./AreaChartPlot";
 import ChartSetting from "../ChartSettings";
@@ -69,7 +68,7 @@ const Charts = () => {
       <section className="my-4 flex gap-2 px-4">
         <div className=" h-[250px] w-1/2 rounded ">
           <div>Header</div>
-          <div>
+          <div className="ali">
             <QuantityInput setValue={setAmountOfNuclear}></QuantityInput>
           </div>
         </div>
