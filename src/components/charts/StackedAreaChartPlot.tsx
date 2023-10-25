@@ -111,8 +111,8 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
               <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="date" stroke="#D3D3D3" />
-          <YAxis stroke="#D3D3D3" />
+          <XAxis dataKey="date" />
+          <YAxis />
           <Tooltip
             labelFormatter={(date) => "Datum: " + `${date}`}
             labelStyle={{ fontWeight: "bold", borderBottom: "solid" }}

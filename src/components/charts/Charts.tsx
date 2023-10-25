@@ -3,10 +3,12 @@ import { useState } from "react";
 import { Switch } from "~/components/ui/switch";
 import StackedAreaChartPlot from "./StackedAreaChartPlot";
 import AreaChartPlot from "./AreaChartPlot";
+import ChartSetting from "../ChartSettings";
 
 const Charts = () => {
   const [showConsumption, setShowConsumption] = useState<boolean>(false);
   const [showLosses, setShowLosses] = useState<boolean>(false);
+  const [showNuclear, setShowNuclear] = useState<boolean>(false);
 
   return (
     <>
@@ -22,6 +24,7 @@ const Charts = () => {
           <StackedAreaChartPlot
             showConsumption={showConsumption}
             showLosses={showLosses}
+            showNuclear={showNuclear}
           />
         </div>
 
@@ -30,58 +33,24 @@ const Charts = () => {
             <div className="w-full space-y-6">
               <div>
                 <div className="space-y-4">
-                  <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
-                    <div className="space-y-0.5">
-                      <label
-                        htmlFor="consumption"
-                        className="text-base font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        Verbrauch
-                      </label>
-                      <p className="text-sm text-muted-foreground">
-                        Vergleiche den Stromverbrauch der Schweiz mit der
-                        Gesamtproduktion.
-                      </p>
-                    </div>
-                    <Switch
-                      id="consumption"
-                      checked={showConsumption}
-                      onCheckedChange={() => {
-                        setShowConsumption(!showConsumption);
-                        setShowLosses(false);
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="disabled w-full space-y-6">
-              <div>
-                <div className="space-y-4">
-                  <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
-                    <div className="space-y-0.5">
-                      <label
-                        htmlFor="losses"
-                        className="text-base font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        Stromverlust
-                      </label>
-                      <p className="text-sm text-muted-foreground">
-                        Zeige die Verluste welche durch den Transport und
-                        aehnlichem entstehen.
-                      </p>
-                    </div>
-                    <Switch
-                      id="losses"
-                      checked={showLosses}
-                      onCheckedChange={() => {
-                        setShowLosses(!showLosses);
-                      }}
-                      disabled={!showConsumption}
-                    />
-                  </div>
+                  <ChartSetting
+                    label="Verbrauch"
+                    description="Vergleiche den Stromverbrauch der Schweiz mit der Gesamtproduktion."
+                    state={showConsumption}
+                    setState={setShowConsumption}
+                  />
+                  <ChartSetting
+                    label="Verluste"
+                    description="Zeige die Verluste welche durch die &Uuml;bertragung und Verteilung entstehen."
+                    state={showLosses}
+                    setState={setShowLosses}
+                  />
+                  <ChartSetting
+                    label="Kernkraft"
+                    description="Zeige die Kernkraftproduktion."
+                    state={showNuclear}
+                    setState={setShowNuclear}
+                  />
                 </div>
               </div>
             </div>

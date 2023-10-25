@@ -48,32 +48,32 @@ export const powerProductionRouter = createTRPCRouter({
       return filteredDates
         .map((entry) => ({
           date: entry.date,
-          Solar: fullData.findLast(
+          Solar: fullData.find(
             (pred) =>
               pred.date.toDateString() == entry.date.toDateString() &&
               pred.type === "Photovoltaik",
           )!.production,
-          Wind: fullData.findLast(
+          Wind: fullData.find(
             (pred) =>
               pred.date.toDateString() == entry.date.toDateString() &&
               pred.type === "Wind",
           )!.production,
-          Thermische: fullData.findLast(
+          Thermische: fullData.find(
             (pred) =>
               pred.date.toDateString() == entry.date.toDateString() &&
               pred.type === "Thermische",
           )!.production,
-          Speicherkraft: fullData.findLast(
+          Speicherkraft: fullData.find(
             (pred) =>
               pred.date.toDateString() == entry.date.toDateString() &&
               pred.type === "Speicherkraft",
           )!.production,
-          Kernkraft: fullData.findLast(
+          Kernkraft: fullData.find(
             (pred) =>
               pred.date.toDateString() == entry.date.toDateString() &&
               pred.type === "Kernkraft",
           )!.production,
-          Flusskraft: fullData.findLast(
+          Flusskraft: fullData.find(
             (pred) =>
               pred.date.toDateString() == entry.date.toDateString() &&
               pred.type === "Flusskraft",

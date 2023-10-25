@@ -13,7 +13,7 @@ generator client {
 
 model PowerProduction {
     id         Int      @id @default(autoincrement())
-    date       DateTime @unique @default(now())
+    date       DateTime @default(now())
     type       String
     production Float
 }
