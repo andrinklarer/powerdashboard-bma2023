@@ -37,33 +37,29 @@ const NumberInput = React.forwardRef(function CustomNumberInput(
 
 interface QuantityInputProps {
   setValue: React.Dispatch<React.SetStateAction<number>>;
+  min?: number;
+  max?: number;
+  defaultValue?: number;
 }
 
-export default function QuantityInput({ setValue }: QuantityInputProps) {
+export default function QuantityInput({
+  setValue,
+  min = 0,
+  max = 100,
+  defaultValue = 0,
+}: QuantityInputProps) {
   return (
     <NumberInput
       onChange={(_event, value) => {
-        console.log(value);
-        setValue(value as number);
+        setValue(value!);
       }}
       aria-label="Quantity Input"
-      min={0}
-      max={11}
-      defaultValue={amountOfNuclearPowerPlants}
+      min={min}
+      max={max}
+      defaultValue={defaultValue}
     />
   );
 }
-
-const blue = {
-  100: "#daecff",
-  200: "#b6daff",
-  300: "#66b2ff",
-  400: "#3399ff",
-  500: "#007fff",
-  600: "#0072e5",
-  700: "#0059B2",
-  800: "#004c99",
-};
 
 const grey = {
   50: "#F3F6F9",
@@ -111,13 +107,13 @@ const StyledInput = styled("input")(
   text-align: center;
 
   &:hover {
-    border-color: ${blue[400]};
+    border-color: ${grey[400]};
   }
 
   &:focus {
-    border-color: ${blue[400]};
+    border-color: ${grey[400]};
     box-shadow: 0 0 0 3px ${
-      theme.palette.mode === "dark" ? blue[700] : blue[200]
+      theme.palette.mode === "dark" ? grey[700] : grey[200]
     };
   }
 
@@ -150,8 +146,8 @@ const StyledButton = styled("button")(
 
   &:hover {
     cursor: pointer;
-    background: ${theme.palette.mode === "dark" ? blue[700] : blue[500]};
-    border-color: ${theme.palette.mode === "dark" ? blue[500] : blue[400]};
+    background: ${theme.palette.mode === "dark" ? grey[700] : grey[800]};
+    border-color: ${theme.palette.mode === "dark" ? grey[500] : grey[900]};
     color: ${grey[50]};
   }
 

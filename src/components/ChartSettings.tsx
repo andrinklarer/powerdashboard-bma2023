@@ -9,8 +9,6 @@ interface Props {
 }
 
 const ChartSetting: React.FC<Props> = (props) => {
-  // Component logic here
-
   return (
     <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
       <div className="space-y-0.5">
