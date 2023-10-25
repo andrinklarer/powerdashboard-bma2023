@@ -4,11 +4,17 @@ import { Switch } from "~/components/ui/switch";
 import StackedAreaChartPlot from "./StackedAreaChartPlot";
 import AreaChartPlot from "./AreaChartPlot";
 import ChartSetting from "../ChartSettings";
+import QuantityInput from "../NumberInput";
+import { amountOfNuclearPowerPlants } from "~/lib/consts";
 
 const Charts = () => {
   const [showConsumption, setShowConsumption] = useState<boolean>(false);
   const [showLosses, setShowLosses] = useState<boolean>(false);
-  const [showNuclear, setShowNuclear] = useState<boolean>(false);
+  const [hideNuclear, setHideNuclear] = useState<boolean>(false);
+
+  const [amountOfNuclear, setAmountOfNuclear] = useState<number>(
+    amountOfNuclearPowerPlants,
+  );
 
   return (
     <>
@@ -22,9 +28,11 @@ const Charts = () => {
       <section className="my-4 flex gap-3 px-4">
         <div className="bg-white-700 h-[600px] w-2/3 rounded">
           <StackedAreaChartPlot
+            amount={100}
             showConsumption={showConsumption}
             showLosses={showLosses}
-            showNuclear={showNuclear}
+            hideNuclear={hideNuclear}
+            nuclearModifier={amountOfNuclear}
           />
         </div>
 
@@ -46,10 +54,10 @@ const Charts = () => {
                     setState={setShowLosses}
                   />
                   <ChartSetting
-                    label="Kernkraft"
-                    description="Zeige die Kernkraftproduktion."
-                    state={showNuclear}
-                    setState={setShowNuclear}
+                    label="Kernkraft ausblenden"
+                    description="Zeige die Stromerzeugnisse ohne Kernkraft."
+                    state={hideNuclear}
+                    setState={setHideNuclear}
                   />
                 </div>
               </div>
@@ -59,7 +67,13 @@ const Charts = () => {
       </section>
 
       <section className="my-4 flex gap-2 px-4">
-        <div className=" h-[250px] w-1/2 rounded bg-gray-700"></div>
+        <div className=" h-[250px] w-1/2 rounded ">
+          <div>Header</div>
+          <div>
+            <QuantityInput setValue={setAmountOfNuclear}></QuantityInput>
+          </div>
+        </div>
+
         <div className=" h-[250px] w-1/2 rounded bg-gray-700"></div>
       </section>
     </>

@@ -19,7 +19,6 @@ export const powerConsumptionRouter = createTRPCRouter({
         },
         take: input.amount,
       });
-      console.log(data);
       return data
         .map((entry) => ({
           date: entry.date,
@@ -42,7 +41,6 @@ export const powerConsumptionRouter = createTRPCRouter({
         },
         take: input.amount,
       });
-      console.log(data);
       return data
         .map((entry) => ({
           date: entry.date,

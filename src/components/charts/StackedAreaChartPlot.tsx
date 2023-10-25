@@ -6,6 +6,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { amountOfNuclearPowerPlants, defaultChartSize } from "~/lib/consts";
 import { api } from "~/utils/api";
 
 const DetailedConsumptionData = (amount: number) =>
@@ -29,17 +30,19 @@ const DetailedProductionData = (amount: number) =>
 interface StackedAreaChartPlotProps {
   amount?: number;
   showConsumption?: boolean;
-  showNuclear?: boolean;
+  hideNuclear?: boolean;
   showWater?: boolean;
   showLosses?: boolean;
+  nuclearModifier?: number;
 }
 
 const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
-  amount = 100,
+  amount = defaultChartSize,
   showConsumption = true,
-  showNuclear = true,
+  hideNuclear = false,
   showWater = true,
   showLosses = false,
+  nuclearModifier = amountOfNuclearPowerPlants,
 }) => {
   const detailedProductionData = DetailedProductionData(amount);
   const detailedConsumptionData = DetailedConsumptionData(amount);
@@ -52,12 +55,14 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     !productionData.data ||
     !detailedConsumptionData.data
   ) {
-    return <div>Something went wrong!</div>;
+    return <div>Data still loading!</div>;
   }
 
   if (!consumptionData) return;
 
-  const mergedData = detailedProductionData.data.map((prodItem) => {
+  console.log(nuclearModifier);
+
+  const modifiedData = detailedProductionData.data.map((prodItem) => {
     const correspondingConsumptionItem = consumptionData.data.find(
       (entry) => entry.date.toDateString() === prodItem.date.toDateString(),
     );
@@ -77,7 +82,12 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
       Thermische: prodItem.Thermische,
       Speicherkraft: prodItem.Speicherkraft,
       Flusskraft: prodItem.Flusskraft,
-      Kernkraft: prodItem.Kernkraft,
+      Kernkraft:
+        Math.round(
+          (prodItem.Kernkraft / amountOfNuclearPowerPlants) *
+            nuclearModifier *
+            10,
+        ) / 10,
       Verbrauch: correspondingConsumptionItem
         ? correspondingConsumptionItem.consumption
         : 0,
@@ -90,15 +100,13 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     };
   });
 
-  console.log(mergedData);
-
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={730}
           height={250}
-          data={mergedData}
+          data={modifiedData}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>
@@ -127,7 +135,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
               ].indexOf(i.dataKey!.toString())
             }
           />
-          {showNuclear && (
+          {!hideNuclear && (
             <Area
               type="monotone"
               dataKey="Kernkraft"

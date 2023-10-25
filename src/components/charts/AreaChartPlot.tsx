@@ -10,7 +10,7 @@ import { api } from "~/utils/api";
 
 const AreaChartPlot = () => {
   const { data } = api.powerProduction.getAllGroupedByDate.useQuery({
-    amount: 100,
+    amount: 10,
   });
 
   return (
