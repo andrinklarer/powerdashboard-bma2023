@@ -24,3 +24,16 @@ model PowerConsumption {
     consumption Int
     lossless    Int
 }
+
+model PowerDashboard {
+    id          Int      @id @default(autoincrement())
+    date        DateTime @unique @default(now())
+    Flusskraft  Float   
+    Kernkraft   Float
+    Speicherkraft   Float
+    Thermische  Float
+    Photovoltaik    Float
+    Wind        Float
+    Verlust     Float
+    Verbrauch   Float
+}

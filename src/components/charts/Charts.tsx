@@ -28,7 +28,6 @@ const Charts = () => {
       <section className="my-4 flex gap-3 px-4">
         <div className="bg-white-700 h-[600px] w-2/3 rounded">
           <StackedAreaChartPlot
-            amount={100}
             showConsumption={showConsumption}
             showLosses={showLosses}
             hideNuclear={hideNuclear}

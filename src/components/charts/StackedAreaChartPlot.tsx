@@ -27,6 +27,9 @@ const DetailedProductionData = (amount: number) =>
     amount,
   });
 
+const PowerDashboardData = (amount: number) =>
+  api.powerDashboard.getAll.useQuery({ amount });
+
 interface StackedAreaChartPlotProps {
   amount?: number;
   showConsumption?: boolean;
@@ -48,13 +51,9 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   const detailedConsumptionData = DetailedConsumptionData(amount);
   const consumptionData = ConsumptionData(amount);
   const productionData = TotalProductionData(amount);
+  const powerDashboard = PowerDashboardData(amount);
 
-  if (
-    !detailedProductionData.data ||
-    !consumptionData.data ||
-    !productionData.data ||
-    !detailedConsumptionData.data
-  ) {
+  if (!powerDashboard.data) {
     return <div>Data still loading!</div>;
   }
 
@@ -62,41 +61,62 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
 
   console.log(nuclearModifier);
 
-  const modifiedData = detailedProductionData.data.map((prodItem) => {
-    const correspondingConsumptionItem = consumptionData.data.find(
-      (entry) => entry.date.toDateString() === prodItem.date.toDateString(),
+  /* Kernkraft */
+  const calculateNuclear = (value: number) =>
+    Math.round((value / amountOfNuclearPowerPlants) * nuclearModifier * 10) /
+    10;
+
+  /* Kernkraft */
+  const calculateRiver = (value: number) => value;
+
+  /* Speicherkraft */
+  const calculateStoragePower = (value: number) => value;
+
+  /* Thermische */
+  const calculateThermic = (value: number) => value;
+
+  /* Photovoltaik */
+  const calculateSolar = (value: number) => value;
+
+  /* Wind */
+  const calculateWind = (value: number) => value;
+
+  const calculateTotalProduction = (item: {
+    id: number;
+    date: Date;
+    Flusskraft: number;
+    Kernkraft: number;
+    Speicherkraft: number;
+    Thermische: number;
+    Photovoltaik: number;
+    Wind: number;
+    Verlust: number;
+    Verbrauch: number;
+  }) => {
+    return (
+      calculateRiver(item.Flusskraft) +
+      calculateNuclear(item.Kernkraft) +
+      calculateStoragePower(item.Speicherkraft) +
+      calculateThermic(item.Thermische) +
+      calculateSolar(item.Photovoltaik) +
+      calculateWind(item.Wind)
     );
-    const correspondingTotalProductionItem = productionData.data.find(
-      (entry) => entry.date.toDateString() === prodItem.date.toDateString(),
-    );
-    const correspondingDetailedConsumptionItem =
-      detailedConsumptionData.data.find(
-        (entry) => entry.date.toDateString() === prodItem.date.toDateString(),
-      );
+  };
+
+  const modifyData = powerDashboard.data.map((item) => {
     return {
-      date: `${prodItem.date.getDate()}.${
-        prodItem.date.getMonth() + 1
-      }.${prodItem.date.getFullYear()}`,
-      Solar: prodItem.Solar,
-      Wind: prodItem.Wind,
-      Thermische: prodItem.Thermische,
-      Speicherkraft: prodItem.Speicherkraft,
-      Flusskraft: prodItem.Flusskraft,
-      Kernkraft:
-        Math.round(
-          (prodItem.Kernkraft / amountOfNuclearPowerPlants) *
-            nuclearModifier *
-            10,
-        ) / 10,
-      Verbrauch: correspondingConsumptionItem
-        ? correspondingConsumptionItem.consumption
-        : 0,
-      Produktion: correspondingTotalProductionItem
-        ? correspondingTotalProductionItem.production
-        : 0,
-      Verlust: correspondingDetailedConsumptionItem
-        ? correspondingDetailedConsumptionItem.losses
-        : 0,
+      date: `${item.date.getDate()}.${
+        item.date.getMonth() + 1
+      }.${item.date.getFullYear()}`,
+      Solar: calculateSolar(item.Photovoltaik),
+      Wind: calculateWind(item.Wind),
+      Thermische: calculateThermic(item.Thermische),
+      Speicherkraft: calculateStoragePower(item.Speicherkraft),
+      Flusskraft: calculateRiver(item.Flusskraft),
+      Kernkraft: calculateNuclear(item.Kernkraft),
+      Verbrauch: item.Verbrauch,
+      Produktion: calculateTotalProduction(item),
+      Verlust: item.Verlust,
     };
   });
 
@@ -106,7 +126,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
         <AreaChart
           width={730}
           height={250}
-          data={modifiedData}
+          data={modifyData}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>
