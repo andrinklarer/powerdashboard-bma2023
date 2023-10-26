@@ -2,21 +2,26 @@
 import { useState } from "react";
 import StackedAreaChartPlot from "./StackedAreaChartPlot";
 import ChartSetting from "../ChartSettings";
+import { addDays, format } from "date-fns";
 import {
   amountOfNuclearPowerPlants,
   amountOfWindTurbines,
+  dataFreshness,
   efficiencyOfSolarPanels,
 } from "~/lib/consts";
 import ProductionOptions from "../ProductionOptions";
 import { DatePicker } from "../DatePicker";
 import { api } from "~/utils/api";
+import { DateRangePicker } from "../DateRangePicker";
+import React from "react";
+import { DateRange } from "react-day-picker";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
   if (data) {
     return data.date;
   } else {
-    return new Date(2023, 8);
+    return dataFreshness;
   }
 }
 
@@ -25,9 +30,13 @@ function getFirstDate() {
   if (data) {
     return data.date;
   } else {
-    return new Date(2023, 8);
+    return getFirstDayOfMonth(dataFreshness);
   }
 }
+
+const getFirstDayOfMonth = (date: Date) => {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
+};
 
 function calculateTimeDifference(date: Date, date2: Date) {
   const diff = date2.getTime() - date.getTime();
@@ -38,16 +47,15 @@ const Charts = () => {
   const latestDate = getLatestDate();
   const firstDate = getFirstDate();
 
-  const firstDayOfMonth = new Date(
-    latestDate.getFullYear(),
-    latestDate.getMonth(),
-    1,
-  );
-
   const [showConsumption, setShowConsumption] = useState<boolean>(false);
   const [showLosses, setShowLosses] = useState<boolean>(false);
   const [hideNuclear, setHideNuclear] = useState<boolean>(false);
-  const [date, setDate] = useState<Date>(firstDayOfMonth);
+  const [date, setDate] = useState<Date>(getFirstDayOfMonth(latestDate));
+
+  const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
+    from: getFirstDayOfMonth(latestDate),
+    to: latestDate,
+  });
 
   const [amountOfNuclear, setAmountOfNuclear] = useState<number>(
     amountOfNuclearPowerPlants,
@@ -58,6 +66,8 @@ const Charts = () => {
   const [windTurbines, setWindTurbines] =
     useState<number>(amountOfWindTurbines);
 
+  const [scenario, setScenario] = useState<number>(0);
+
   const amountToDisplay = calculateTimeDifference(date, latestDate);
 
   return (
@@ -66,6 +76,7 @@ const Charts = () => {
         <div className="bg-white-700 h-[600px] w-2/3 rounded">
           <StackedAreaChartPlot
             amount={amountToDisplay}
+            dateRange={dateRange!}
             showConsumption={showConsumption}
             showLosses={showLosses}
             hideNuclear={hideNuclear}
@@ -82,13 +93,13 @@ const Charts = () => {
                 <div className="space-y-4">
                   <div className="flex items-center justify-between space-x-2 rounded-lg border bg-slate-200 p-4">
                     <p className="text-md font-medium leading-none">
-                      Setze das Startdatum:
+                      Zeitraum:
                     </p>
-                    <DatePicker
+                    <DateRangePicker
                       lowerLimit={firstDate}
                       upperLimit={latestDate}
-                      date={date}
-                      setDate={setDate}
+                      dateRange={dateRange}
+                      setDateRange={setDateRange}
                     />
                   </div>
                   <ChartSetting
@@ -119,7 +130,7 @@ const Charts = () => {
       <section className="my-4 flex gap-2 px-4">
         <div className=" m-8 h-[250px] w-1/2 space-y-4 rounded  ">
           <ProductionOptions
-            iconPath="reactorIcon.png"
+            iconPath="nuclear-symbol.png"
             text="Anzahl Reaktoren in der Schweiz"
             tooltip="Die Schweiz hat aktuell 4 Atomreaktoren, welche aktiv Strom produzieren. Wird ein Reaktor hinzugef&uuml;gt, wird die zus&auml;tzliche Stromproduktion anhand des Durchschnitts der bestehenden Reaktoren berechnet."
             setAmount={setAmountOfNuclear}
@@ -144,8 +155,35 @@ const Charts = () => {
             defaultValue={windTurbines}
           />
         </div>
-
-        <div className=" h-[250px] w-1/2 rounded bg-gray-700"></div>
+        <div className=" m-8 h-[250px] w-1/2 space-y-4 rounded  ">
+          <ProductionOptions
+            iconPath=""
+            text="Scenario 1"
+            tooltip=" Placeholder "
+            setAmount={setScenario}
+            max={1000}
+            step={10}
+            defaultValue={scenario}
+          />
+          <ProductionOptions
+            iconPath=""
+            text="Scenario 2"
+            tooltip=" Placeholder "
+            setAmount={setScenario}
+            max={1000}
+            step={10}
+            defaultValue={scenario}
+          />
+          <ProductionOptions
+            iconPath=""
+            text="Scenario 3"
+            tooltip=" Placeholder "
+            setAmount={setScenario}
+            max={1000}
+            step={10}
+            defaultValue={scenario}
+          />
+        </div>{" "}
       </section>
     </>
   );

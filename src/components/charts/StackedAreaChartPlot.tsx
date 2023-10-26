@@ -1,3 +1,4 @@
+import { DateRange } from "react-day-picker";
 import {
   AreaChart,
   Area,
@@ -32,11 +33,16 @@ const DetailedProductionData = (amount: number) =>
     amount,
   });
 
-const PowerDashboardData = (amount: number) =>
-  api.powerDashboard.getAll.useQuery({ amount });
+const PowerDashboardData = (amount: number, dateRange: DateRange) =>
+  api.powerDashboard.getAll.useQuery({
+    amount,
+    from: dateRange.from!,
+    to: dateRange.to!,
+  });
 
 interface StackedAreaChartPlotProps {
   amount?: number;
+  dateRange: DateRange;
   showConsumption?: boolean;
   hideNuclear?: boolean;
   showWater?: boolean;
@@ -48,6 +54,7 @@ interface StackedAreaChartPlotProps {
 
 const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   amount = defaultChartSize,
+  dateRange,
   showConsumption = true,
   hideNuclear = false,
   showWater = true,
@@ -60,7 +67,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   // const detailedConsumptionData = DetailedConsumptionData(amount);
   // const consumptionData = ConsumptionData(amount);
   // const productionData = TotalProductionData(amount);
-  const powerDashboard = PowerDashboardData(amount);
+  const powerDashboard = PowerDashboardData(amount, dateRange);
 
   if (!powerDashboard.data) {
     return <div>Data still loading!</div>;

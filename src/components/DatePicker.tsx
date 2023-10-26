@@ -11,7 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 // Create props to pass usestate so date is available in parent component
 
-interface ProductionOptionsProps {
+interface DatePickerProps {
   upperLimit: Date;
   lowerLimit: Date;
   date: Date;
@@ -23,7 +23,7 @@ export function DatePicker({
   lowerLimit,
   date,
   setDate,
-}: ProductionOptionsProps) {
+}: DatePickerProps) {
   return (
     <Popover>
       <PopoverTrigger asChild>
