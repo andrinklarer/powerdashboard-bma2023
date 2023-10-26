@@ -129,7 +129,7 @@ const Charts = () => {
           <ProductionOptions
             iconPath="solarIcon.svg"
             text="Wirkunsgrad der Solaranlagen"
-            tooltip="Akt"
+            tooltip="Aktuell generieren Solarpanels Strom mit einem Wirkungsgrad von ungef&auml;hr 22%. Weitere technologische Fortschritte koennten es ermoeglichen das dieser Wirkunsgrad steigt und somit das Potenzielle Stromerzeugnis mit gleicher Abdeckung von Solaranlagen steigt."
             setAmount={setSolarEfficiency}
             max={100}
             defaultValue={efficiencyOfSolarPanels}
