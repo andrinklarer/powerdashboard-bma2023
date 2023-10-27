@@ -15,6 +15,7 @@ import { api } from "~/utils/api";
 import { DateRangePicker } from "../DateRangePicker";
 import React from "react";
 import { DateRange } from "react-day-picker";
+import { Input } from "../ui/input";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
@@ -156,6 +157,7 @@ const Charts = () => {
           />
         </div>
         <div className=" m-8 h-[250px] w-1/2 space-y-4 rounded  ">
+          <Input type="number"></Input>
           <ProductionOptions
             iconPath=""
             text="Scenario 1"

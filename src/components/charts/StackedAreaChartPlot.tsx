@@ -17,6 +17,7 @@ import {
   efficiencyOfSolarPanels,
 } from "~/lib/consts";
 import { api } from "~/utils/api";
+import CustomTooltip from "./ChartTooltip";
 
 const DetailedConsumptionData = (amount: number) =>
   api.powerConsumption.getLossesOfLastN.useQuery({
@@ -172,9 +173,13 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             labelFormatter={(date) =>
               `${format(date, "cccc, dd.MM.yyyy", { locale: de })}`
             }
+            content={<CustomTooltip />}
             labelStyle={{ fontWeight: "bold", borderBottom: "solid" }}
             itemSorter={(i) =>
               [
+                "Produktion",
+                "Verbrauch",
+                "Verlust",
                 "Wind",
                 "Thermische",
                 "Solar",
@@ -230,7 +235,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             dataKey="Wind"
             stroke="#8884d8"
             stackId={1}
-            fill="url(#colorUv)"
+            fill="#8884d8"
           />
           {showConsumption && (
             <Area
@@ -238,6 +243,16 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
               dataKey="Verbrauch"
               stroke="#000"
               strokeWidth={3}
+              stackId={2}
+              fillOpacity={0}
+            />
+          )}
+          {showLosses && (
+            <Area
+              type="monotone"
+              dataKey="Verlust"
+              stroke="#000"
+              strokeWidth={1}
               stackId={2}
               fillOpacity={0}
             />
@@ -250,16 +265,6 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             stackId={3}
             fillOpacity={0}
           />
-          {showLosses && (
-            <Area
-              type="monotone"
-              dataKey="Verlust"
-              stroke="#000"
-              strokeWidth={1}
-              stackId={2}
-              fillOpacity={0}
-            />
-          )}
         </AreaChart>
       </ResponsiveContainer>
     </>
