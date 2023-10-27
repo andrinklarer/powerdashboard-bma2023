@@ -1,3 +1,5 @@
+import { addDays, format } from "date-fns";
+import { de } from "date-fns/locale";
 import { DateRange } from "react-day-picker";
 import {
   AreaChart,
@@ -6,6 +8,7 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  Legend,
 } from "recharts";
 import {
   amountOfNuclearPowerPlants,
@@ -123,11 +126,9 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     );
   };
 
-  const modifyData = powerDashboard.data.map((item) => {
+  const modifiedData = powerDashboard.data.map((item) => {
     return {
-      date: `${item.date.getDate()}.${
-        item.date.getMonth() + 1
-      }.${item.date.getFullYear()}`,
+      date: item.date,
       Solar: calculateSolar(item.Photovoltaik),
       Wind: calculateWind(item.Wind),
       Thermische: calculateThermic(item.Thermische),
@@ -140,29 +141,37 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     };
   });
 
+  const renderTick = (props: any) => {
+    const { x, y, payload } = props;
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text x={0} y={0} dy={6} textAnchor="end" fill="#666">
+          {payload.value} <tspan fontSize={12}>GWh</tspan>
+        </text>
+      </g>
+    );
+  };
+
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={730}
           height={250}
-          data={modifyData}
+          data={modifiedData}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
-          <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
-            </linearGradient>
-            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8} />
-              <stop offset="95%" stopColor="#82ca9d" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis dataKey="date" />
-          <YAxis />
+          <XAxis
+            dataKey="date"
+            tickFormatter={(value) => `${format(value, "dd.MM")}`}
+          />
+          <YAxis tick={renderTick} width={70} />
+          <Legend verticalAlign="top" height={36} />
+
           <Tooltip
-            labelFormatter={(date) => "Datum: " + `${date}`}
+            labelFormatter={(date) =>
+              `${format(date, "cccc, dd.MM.yyyy", { locale: de })}`
+            }
             labelStyle={{ fontWeight: "bold", borderBottom: "solid" }}
             itemSorter={(i) =>
               [

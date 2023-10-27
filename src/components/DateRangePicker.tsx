@@ -9,6 +9,7 @@ import { cn } from "./../lib/utils";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { de } from "date-fns/locale";
 
 interface DateRangePickerProps {
   upperLimit: Date;
@@ -59,11 +60,18 @@ export function DateRangePicker({
             {dateRange?.from ? (
               dateRange.to ? (
                 <>
-                  {format(dateRange.from, "LLL dd, y")} -{" "}
-                  {format(dateRange.to, "LLL dd, y")}
+                  {format(dateRange.from, "LLL dd, y", {
+                    locale: de,
+                  })}
+                  -{" "}
+                  {format(dateRange.to, "LLL dd, y", {
+                    locale: de,
+                  })}
                 </>
               ) : (
-                format(dateRange.from, "LLL dd, y")
+                format(dateRange.from, "LLL dd, y", {
+                  locale: de,
+                })
               )
             ) : (
               <span>Pick a date</span>
@@ -72,6 +80,7 @@ export function DateRangePicker({
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
+            locale={de}
             fromDate={lowerLimit}
             toDate={upperLimit}
             initialFocus
