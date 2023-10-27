@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import { Button } from "./ui/button";
 import {
   Tooltip,
@@ -7,25 +8,16 @@ import {
 } from "./ui/tooltip";
 
 export interface HoverTooltipProps {
-  text: string;
+  text: ReactElement;
+  trigger: ReactElement;
 }
 
-export const HoverTooltip = ({ text }: HoverTooltipProps) => {
+export const HoverTooltip = ({ text, trigger }: HoverTooltipProps) => {
   return (
-    <TooltipProvider>
+    <TooltipProvider delayDuration={100}>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            className="h-5 w-5 rounded-full"
-            size="icon"
-            variant="outline"
-          >
-            i
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent className="max-w-md	">
-          <p>{text}</p>
-        </TooltipContent>
+        <TooltipTrigger asChild>{trigger}</TooltipTrigger>
+        <TooltipContent className="max-w-md	">{text}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

@@ -62,7 +62,9 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
         .filter((data) => data.value !== "Produktion")
         .map((entry, index) => (
           <div key={`item-${index}`} className="legend-item">
-            {entry.value === "Verbrauch" || entry.value === "Verlust" ? (
+            {entry.value === "Verbrauch" ||
+            entry.value === "Verlust" ||
+            entry.value === "Bedarf" ? (
               <>{theme.theme === "dark" ? whiteSvg : svg}</>
             ) : (
               <span

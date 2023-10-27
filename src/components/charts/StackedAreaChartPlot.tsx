@@ -123,6 +123,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
       Verbrauch: item.Verbrauch,
       Produktion: calculateTotalProduction(item),
       Verlust: item.Verlust,
+      Bedarf: item.Verbrauch + item.Verlust,
     };
   });
 
@@ -232,12 +233,12 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             stackId={1}
             fill="#8884d8"
           />
-          {showConsumption && (
+          {showConsumption && !showLosses && (
             <Area
               type="monotone"
               dataKey="Verbrauch"
               stroke={theme.theme === "dark" ? "#fff" : "#000"}
-              strokeWidth={3}
+              strokeWidth={2}
               stackId={2}
               fillOpacity={0}
             />
@@ -245,9 +246,9 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           {showLosses && (
             <Area
               type="monotone"
-              dataKey="Verlust"
+              dataKey="Bedarf"
               stroke={theme.theme === "dark" ? "#fff" : "#000"}
-              strokeWidth={1}
+              strokeWidth={2}
               stackId={2}
               fillOpacity={0}
             />

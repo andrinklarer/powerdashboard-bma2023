@@ -13,6 +13,8 @@ import ChartSetting from "../ChartSettings";
 import { DateRangePicker } from "../DateRangePicker";
 import ProductionOptions from "../ProductionOptions";
 import StackedAreaChartPlot from "./StackedAreaChartPlot";
+import Link from "next/link";
+import { HoverTooltip } from "../HoverTooltip";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
@@ -104,13 +106,13 @@ const Charts = () => {
                   </div>
                   <ChartSetting
                     label="Verbrauch"
-                    description="Vergleiche den Stromverbrauch der Schweiz mit der Gesamtproduktion."
+                    description="Zeige den Stromverbrauch der Schweiz."
                     state={showConsumption}
                     setState={setShowConsumption}
                   />
                   <ChartSetting
                     label="Verluste"
-                    description="Zeige die Verluste welche durch die &Uuml;bertragung und Verteilung entstehen."
+                    description="Zeige die Verluste in der Strom&uuml;bertragung und -verteilung und wie viel Energie wirklich ben&ouml;tigt wird, um unseren Bedarf zu decken."
                     state={showLosses}
                     setState={setShowLosses}
                     disabled={!showConsumption}
@@ -137,7 +139,20 @@ const Charts = () => {
                 : "nuclear-symbol.svg"
             }
             text="Anzahl Reaktoren in der Schweiz"
-            tooltip="Die Schweiz hat aktuell 4 Atomreaktoren, welche aktiv Strom produzieren. Wird ein Reaktor hinzugef&uuml;gt, wird die zus&auml;tzliche Stromproduktion anhand des Durchschnitts der bestehenden Reaktoren berechnet."
+            tooltip={
+              <p>
+                Die Schweiz hat aktuell{" "}
+                <Link
+                  className="underline"
+                  href=" https://www.ensi.ch/de/themen/kernkraftwerke-schweiz/"
+                >
+                  4 Atomreaktoren
+                </Link>
+                , welche aktiv Strom produzieren. Wird ein Reaktor
+                hinzugef&uuml;gt, wird die zus&auml;tzliche Stromproduktion
+                anhand des Durchschnitts der bestehenden Reaktoren berechnet.
+              </p>
+            }
             setAmount={setAmountOfNuclear}
             max={10}
             defaultValue={amountOfNuclearPowerPlants}
@@ -147,7 +162,13 @@ const Charts = () => {
               theme.theme === "light" ? "solarIcon.svg" : "solarIconWhite.svg"
             }
             text="Wirkunsgrad der Solaranlagen"
-            tooltip="Aktuell generieren Solarpanels Strom mit einem Wirkungsgrad von ungef&auml;hr 22%. Weitere technologische Fortschritte koennten es ermoeglichen das dieser Wirkunsgrad steigt und somit das Potenzielle Stromerzeugnis mit gleicher Abdeckung von Solaranlagen steigt."
+            tooltip={
+              <p>
+                Aktuelle Solarpanels haben einen Wirkungsgrad von etwa 22%.
+                Technologische Fortschritte könnten diesen Wert erhöhen und die
+                Stromerzeugung bei gleicher Fläche steigern.
+              </p>
+            }
             setAmount={setSolarEfficiency}
             max={100}
             defaultValue={efficiencyOfSolarPanels}
@@ -159,42 +180,27 @@ const Charts = () => {
                 : "turbineIconWhite.svg"
             }
             text="Anzahl Windturbinen"
-            tooltip="In der Schweiz stehen aktuell nur 41 Windturbinen. Wird eine Windturbine hinzugef&uuml;gt, wird die zus&auml;tzliche Stromproduktion anhand des Durchschnitts der bestehenden Windturbinen berechnet."
+            tooltip={
+              <p>
+                In der Schweiz stehen aktuell nur{" "}
+                <Link
+                  className="underline"
+                  href="https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/windenergie.html/#:~:text=2020%20gibt%20es%20in%20unserem,Gesamtleistung%20von%2037%2C2%20MW"
+                >
+                  41 Windturbinen.{" "}
+                </Link>
+                Wird eine Windturbine hinzugef&uuml;gt, wird die
+                zus&auml;tzliche Stromproduktion anhand des Durchschnitts der
+                bestehenden Windturbinen berechnet.
+              </p>
+            }
             setAmount={setWindTurbines}
             max={1000}
             step={10}
             defaultValue={windTurbines}
           />
         </div>
-        <div className=" m-8 h-[250px] w-1/2 space-y-4 rounded  ">
-          <ProductionOptions
-            iconPath=""
-            text="Scenario 1"
-            tooltip=" Placeholder "
-            setAmount={setScenario}
-            max={1000}
-            step={10}
-            defaultValue={scenario}
-          />
-          <ProductionOptions
-            iconPath=""
-            text="Scenario 2"
-            tooltip=" Placeholder "
-            setAmount={setScenario}
-            max={1000}
-            step={10}
-            defaultValue={scenario}
-          />
-          <ProductionOptions
-            iconPath=""
-            text="Scenario 3"
-            tooltip=" Placeholder "
-            setAmount={setScenario}
-            max={1000}
-            step={10}
-            defaultValue={scenario}
-          />
-        </div>{" "}
+        <div className=" m-8 h-[250px] w-1/2 space-y-4 rounded  "></div>
       </section>
     </>
   );

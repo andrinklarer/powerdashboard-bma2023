@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { HoverTooltip } from "./HoverTooltip";
 import QuantityInput from "./NumberInput";
+import { ReactElement } from "react";
+import { Button } from "./ui/button";
 
 interface ProductionOptionsProps {
   setAmount: React.Dispatch<React.SetStateAction<number>>;
   iconPath: string;
   text: string;
-  tooltip: string;
+  tooltip: ReactElement;
   min?: number;
   max: number;
   defaultValue: number;
@@ -29,10 +31,21 @@ const ProductionOptions: React.FC<ProductionOptionsProps> = ({
             src={`/${props.iconPath}`}
           />
         </div>
-        <div className="flex space-x-2 font-semibold">
+        <div className="flex items-center space-x-2 font-semibold">
           <p className="text-md font-medium leading-none">{props.text}</p>
           {/* https://www.ensi.ch/de/themen/kernkraftwerke-schweiz/ */}
-          <HoverTooltip text={props.tooltip}></HoverTooltip>
+          <HoverTooltip
+            text={props.tooltip}
+            trigger={
+              <Button
+                className="h-5 w-5 rounded-full"
+                size="icon"
+                variant="outline"
+              >
+                i
+              </Button>
+            }
+          ></HoverTooltip>
         </div>
       </div>
       <QuantityInput
