@@ -1,16 +1,22 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { addDays, format } from "date-fns";
 
 export const powerDashboardRouter = createTRPCRouter({
   getAll: publicProcedure
-    .input(z.object({ amount: z.number() }))
+    .input(z.object({ amount: z.number(), from: z.date(), to: z.date() }))
     .query(async ({ ctx, input }) => {
       return (
         await ctx.db.powerDashboard.findMany({
           orderBy: {
             date: "desc",
           },
-          take: input.amount,
+          where: {
+            date: {
+              lte: addDays(input.to, 1),
+              gte: input.from,
+            },
+          },
         })
       ).reverse();
     }),
