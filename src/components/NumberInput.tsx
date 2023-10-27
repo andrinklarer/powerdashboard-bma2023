@@ -7,6 +7,8 @@ import { styled } from "@mui/system";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
 import { amountOfNuclearPowerPlants } from "~/lib/consts";
+import { useTheme } from "next-themes";
+import { log } from "console";
 
 const NumberInput = React.forwardRef(function CustomNumberInput(
   props: NumberInputProps,
@@ -77,29 +79,33 @@ const grey = {
   900: "#1C2025",
 };
 
-const StyledInputRoot = styled("div")(
-  ({ theme }) => `
+const StyledInputRoot = styled("div")(({ theme }) => {
+  const webTheme = useTheme();
+
+  return `
   font-family: IBM Plex Sans, sans-serif;
   font-weight: 400;
-  color: ${theme.palette.mode === "dark" ? grey[300] : grey[500]};
+  color: ${webTheme.theme === "dark" ? grey[300] : grey[500]};
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-`,
-);
+`;
+});
 
-const StyledInput = styled("input")(
-  ({ theme }) => `
+const StyledInput = styled("input")(({ theme }) => {
+  const webTheme = useTheme();
+
+  return `
   font-size: 0.875rem;
   font-family: inherit;
   font-weight: 400;
   line-height: 1.375;
-  color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
-  background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
-  border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+  color: ${webTheme.theme === "dark" ? grey[300] : grey[900]};
+  background: ${webTheme.theme === "dark" ? "#020817" : "#fff"};
+  border: 1px solid ${webTheme.theme === "dark" ? grey[700] : grey[200]};
   box-shadow: 0px 2px 4px ${
-    theme.palette.mode === "dark" ? "rgba(0,0,0, 0.5)" : "rgba(0,0,0, 0.05)"
+    webTheme.theme === "dark" ? "rgba(0,0,0, 0.5)" : "rgba(0,0,0, 0.05)"
   };
   border-radius: 8px;
   margin: 0 8px;
@@ -115,28 +121,27 @@ const StyledInput = styled("input")(
 
   &:focus {
     border-color: ${grey[400]};
-    box-shadow: 0 0 0 3px ${
-      theme.palette.mode === "dark" ? grey[700] : grey[200]
-    };
+    box-shadow: 0 0 0 3px ${webTheme.theme === "dark" ? grey[700] : grey[200]};
   }
 
   &:focus-visible {
     outline: 0;
   }
-`,
-);
+`;
+});
 
-const StyledButton = styled("button")(
-  ({ theme }) => `
+const StyledButton = styled("button")(({ theme }) => {
+  const webTheme = useTheme();
+  return `
   font-family: IBM Plex Sans, sans-serif;
   font-size: 0.875rem;
   box-sizing: border-box;
   line-height: 1.5;
   border: 1px solid;
   border-radius: 999px;
-  border-color: ${theme.palette.mode === "dark" ? grey[800] : grey[200]};
-  background: ${theme.palette.mode === "dark" ? grey[900] : grey[50]};
-  color: ${theme.palette.mode === "dark" ? grey[200] : grey[900]};
+  border-color: ${webTheme.theme === "dark" ? grey[800] : grey[200]};
+  background: ${webTheme.theme === "dark" ? "#020817" : grey[50]};
+  color: ${webTheme.theme === "dark" ? grey[200] : grey[900]};
   width: 32px;
   height: 32px;
   display: flex;
@@ -149,8 +154,8 @@ const StyledButton = styled("button")(
 
   &:hover {
     cursor: pointer;
-    background: ${theme.palette.mode === "dark" ? grey[700] : grey[800]};
-    border-color: ${theme.palette.mode === "dark" ? grey[500] : grey[900]};
+    background: ${webTheme.theme === "dark" ? grey[700] : grey[800]};
+    border-color: ${webTheme.theme === "dark" ? grey[500] : grey[900]};
     color: ${grey[50]};
   }
 
@@ -161,5 +166,5 @@ const StyledButton = styled("button")(
   &.increment {
     order: 1;
   }
-`,
-);
+`;
+});
