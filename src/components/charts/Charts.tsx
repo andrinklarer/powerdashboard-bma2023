@@ -10,6 +10,7 @@ import {
 import ProductionOptions from "../ProductionOptions";
 import { DatePicker } from "../DatePicker";
 import { api } from "~/utils/api";
+import { useTheme } from "next-themes";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
@@ -60,6 +61,8 @@ const Charts = () => {
 
   const amountToDisplay = calculateTimeDifference(date, latestDate);
 
+  const theme = useTheme();
+
   return (
     <>
       <section className="my-4 flex gap-3 px-4">
@@ -80,7 +83,7 @@ const Charts = () => {
             <div className="w-full space-y-6">
               <div>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between space-x-2 rounded-lg border bg-slate-200 p-4">
+                  <div className="flex items-center justify-between space-x-2 rounded-lg border p-4">
                     <p className="text-md font-medium leading-none">
                       Setze das Startdatum:
                     </p>
@@ -119,7 +122,7 @@ const Charts = () => {
       <section className="my-4 flex gap-2 px-4">
         <div className=" m-8 h-[250px] w-1/2 space-y-4 rounded  ">
           <ProductionOptions
-            iconPath="reactorIcon.png"
+            iconPath={theme.theme === "light" ? "reactorIcon.png": "reactorIconWhite.svg"}
             text="Anzahl Reaktoren in der Schweiz"
             tooltip="Die Schweiz hat aktuell 4 Atomreaktoren, welche aktiv Strom produzieren. Wird ein Reaktor hinzugef&uuml;gt, wird die zus&auml;tzliche Stromproduktion anhand des Durchschnitts der bestehenden Reaktoren berechnet."
             setAmount={setAmountOfNuclear}
@@ -127,7 +130,7 @@ const Charts = () => {
             defaultValue={amountOfNuclearPowerPlants}
           />
           <ProductionOptions
-            iconPath="solarIcon.svg"
+            iconPath={theme.theme === "light" ? "solarIcon.svg": "solarIconWhite.svg"}
             text="Wirkunsgrad der Solaranlagen"
             tooltip="Aktuell generieren Solarpanels Strom mit einem Wirkungsgrad von ungef&auml;hr 22%. Weitere technologische Fortschritte koennten es ermoeglichen das dieser Wirkunsgrad steigt und somit das Potenzielle Stromerzeugnis mit gleicher Abdeckung von Solaranlagen steigt."
             setAmount={setSolarEfficiency}
@@ -135,7 +138,7 @@ const Charts = () => {
             defaultValue={efficiencyOfSolarPanels}
           />
           <ProductionOptions
-            iconPath="turbineIcon.png"
+            iconPath={theme.theme === "light" ? "turbineIcon.png": "turbineIconWhite.svg"}
             text="Anzahl Windturbinen"
             tooltip="In der Schweiz stehen aktuell nur 41 Windturbinen. Wird eine Windturbine hinzugef&uuml;gt, wird die zus&auml;tzliche Stromproduktion anhand des Durchschnitts der bestehenden Windturbinen berechnet."
             setAmount={setWindTurbines}

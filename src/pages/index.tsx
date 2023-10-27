@@ -7,7 +7,7 @@ export default function Home() {
       <div className="flex">
         <main className="relative flex-grow">
           <Navbar />
-          <Charts />
+          {/* <Charts /> */}
         </main>
       </div>
     </>

@@ -18,7 +18,7 @@ const ProductionOptions: React.FC<ProductionOptionsProps> = ({
   ...props
 }: ProductionOptionsProps) => {
   return (
-    <div className="sheet flex flex-row items-center justify-between rounded-lg border bg-slate-200 p-4 ">
+    <div className="sheet flex flex-row items-center justify-between rounded-lg border p-4 ">
       <div className="flex items-center space-x-8">
         <div className="h-16 w-16">
           <img src={props.iconPath}></img>
