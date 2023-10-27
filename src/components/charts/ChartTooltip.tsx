@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import React from "react";
+import { Separator } from "../ui/separator";
 
 interface Payload {
   name: string;
@@ -35,6 +36,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
         {payload
           .map((entry, index) => (
             <div key={`entry-${index}`}>
+              {entry.name === "Wind" && <Separator />}
               <div
                 className="flex justify-between"
                 style={{ color: entry.color }}
@@ -50,7 +52,6 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
                   <span className="text-sm"> GWh</span>
                 </div>
               </div>
-              {entry.name === "Verbrauch" && <hr />}
             </div>
           ))
           .reverse()}

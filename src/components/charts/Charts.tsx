@@ -113,6 +113,7 @@ const Charts = () => {
                     description="Zeige die Verluste welche durch die &Uuml;bertragung und Verteilung entstehen."
                     state={showLosses}
                     setState={setShowLosses}
+                    disabled={!showConsumption}
                   />
                   <ChartSetting
                     label="Kernkraft ausblenden"

@@ -7,9 +7,10 @@ interface Props {
   description: string;
   state: boolean;
   setState: React.Dispatch<React.SetStateAction<boolean>>;
+  disabled?: boolean;
 }
 
-const ChartSetting: React.FC<Props> = (props) => {
+const ChartSetting: React.FC<Props> = ({ disabled = false, ...props }) => {
   return (
     <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
       <div className="space-y-0.5">
@@ -23,7 +24,8 @@ const ChartSetting: React.FC<Props> = (props) => {
       </div>
       <Switch
         id={props.label}
-        checked={props.state}
+        checked={disabled ? false : props.state}
+        disabled={disabled}
         onCheckedChange={() => {
           props.setState(!props.state);
         }}
