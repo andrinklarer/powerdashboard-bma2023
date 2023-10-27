@@ -1,14 +1,12 @@
-import * as React from "react";
 import {
   Unstable_NumberInput as BaseNumberInput,
   NumberInputProps,
 } from "@mui/base/Unstable_NumberInput";
-import { styled } from "@mui/system";
-import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
-import { amountOfNuclearPowerPlants } from "~/lib/consts";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { styled } from "@mui/system";
 import { useTheme } from "next-themes";
-import { log } from "console";
+import * as React from "react";
 
 const NumberInput = React.forwardRef(function CustomNumberInput(
   props: NumberInputProps,
@@ -79,7 +77,7 @@ const grey = {
   900: "#1C2025",
 };
 
-const StyledInputRoot = styled("div")(({ theme }) => {
+const StyledInputRoot = styled("div")(() => {
   const webTheme = useTheme();
 
   return `
@@ -93,7 +91,7 @@ const StyledInputRoot = styled("div")(({ theme }) => {
 `;
 });
 
-const StyledInput = styled("input")(({ theme }) => {
+const StyledInput = styled("input")(() => {
   const webTheme = useTheme();
 
   return `
@@ -130,7 +128,7 @@ const StyledInput = styled("input")(({ theme }) => {
 `;
 });
 
-const StyledButton = styled("button")(({ theme }) => {
+const StyledButton = styled("button")(() => {
   const webTheme = useTheme();
   return `
   font-family: IBM Plex Sans, sans-serif;

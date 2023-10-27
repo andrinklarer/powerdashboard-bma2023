@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { HoverTooltip } from "./HoverTooltip";
 import QuantityInput from "./NumberInput";
 
@@ -16,12 +17,17 @@ const ProductionOptions: React.FC<ProductionOptionsProps> = ({
   step = 1,
   min = 0,
   ...props
-}: ProductionOptionsProps) => {
+}) => {
   return (
     <div className="sheet flex flex-row items-center justify-between rounded-lg border p-4 ">
       <div className="flex items-center space-x-8">
         <div className="h-16 w-16">
-          <img src={props.iconPath}></img>
+          <Image
+            alt={props.text}
+            width={64}
+            height={64}
+            src={`/${props.iconPath}`}
+          />
         </div>
         <div className="flex space-x-2 font-semibold">
           <p className="text-md font-medium leading-none">{props.text}</p>

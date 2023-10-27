@@ -1,3 +1,5 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 import { addDays, format } from "date-fns";
 import { de } from "date-fns/locale";
 import { DateRange } from "react-day-picker";
@@ -19,24 +21,7 @@ import {
 import { api } from "~/utils/api";
 import CustomTooltip from "./ChartTooltip";
 import { useTheme } from "next-themes";
-
-const DetailedConsumptionData = (amount: number) =>
-  api.powerConsumption.getLossesOfLastN.useQuery({
-    amount,
-  });
-
-const ConsumptionData = (amount: number) =>
-  api.powerConsumption.getLastN.useQuery({
-    amount,
-  });
-
-const TotalProductionData = (amount: number) =>
-  api.powerProduction.getAllGroupedByDate.useQuery({ amount });
-
-const DetailedProductionData = (amount: number) =>
-  api.powerProduction.getAllSeperated.useQuery({
-    amount,
-  });
+import CustomLegend from "./ChartLegend";
 
 const PowerDashboardData = (amount: number, dateRange: DateRange) =>
   api.powerDashboard.getAll.useQuery({
@@ -68,11 +53,9 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   solarEfficiency = efficiencyOfSolarPanels,
   windTurbines = amountOfWindTurbines,
 }) => {
-  // const detailedProductionData = DetailedProductionData(amount);
-  // const detailedConsumptionData = DetailedConsumptionData(amount);
-  // const consumptionData = ConsumptionData(amount);
-  // const productionData = TotalProductionData(amount);
   const powerDashboard = PowerDashboardData(amount, dateRange);
+
+  const theme = useTheme();
 
   if (!powerDashboard.data) {
     return <div>Data still loading!</div>;
@@ -143,8 +126,15 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     };
   });
 
-  const renderTick = (props: any) => {
-    const { x, y, payload } = props;
+  interface RenderTickProps {
+    x: number;
+    y: number;
+    payload: {
+      value: number;
+    };
+  }
+
+  const renderTick = ({ x, y, payload }: RenderTickProps) => {
     return (
       <g transform={`translate(${x},${y})`}>
         <text x={0} y={0} dy={6} textAnchor="end" fill="#666">
@@ -153,8 +143,6 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
       </g>
     );
   };
-
-  const theme = useTheme();
 
   return (
     <>
@@ -167,13 +155,17 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
         >
           <XAxis
             dataKey="date"
-            tickFormatter={(value) => `${format(value, "dd.MM")}`}
+            tickFormatter={(value: Date) => `${format(value, "dd.MM")}`}
           />
           <YAxis tick={renderTick} width={70} />
-          <Legend verticalAlign="top" height={36} />
+          <Legend
+            verticalAlign="bottom"
+            height={36}
+            content={<CustomLegend />}
+          />
 
           <Tooltip
-            labelFormatter={(date) =>
+            labelFormatter={(date: Date) =>
               `${format(date, "cccc, dd.MM.yyyy", { locale: de })}`
             }
             content={<CustomTooltip />}
@@ -263,7 +255,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           <Area
             type="monotone"
             dataKey="Produktion"
-            stroke="#000"
+            stroke={theme.theme === "dark" ? "#fff" : "#000"}
             strokeWidth={0}
             stackId={3}
             fillOpacity={0}
