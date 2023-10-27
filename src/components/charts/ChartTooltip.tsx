@@ -34,7 +34,7 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
         {payload
           .map((entry, index) => (
             <div key={`item-${index}`} style={{ color: entry.color }}>
-              <span className="font-medium">{entry.name}:</span>
+              <span className="font-semibold">{entry.name}:</span>
               <span style={{ fontWeight: "bold", marginLeft: "5px" }}>
                 {entry.value}
               </span>

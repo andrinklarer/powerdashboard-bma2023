@@ -18,6 +18,7 @@ import {
 } from "~/lib/consts";
 import { api } from "~/utils/api";
 import CustomTooltip from "./ChartTooltip";
+import { useTheme } from "next-themes";
 
 const DetailedConsumptionData = (amount: number) =>
   api.powerConsumption.getLossesOfLastN.useQuery({
@@ -153,6 +154,8 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     );
   };
 
+  const theme = useTheme();
+
   return (
     <>
       <ResponsiveContainer width="100%" height="100%">
@@ -241,7 +244,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             <Area
               type="monotone"
               dataKey="Verbrauch"
-              stroke="#000"
+              stroke={theme.theme === "dark" ? "#fff" : "#000"}
               strokeWidth={3}
               stackId={2}
               fillOpacity={0}
@@ -251,7 +254,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             <Area
               type="monotone"
               dataKey="Verlust"
-              stroke="#000"
+              stroke={theme.theme === "dark" ? "#fff" : "#000"}
               strokeWidth={1}
               stackId={2}
               fillOpacity={0}
