@@ -69,7 +69,7 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
             ) : (
               <span
                 className="legend-color"
-                style={{ backgroundColor: entry.color }}
+                style={{ backgroundColor: entry.color, opacity: 0.6 }}
               />
             )}
             <span>{entry.value}</span>
@@ -82,8 +82,8 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
           align-items: center;
         }
         .legend-color {
-          width: 10px;
-          height: 10px;
+          width: 16px;
+          height: 16px;
           display: inline-block;
           margin-right: 5px;
         }

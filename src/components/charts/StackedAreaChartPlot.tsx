@@ -138,7 +138,13 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   const renderTick = ({ x, y, payload }: RenderTickProps) => {
     return (
       <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={6} textAnchor="end" fill="#666">
+        <text
+          x={0}
+          y={0}
+          dy={6}
+          textAnchor="end"
+          fill={theme.theme === "dark" ? "#94A3B8" : "#64748B"}
+        >
           {payload.value} <tspan fontSize={12}>GWh</tspan>
         </text>
       </g>
@@ -155,10 +161,15 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <XAxis
+            tick={{ fill: theme.theme === "dark" ? "#94A3B8" : "#64748B" }}
             dataKey="date"
             tickFormatter={(value: Date) => `${format(value, "dd.MM")}`}
           />
-          <YAxis tick={renderTick} width={70} />
+          <YAxis
+            tick={renderTick}
+            width={70}
+            fill={theme.theme === "dark" ? "#FFF" : "#FFF"}
+          />
           <Legend
             verticalAlign="bottom"
             height={36}
@@ -189,49 +200,49 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             <Area
               type="monotone"
               dataKey="Kernkraft"
-              stroke="#82ca9d"
+              stroke="#66E07E"
               stackId={1}
-              fill="#82ca9d"
+              fill="#66E07E"
             />
           )}
           {showWater && (
             <Area
               type="monotone"
               dataKey="Flusskraft"
-              stroke="#8884d8"
+              stroke="#40E0D0"
               stackId={1}
-              fill="#8884d8"
+              fill="#40E0D0"
             />
           )}
           {showWater && (
             <Area
               type="monotone"
               dataKey="Speicherkraft"
-              stroke="#ADD8E6"
+              stroke="#0060FF"
               stackId={1}
-              fill="#ADD8E6"
+              fill="#0060FF"
             />
           )}
           <Area
             type="monotone"
             dataKey="Solar"
-            stroke="#ffc658"
+            stroke="#FFDA57"
             stackId={1}
-            fill="#ffc658"
+            fill="#FFDA57"
           />
           <Area
             type="monotone"
             dataKey="Thermische"
-            stroke="#4464d8"
+            stroke="#FF7C30"
             stackId={1}
-            fill="#4464d8"
+            fill="#FF7C30"
           />
           <Area
             type="monotone"
             dataKey="Wind"
-            stroke="#8884d8"
+            stroke="#87CEEB"
             stackId={1}
-            fill="#8884d8"
+            fill="#87CEEB"
           />
           {showConsumption && !showLosses && (
             <Area
