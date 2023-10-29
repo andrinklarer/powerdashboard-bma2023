@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { HoverTooltip } from "./HoverTooltip";
 import QuantityInput from "./NumberInput";
 import { ReactElement } from "react";
 import { Button } from "./ui/button";

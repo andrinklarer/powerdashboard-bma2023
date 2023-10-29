@@ -14,7 +14,6 @@ import { DateRangePicker } from "../DateRangePicker";
 import ProductionOptions from "../ProductionOptions";
 import StackedAreaChartPlot from "./StackedAreaChartPlot";
 import Link from "next/link";
-import { HoverTooltip } from "../HoverTooltip";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
