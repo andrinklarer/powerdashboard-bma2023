@@ -38,7 +38,7 @@ const ProductionOptions: React.FC<ProductionOptionsProps> = ({
             popoverContent={props.tooltip}
             popoverTrigger={
               <Button
-                className="h-6 w-6 rounded-full"
+                className="m-0 h-6 w-6 rounded-full p-0"
                 size="icon"
                 variant="outline"
               >

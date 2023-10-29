@@ -131,7 +131,7 @@ const Charts = () => {
       </section>
 
       <section className="my-4 flex gap-2 px-4">
-        <div className=" m-8 h-[250px] w-1/2 space-y-4 rounded  ">
+        <div className=" m-8 space-y-4 rounded  ">
           <ProductionOptions
             iconPath={
               theme.theme === "light"

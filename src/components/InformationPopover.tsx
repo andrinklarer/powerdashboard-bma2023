@@ -1,11 +1,4 @@
 import { ReactElement, useState } from "react";
-import { Button } from "./ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
 export interface InformationPopoverProps {
@@ -26,6 +19,7 @@ export const InformationPopover = ({
   const handleMouseLeave = () => {
     setOpen(false);
   };
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
