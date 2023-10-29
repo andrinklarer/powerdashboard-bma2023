@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { addDays, format } from "date-fns";
+import { addDays } from "date-fns";
 
 export const powerDashboardRouter = createTRPCRouter({
   getAll: publicProcedure

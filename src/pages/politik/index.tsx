@@ -1,16 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import Navbar from "~/components/Navbar";
 import PoliticsCard from "~/components/PoliticsCard";
 
 const politicsJson = [
   {
-    partyComment: "\"....\"",
+    partyComment: '"...."',
     partyImage: "night-mode.svg",
     partyName: "svp",
     linkToParty: "https://www.svp.ch",
-    readMoreLink:
-      "svp",
-  }
+    readMoreLink: "svp",
+  },
 ];
 
 const politics = () => {
@@ -19,17 +18,19 @@ const politics = () => {
       <div className="flex">
         <main className="relative flex-grow">
           <Navbar />
-          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4 justify-center`}>
-          {politicsJson.map((item) => (
-            <PoliticsCard
-              partyComment={item.partyComment}
-              partyImage={item.partyImage}
-              partyName={item.partyName}
-              linkToParty={item.linkToParty}
-              readMoreLink={item.readMoreLink}
-              key={item.partyName}
-            />
-          ))}
+          <div
+            className={`grid grid-cols-1 justify-center md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4`}
+          >
+            {politicsJson.map((item) => (
+              <PoliticsCard
+                partyComment={item.partyComment}
+                partyImage={item.partyImage}
+                partyName={item.partyName}
+                linkToParty={item.linkToParty}
+                readMoreLink={item.readMoreLink}
+                key={item.partyName}
+              />
+            ))}
           </div>
         </main>
       </div>

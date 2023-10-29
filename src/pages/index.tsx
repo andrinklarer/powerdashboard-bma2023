@@ -1,5 +1,4 @@
 import Navbar from "../components/Navbar";
-import Charts from "../components/charts/Charts";
 
 export default function Home() {
   return (
@@ -7,7 +6,6 @@ export default function Home() {
       <div className="flex">
         <main className="relative flex-grow">
           <Navbar />
-          {/* <Charts /> */}
         </main>
       </div>
     </>

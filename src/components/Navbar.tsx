@@ -2,13 +2,6 @@
 
 import Link from "next/link";
 
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "./ui/navigation-menu";
 import { Separator } from "./ui/separator";
 import DarkModeToggleButton from "./DarkModeToggle";
 import { Button } from "./ui/button";

@@ -1,6 +1,5 @@
 import React from "react";
 import { Switch } from "./ui/switch";
-import { Label } from "recharts";
 
 interface Props {
   label: string;

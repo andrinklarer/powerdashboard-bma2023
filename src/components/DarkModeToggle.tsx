@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { useTheme } from "next-themes";
-import { log } from "console";
 import Image from "next/image";
 import { Button } from "./ui/button";
 
