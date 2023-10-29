@@ -3,6 +3,7 @@ import { HoverTooltip } from "./HoverTooltip";
 import QuantityInput from "./NumberInput";
 import { ReactElement } from "react";
 import { Button } from "./ui/button";
+import { InformationPopover } from "./InformationPopover";
 
 interface ProductionOptionsProps {
   setAmount: React.Dispatch<React.SetStateAction<number>>;
@@ -33,10 +34,9 @@ const ProductionOptions: React.FC<ProductionOptionsProps> = ({
         </div>
         <div className="flex items-center space-x-2 font-semibold">
           <p className="text-md font-medium leading-none">{props.text}</p>
-          {/* https://www.ensi.ch/de/themen/kernkraftwerke-schweiz/ */}
-          <HoverTooltip
-            text={props.tooltip}
-            trigger={
+          <InformationPopover
+            popoverContent={props.tooltip}
+            popoverTrigger={
               <Button
                 className="h-5 w-5 rounded-full"
                 size="icon"
@@ -45,7 +45,7 @@ const ProductionOptions: React.FC<ProductionOptionsProps> = ({
                 i
               </Button>
             }
-          ></HoverTooltip>
+          ></InformationPopover>
         </div>
       </div>
       <QuantityInput
