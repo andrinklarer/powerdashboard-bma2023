@@ -17,13 +17,16 @@ const ChartSetting: React.FC<Props> = ({ disabled = false, ...props }) => {
   return (
     <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
       <div className="space-y-0.5">
+        <input className="peer hidden" disabled={disabled}></input>
         <label
           htmlFor={props.label}
           className="text-base font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
         >
           {props.label}
         </label>
-        <p className="text-sm text-muted-foreground">{props.description}</p>
+        <p className="text-sm text-muted-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          {props.description}
+        </p>
       </div>
       <Switch
         className="ml-2"
