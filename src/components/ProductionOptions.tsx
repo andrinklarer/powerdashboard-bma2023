@@ -22,8 +22,8 @@ const ProductionOptions: React.FC<ProductionOptionsProps> = ({
   ...props
 }) => {
   return (
-    <div className="sheet flex flex-row items-center justify-between rounded-lg border p-4 ">
-      <div className="flex items-center space-x-8">
+    <div className="flex flex-row items-center justify-between gap-3 rounded-lg border p-4 ">
+      <div className="flex items-center space-x-6">
         <div className="h-16 w-16">
           <Image
             alt={props.text}
@@ -38,7 +38,7 @@ const ProductionOptions: React.FC<ProductionOptionsProps> = ({
             popoverContent={props.tooltip}
             popoverTrigger={
               <Button
-                className="h-5 w-5 rounded-full"
+                className="h-6 w-6 rounded-full"
                 size="icon"
                 variant="outline"
               >
