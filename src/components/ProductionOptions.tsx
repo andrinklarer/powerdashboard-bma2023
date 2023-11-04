@@ -13,11 +13,9 @@ interface ProductionOptionsProps {
   min?: number;
   max: number;
   defaultValue: number;
-  step?: number;
 }
 
 const ProductionOptions: React.FC<ProductionOptionsProps> = ({
-  step = 1,
   min = 0,
   ...props
 }) => {
@@ -89,7 +87,6 @@ const ProductionOptions: React.FC<ProductionOptionsProps> = ({
       <QuantityInput
         min={min}
         max={props.max}
-        step={step}
         setValue={props.setAmount}
         defaultValue={props.defaultValue}
       ></QuantityInput>

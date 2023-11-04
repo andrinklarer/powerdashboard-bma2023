@@ -5,6 +5,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { styled } from "@mui/system";
+import { set } from "date-fns";
 import { useTheme } from "next-themes";
 import * as React from "react";
 import { useIsMobile } from "~/lib/utils";
@@ -57,7 +58,6 @@ interface QuantityInputProps {
   min?: number;
   max?: number;
   defaultValue?: number;
-  step?: number;
 }
 
 export default function QuantityInput({
@@ -65,8 +65,8 @@ export default function QuantityInput({
   min = 0,
   max = 100,
   defaultValue = 0,
-  step = 1,
 }: QuantityInputProps) {
+  const isMobile = useIsMobile();
   return (
     <NumberInput
       onChange={(_event, value) => {
@@ -75,7 +75,7 @@ export default function QuantityInput({
       aria-label="Quantity Input"
       min={min}
       max={max}
-      step={step}
+      step={1}
       defaultValue={defaultValue}
     />
   );
@@ -95,12 +95,18 @@ const grey = {
 };
 
 const StyledInputRoot = styled("div")(() => {
-  const webTheme = useTheme();
+  const { resolvedTheme } = useTheme();
+  const [color, setColor] = React.useState(grey[300]);
+
+  React.useEffect(() => {
+    if (resolvedTheme) {
+      setColor(resolvedTheme === "dark" ? grey[300] : grey[500]);
+    }
+  }, [resolvedTheme]);
 
   return `
-  font-family: IBM Plex Sans, sans-serif;
   font-weight: 400;
-  color: ${webTheme.theme === "dark" ? grey[300] : grey[500]};
+  color: ${color};
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -109,19 +115,32 @@ const StyledInputRoot = styled("div")(() => {
 });
 
 const StyledInput = styled("input")(() => {
-  const webTheme = useTheme();
+  const { resolvedTheme } = useTheme();
+  const [color, setColor] = React.useState(grey[300]);
+  const [border, setBorder] = React.useState(grey[700]);
+  const [background, setBackground] = React.useState("#020817");
+  const [boxShadow, setBoxShadow] = React.useState("rgba(0,0,0, 0.5)");
+
+  React.useEffect(() => {
+    if (resolvedTheme) {
+      setColor(resolvedTheme === "dark" ? grey[300] : grey[900]);
+      setBorder(resolvedTheme === "dark" ? grey[700] : grey[200]);
+      setBackground(resolvedTheme === "dark" ? "#020817" : "#fff");
+      setBoxShadow(
+        resolvedTheme === "dark" ? "rgba(0,0,0, 0.5)" : "rgba(0,0,0, 0.05)",
+      );
+    }
+  }, [resolvedTheme]);
 
   return `
   font-size: 0.875rem;
   font-family: inherit;
   font-weight: 400;
   line-height: 1.375;
-  color: ${webTheme.theme === "dark" ? grey[300] : grey[900]};
-  background: ${webTheme.theme === "dark" ? "#020817" : "#fff"};
-  border: 1px solid ${webTheme.theme === "dark" ? grey[700] : grey[200]};
-  box-shadow: 0px 2px 4px ${
-    webTheme.theme === "dark" ? "rgba(0,0,0, 0.5)" : "rgba(0,0,0, 0.05)"
-  };
+  color: ${color};
+  background: ${background};
+  border: 1px solid ${border};
+  box-shadow: 0px 2px 4px ${boxShadow};
   border-radius: 8px;
   margin: 0 8px;
   padding: 10px 12px;
@@ -136,7 +155,7 @@ const StyledInput = styled("input")(() => {
 
   &:focus {
     border-color: ${grey[400]};
-    box-shadow: 0 0 0 3px ${webTheme.theme === "dark" ? grey[700] : grey[200]};
+    box-shadow: 0 0 0 3px ${border};
   }
 
   &:focus-visible {
@@ -146,7 +165,22 @@ const StyledInput = styled("input")(() => {
 });
 
 const StyledButton = styled("button")(() => {
-  const webTheme = useTheme();
+  const { resolvedTheme } = useTheme();
+  const [border, setBorder] = React.useState(grey[800]);
+  const [background, setBackground] = React.useState("#020817");
+  const [color, setColor] = React.useState(grey[200]);
+  const [hoverBackground, setHoverBackground] = React.useState(grey[700]);
+  const [hoverBorder, setHoverBorder] = React.useState(grey[500]);
+
+  React.useEffect(() => {
+    if (resolvedTheme) {
+      setBorder(resolvedTheme === "dark" ? grey[800] : grey[200]);
+      setBackground(resolvedTheme === "dark" ? "#020817" : grey[50]);
+      setColor(resolvedTheme === "dark" ? grey[200] : grey[900]);
+      setHoverBackground(resolvedTheme === "dark" ? grey[700] : grey[800]);
+      setHoverBorder(resolvedTheme === "dark" ? grey[500] : grey[900]);
+    }
+  }, [resolvedTheme]);
   return `
   font-family: IBM Plex Sans, sans-serif;
   font-size: 0.875rem;
@@ -154,9 +188,9 @@ const StyledButton = styled("button")(() => {
   line-height: 1.5;
   border: 1px solid;
   border-radius: 999px;
-  border-color: ${webTheme.theme === "dark" ? grey[800] : grey[200]};
-  background: ${webTheme.theme === "dark" ? "#020817" : grey[50]};
-  color: ${webTheme.theme === "dark" ? grey[200] : grey[900]};
+  border-color: ${border};
+  background: ${background};
+  color: ${color};
   width: 32px;
   height: 32px;
   display: flex;
@@ -169,8 +203,8 @@ const StyledButton = styled("button")(() => {
 
   &:hover {
     cursor: pointer;
-    background: ${webTheme.theme === "dark" ? grey[700] : grey[800]};
-    border-color: ${webTheme.theme === "dark" ? grey[500] : grey[900]};
+    background: ${hoverBackground};
+    border-color: ${hoverBorder};
     color: ${grey[50]};
   }
 

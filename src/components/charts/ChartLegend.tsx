@@ -1,5 +1,9 @@
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  darkLineLegendItem,
+  lightLineLegendItem,
+} from "../theme/lineLegendItem";
 
 interface LegendPayload {
   value: string;
@@ -10,52 +14,18 @@ interface CustomLegendProps {
   payload?: LegendPayload[];
 }
 
-const whiteLineSvg = (
-  <svg
-    className="recharts-surface mr-1 inline-block align-middle"
-    width="16"
-    height="16"
-    viewBox="0 0 32 32"
-  >
-    <title></title>
-    <desc></desc>
-    <path
-      stroke-width="4"
-      fill="none"
-      stroke="#FFF"
-      d="M0,16h10.666666666666666
-            A5.333333333333333,5.333333333333333,0,1,1,21.333333333333332,16
-            H32M21.333333333333332,16
-            A5.333333333333333,5.333333333333333,0,1,1,10.666666666666666,16"
-      className="recharts-legend-icon"
-    ></path>
-  </svg>
-);
-
-const blackLineSvg = (
-  <svg
-    className="recharts-surface mr-1 inline-block align-middle"
-    width="16"
-    height="16"
-    viewBox="0 0 32 32"
-  >
-    <title></title>
-    <desc></desc>
-    <path
-      stroke-width="4"
-      fill="none"
-      stroke="#000"
-      d="M0,16h10.666666666666666
-            A5.333333333333333,5.333333333333333,0,1,1,21.333333333333332,16
-            H32M21.333333333333332,16
-            A5.333333333333333,5.333333333333333,0,1,1,10.666666666666666,16"
-      className="recharts-legend-icon"
-    ></path>
-  </svg>
-);
-
 const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
-  const theme = useTheme();
+  const { resolvedTheme } = useTheme();
+  const [icon, setIcon] = useState(darkLineLegendItem);
+
+  useEffect(() => {
+    if (resolvedTheme) {
+      setIcon(
+        resolvedTheme === "dark" ? darkLineLegendItem : lightLineLegendItem,
+      );
+    }
+  }, [resolvedTheme]);
+
   return (
     <div className="grid translate-x-4 grid-cols-3 justify-center justify-items-start sm:flex sm:grid-cols-6 sm:justify-items-center">
       {payload!
@@ -67,7 +37,7 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
             )}
             <div key={`item-${index}`} className="legend-item flex">
               {entry.value === "Verbrauch" || entry.value === "Bedarf" ? (
-                <>{theme.theme === "dark" ? whiteLineSvg : blackLineSvg}</>
+                <>{icon}</>
               ) : (
                 <span
                   className="legend-color"

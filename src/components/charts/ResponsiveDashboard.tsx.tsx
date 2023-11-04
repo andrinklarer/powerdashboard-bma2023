@@ -1,6 +1,6 @@
 "use client";
 import { useTheme } from "next-themes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import {
   amountOfNuclearPowerPlants,
@@ -48,12 +48,19 @@ const ResponsiveCharts = () => {
   const firstDate = getFirstDate();
 
   const isMobile = useIsMobile();
-  const theme = useTheme();
+  const { resolvedTheme } = useTheme();
+  const [iconPath, setIconPath] = useState("dark/");
+
+  useEffect(() => {
+    // Set the icon path as soon as provided dynamically based on the resolved theme
+    if (resolvedTheme) {
+      setIconPath(`${resolvedTheme}/`);
+    }
+  }, [resolvedTheme]);
 
   const [showConsumption, setShowConsumption] = useState<boolean>(false);
   const [showLosses, setShowLosses] = useState<boolean>(false);
   const [hideNuclear, setHideNuclear] = useState<boolean>(false);
-  const [date, setDate] = useState<Date>(getFirstDayOfMonth(latestDate));
 
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
     from: getFirstDayOfMonth(latestDate),
@@ -71,7 +78,10 @@ const ResponsiveCharts = () => {
 
   const [scenario, setScenario] = useState<number>(0);
 
-  const amountToDisplay = calculateTimeDifference(date, latestDate);
+  const amountToDisplay = calculateTimeDifference(
+    getFirstDayOfMonth(latestDate),
+    latestDate,
+  );
 
   return (
     <div className="mb-12 mt-4 grid grid-cols-12">
@@ -126,11 +136,7 @@ const ResponsiveCharts = () => {
       <div className="col-span-12 m-4 mt-4 h-fit lg:m-8 xl:col-span-6">
         <div className="space-y-2.5 rounded  ">
           <ProductionOptions
-            iconPath={
-              theme.theme === "light"
-                ? "nuclear-symbol.png"
-                : "nuclear-symbol.svg"
-            }
+            iconPath={iconPath + "nuclearIcon.svg"}
             text="Anzahl Reaktoren in der Schweiz"
             tooltip={
               <p>
@@ -151,9 +157,7 @@ const ResponsiveCharts = () => {
             defaultValue={amountOfNuclearPowerPlants}
           />
           <ProductionOptions
-            iconPath={
-              theme.theme === "light" ? "solarIcon.svg" : "solarIconWhite.svg"
-            }
+            iconPath={iconPath + "solarIcon.svg"}
             text="Wirkunsgrad der Solaranlagen"
             tooltip={
               <p>
@@ -167,11 +171,7 @@ const ResponsiveCharts = () => {
             defaultValue={efficiencyOfSolarPanels}
           />
           <ProductionOptions
-            iconPath={
-              theme.theme === "light"
-                ? "turbineIcon.png"
-                : "turbineIconWhite.svg"
-            }
+            iconPath={iconPath + "turbineIcon.svg"}
             text="Anzahl Windturbinen"
             tooltip={
               <p>
@@ -189,7 +189,6 @@ const ResponsiveCharts = () => {
             }
             setAmount={setWindTurbines}
             max={1000}
-            step={10}
             defaultValue={windTurbines}
           />
         </div>

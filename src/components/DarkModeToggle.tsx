@@ -1,16 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import { Button } from "./ui/button";
 
 const DarkModeToggleButton = () => {
-  const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
-  const [icon, setIcon] = useState(
-    currentTheme === "dark" ? "night-mode.svg" : "sun.svg",
-  );
+  const { resolvedTheme, setTheme } = useTheme();
+
+  const [iconPath, setIconPath] = useState("dark/themeToggle.svg");
+
+  useEffect(() => {
+    // Set the icon path as soon as provided dynamically based on the resolved theme
+    if (resolvedTheme) {
+      setIconPath(`${resolvedTheme}/themeToggle.svg`);
+    }
+  }, [resolvedTheme]);
 
   {
     /* <a href="https://www.flaticon.com/free-icons/night" title="night icons">Night icons created by rsetiawan - Flaticon</a> */
@@ -21,18 +26,12 @@ const DarkModeToggleButton = () => {
   return (
     <Button variant="ghost" className="p-2">
       <Image
-        src={icon}
+        src={iconPath}
         width={30}
         height={30}
         alt="light mode / dark mode switch"
         onClick={() => {
-          if (theme == "dark") {
-            setIcon("sun.svg");
-            setTheme("light");
-          } else {
-            setIcon("night-mode.svg");
-            setTheme("dark");
-          }
+          setTheme(resolvedTheme === "dark" ? "light" : "dark");
         }}
       />
     </Button>

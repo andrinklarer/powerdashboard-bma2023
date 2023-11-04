@@ -7,8 +7,13 @@ import { ThemeProvider } from "next-themes";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider attribute="class">
-      <div className="bg-background text-foreground h-screen">
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      disableTransitionOnChange
+      enableSystem={true}
+    >
+      <div className="h-screen bg-background text-foreground">
         <Component {...pageProps} />
       </div>
     </ThemeProvider>

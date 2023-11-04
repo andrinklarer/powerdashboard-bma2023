@@ -57,7 +57,16 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
 
   const powerDashboard = PowerDashboardData(amount, dateRange);
 
-  const theme = useTheme();
+  const { resolvedTheme } = useTheme();
+  const [tickColor, setTickColor] = useState("#94A3B8");
+  const [strokeColor, setStrokeColor] = useState("#FFF");
+
+  useEffect(() => {
+    if (resolvedTheme) {
+      setTickColor(resolvedTheme === "dark" ? "#94A3B8" : "#64748B");
+      setStrokeColor(resolvedTheme === "dark" ? "#FFF" : "#000");
+    }
+  }, [resolvedTheme]);
 
   if (!powerDashboard.data) {
     return <div>Data still loading!</div>;
@@ -140,13 +149,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   const renderTick = ({ x, y, payload }: RenderTickProps) => {
     return (
       <g transform={`translate(${x},${y})`}>
-        <text
-          x={0}
-          y={0}
-          dy={6}
-          textAnchor="end"
-          fill={theme.theme === "dark" ? "#94A3B8" : "#64748B"}
-        >
+        <text x={0} y={0} dy={6} textAnchor="end" fill={tickColor}>
           {payload.value} <tspan fontSize={12}> GWh</tspan>
         </text>
       </g>
@@ -156,13 +159,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   const renderMobileTick = ({ x, y, payload }: RenderTickProps) => {
     return (
       <g transform={`translate(${x},${y})`}>
-        <text
-          x={0}
-          y={0}
-          dy={5}
-          textAnchor="end"
-          fill={theme.theme === "dark" ? "#94A3B8" : "#64748B"}
-        >
+        <text x={0} y={0} dy={5} textAnchor="end" fill={tickColor}>
           {payload.value}
           {payload.value !== 0 && (
             <tspan x={0} dy={12} fontSize={10} className="font-bold">
@@ -184,14 +181,13 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <XAxis
-            tick={{ fill: theme.theme === "dark" ? "#94A3B8" : "#64748B" }}
+            tick={{ fill: tickColor }}
             dataKey="date"
             tickFormatter={(value: Date) => `${format(value, "dd.MM")}`}
           />
           <YAxis
             tick={isMobile ? renderMobileTick : renderTick}
             width={isMobile ? 40 : 70}
-            fill={theme.theme === "dark" ? "#FFF" : "#FFF"}
           />
           <Legend
             verticalAlign="bottom"
@@ -271,7 +267,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             <Area
               type="monotone"
               dataKey="Verbrauch"
-              stroke={theme.theme === "dark" ? "#fff" : "#000"}
+              stroke={strokeColor}
               strokeWidth={2}
               stackId={2}
               fillOpacity={0}
@@ -281,7 +277,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             <Area
               type="monotone"
               dataKey="Bedarf"
-              stroke={theme.theme === "dark" ? "#fff" : "#000"}
+              stroke={strokeColor}
               strokeWidth={2}
               stackId={2}
               fillOpacity={0}
@@ -290,7 +286,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           <Area
             type="monotone"
             dataKey="Produktion"
-            stroke={theme.theme === "dark" ? "#fff" : "#000"}
+            stroke={strokeColor}
             strokeWidth={0}
             stackId={3}
             fillOpacity={0}
