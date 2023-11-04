@@ -74,7 +74,7 @@ const ResponsiveCharts = () => {
   const amountToDisplay = calculateTimeDifference(date, latestDate);
 
   return (
-    <div className="mt-4 grid grid-cols-12">
+    <div className="mb-12 mt-4 grid grid-cols-12">
       <div className="col-span-12 my-2 ml-2 mr-0 h-[600px] lg:col-span-8 lg:my-4 lg:ml-4">
         <StackedAreaChartPlot
           amount={amountToDisplay}

@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
 
-import { cn } from "./../lib/utils";
+import { cn, useIsMobile } from "./../lib/utils";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
@@ -24,6 +24,8 @@ export function DateRangePicker({
   dateRange,
   setDateRange,
 }: DateRangePickerProps) {
+  const isMobile = useIsMobile();
+
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: dateRange?.from,
     to: dateRange?.to,
@@ -78,7 +80,7 @@ export function DateRangePicker({
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent className="mr-3 w-auto p-0" align="start">
           <Calendar
             locale={de}
             fromDate={lowerLimit}
@@ -97,7 +99,7 @@ export function DateRangePicker({
                 setDate(range);
               }
             }}
-            numberOfMonths={2}
+            numberOfMonths={isMobile ? 1 : 2}
           />
           <div className="w-full p-3">
             <Button className="w-full" variant={"secondary"} onClick={apply}>
