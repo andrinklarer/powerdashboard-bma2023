@@ -12,29 +12,10 @@ export const InformationPopover = ({
   popoverTrigger,
 }: InformationPopoverProps) => {
   const [open, setOpen] = useState(false);
-  const isMobile = useIsMobile();
-
-  const handleMouseEnter = () => {
-    setOpen(true);
-  };
-
-  const handleMouseLeave = () => {
-    setOpen(false);
-  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      {isMobile ? (
-        <PopoverTrigger asChild>{popoverTrigger}</PopoverTrigger>
-      ) : (
-        <PopoverTrigger
-          asChild
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        >
-          {popoverTrigger}
-        </PopoverTrigger>
-      )}
+      <PopoverTrigger asChild>{popoverTrigger}</PopoverTrigger>
       <PopoverContent className="max-w-sm p-3 pb-1.5 pt-1.5	text-sm font-bold sm:max-w-md">
         {popoverContent}
       </PopoverContent>
