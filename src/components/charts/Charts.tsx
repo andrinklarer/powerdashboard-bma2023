@@ -195,7 +195,6 @@ const Charts = () => {
             }
             setAmount={setWindTurbines}
             max={1000}
-            step={10}
             defaultValue={windTurbines}
           />
         </div>
