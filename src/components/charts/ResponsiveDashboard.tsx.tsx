@@ -74,8 +74,8 @@ const ResponsiveCharts = () => {
   const amountToDisplay = calculateTimeDifference(date, latestDate);
 
   return (
-    <div className="grid grid-cols-12">
-      <div className="col-span-12 m-2 h-[600px] lg:col-span-8">
+    <div className="mt-4 grid grid-cols-12">
+      <div className="col-span-12 my-2 ml-2 mr-0 h-[600px] lg:col-span-8 lg:my-4 lg:ml-4">
         <StackedAreaChartPlot
           amount={amountToDisplay}
           dateRange={dateRange!}
@@ -92,8 +92,8 @@ const ResponsiveCharts = () => {
           isMobile && "mt-12"
         }`}
       >
-        <div className="w-full space-y-4">
-          <div className="flex items-center justify-between space-x-2 rounded-lg border p-4">
+        <div className="w-full space-y-2.5">
+          <div className="mb-8 flex items-center justify-between space-x-2 rounded-lg border p-4">
             <label className="text-md font-medium leading-none">Zeitraum</label>
             <DateRangePicker
               lowerLimit={firstDate}
@@ -123,8 +123,8 @@ const ResponsiveCharts = () => {
           />
         </div>
       </div>
-      <div className="col-span-12 m-4 h-fit xl:col-span-6">
-        <div className="space-y-4 rounded  ">
+      <div className="col-span-12 m-4 mt-4 h-fit lg:m-8 xl:col-span-6">
+        <div className="space-y-2.5 rounded  ">
           <ProductionOptions
             iconPath={
               theme.theme === "light"
