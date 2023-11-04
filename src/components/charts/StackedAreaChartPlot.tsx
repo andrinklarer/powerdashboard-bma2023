@@ -20,6 +20,8 @@ import { api } from "~/utils/api";
 import CustomTooltip from "./ChartTooltip";
 import { useTheme } from "next-themes";
 import CustomLegend from "./ChartLegend";
+import { useEffect, useState } from "react";
+import { useIsMobile } from "~/lib/utils";
 
 const PowerDashboardData = (amount: number, dateRange: DateRange) =>
   api.powerDashboard.getAll.useQuery({
@@ -51,6 +53,8 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   solarEfficiency = efficiencyOfSolarPanels,
   windTurbines = amountOfWindTurbines,
 }) => {
+  const isMobile = useIsMobile();
+
   const powerDashboard = PowerDashboardData(amount, dateRange);
 
   const theme = useTheme();
@@ -143,7 +147,28 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           textAnchor="end"
           fill={theme.theme === "dark" ? "#94A3B8" : "#64748B"}
         >
-          {payload.value} <tspan fontSize={12}>GWh</tspan>
+          {payload.value} <tspan fontSize={12}> GWh</tspan>
+        </text>
+      </g>
+    );
+  };
+
+  const renderMobileTick = ({ x, y, payload }: RenderTickProps) => {
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text
+          x={0}
+          y={0}
+          dy={5}
+          textAnchor="end"
+          fill={theme.theme === "dark" ? "#94A3B8" : "#64748B"}
+        >
+          {payload.value}
+          {payload.value !== 0 && (
+            <tspan x={0} dy={12} fontSize={10} className="font-bold">
+              GWh
+            </tspan>
+          )}
         </text>
       </g>
     );
@@ -164,8 +189,8 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             tickFormatter={(value: Date) => `${format(value, "dd.MM")}`}
           />
           <YAxis
-            tick={renderTick}
-            width={70}
+            tick={isMobile ? renderMobileTick : renderTick}
+            width={isMobile ? 40 : 70}
             fill={theme.theme === "dark" ? "#FFF" : "#FFF"}
           />
           <Legend

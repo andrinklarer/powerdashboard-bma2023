@@ -7,31 +7,48 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { styled } from "@mui/system";
 import { useTheme } from "next-themes";
 import * as React from "react";
+import { useIsMobile } from "~/lib/utils";
 
 const NumberInput = React.forwardRef(function CustomNumberInput(
   props: NumberInputProps,
   ref: React.ForwardedRef<HTMLDivElement>,
 ) {
+  const isMobile = useIsMobile();
+
+  // Define slots and slotProps for mobile and non-mobile views
+  const mobileSlots = {
+    root: StyledInputRoot,
+    input: StyledInput,
+    // You might want to exclude incrementButton and decrementButton for mobile
+  };
+
+  const nonMobileSlots = {
+    ...mobileSlots, // Include the same slots from mobile
+    incrementButton: StyledButton,
+    decrementButton: StyledButton,
+  };
+
+  const mobileSlotProps = {
+    // Props for mobile view if any
+  };
+
+  const nonMobileSlotProps = {
+    ...mobileSlotProps, // Include the same slotProps from mobile
+    incrementButton: {
+      children: <AddIcon fontSize="small" />,
+      className: "increment",
+    },
+    decrementButton: {
+      children: <RemoveIcon fontSize="small" />,
+    },
+  };
+
+  // Choose the appropriate slots and slotProps based on isMobile
+  const slots = isMobile ? mobileSlots : nonMobileSlots;
+  const slotProps = isMobile ? mobileSlotProps : nonMobileSlotProps;
+
   return (
-    <BaseNumberInput
-      slots={{
-        root: StyledInputRoot,
-        input: StyledInput,
-        incrementButton: StyledButton,
-        decrementButton: StyledButton,
-      }}
-      slotProps={{
-        incrementButton: {
-          children: <AddIcon fontSize="small" />,
-          className: "increment",
-        },
-        decrementButton: {
-          children: <RemoveIcon fontSize="small" />,
-        },
-      }}
-      {...props}
-      ref={ref}
-    />
+    <BaseNumberInput slots={slots} slotProps={slotProps} {...props} ref={ref} />
   );
 });
 

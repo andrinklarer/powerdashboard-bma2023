@@ -14,6 +14,7 @@ import { DateRangePicker } from "../DateRangePicker";
 import ProductionOptions from "../ProductionOptions";
 import StackedAreaChartPlot from "./StackedAreaChartPlot";
 import Link from "next/link";
+import { useIsMobile } from "~/lib/utils";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
@@ -46,6 +47,9 @@ const ResponsiveCharts = () => {
   const latestDate = getLatestDate();
   const firstDate = getFirstDate();
 
+  const isMobile = useIsMobile();
+  const theme = useTheme();
+
   const [showConsumption, setShowConsumption] = useState<boolean>(false);
   const [showLosses, setShowLosses] = useState<boolean>(false);
   const [hideNuclear, setHideNuclear] = useState<boolean>(false);
@@ -69,10 +73,9 @@ const ResponsiveCharts = () => {
 
   const amountToDisplay = calculateTimeDifference(date, latestDate);
 
-  const theme = useTheme();
   return (
     <div className="grid grid-cols-12">
-      <div className="col-span-12 m-4 h-[600px] lg:col-span-8">
+      <div className="col-span-12 m-2 h-[600px] lg:col-span-8">
         <StackedAreaChartPlot
           amount={amountToDisplay}
           dateRange={dateRange!}
@@ -84,7 +87,11 @@ const ResponsiveCharts = () => {
           windTurbines={windTurbines}
         />
       </div>
-      <div className="col-span-12 m-4 h-fit md:col-span-6 lg:col-span-4">
+      <div
+        className={`col-span-12 m-4 h-fit lg:col-span-4 lg:ml-0 ${
+          isMobile && "mt-12"
+        }`}
+      >
         <div className="w-full space-y-4">
           <div className="flex items-center justify-between space-x-2 rounded-lg border p-4">
             <label className="text-md font-medium leading-none">Zeitraum</label>
@@ -116,7 +123,7 @@ const ResponsiveCharts = () => {
           />
         </div>
       </div>
-      <div className="col-span-12 m-4 h-fit md:col-span-6">
+      <div className="col-span-12 m-4 h-fit xl:col-span-6">
         <div className="space-y-4 rounded  ">
           <ProductionOptions
             iconPath={

@@ -10,11 +10,11 @@ interface CustomLegendProps {
   payload?: LegendPayload[];
 }
 
-const whiteSvg = (
+const whiteLineSvg = (
   <svg
     className="recharts-surface mr-1 inline-block align-middle"
-    width="14"
-    height="14"
+    width="16"
+    height="16"
     viewBox="0 0 32 32"
   >
     <title></title>
@@ -32,11 +32,11 @@ const whiteSvg = (
   </svg>
 );
 
-const svg = (
+const blackLineSvg = (
   <svg
     className="recharts-surface mr-1 inline-block align-middle"
-    width="14"
-    height="14"
+    width="16"
+    height="16"
     viewBox="0 0 32 32"
   >
     <title></title>
@@ -57,23 +57,26 @@ const svg = (
 const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
   const theme = useTheme();
   return (
-    <div className="flex justify-center">
+    <div className="grid translate-x-4 grid-cols-3 justify-center justify-items-start sm:flex sm:grid-cols-6 sm:justify-items-center">
       {payload!
         .filter((data) => data.value !== "Produktion")
         .map((entry, index) => (
-          <div key={`item-${index}`} className="legend-item">
-            {entry.value === "Verbrauch" ||
-            entry.value === "Verlust" ||
-            entry.value === "Bedarf" ? (
-              <>{theme.theme === "dark" ? whiteSvg : svg}</>
-            ) : (
-              <span
-                className="legend-color"
-                style={{ backgroundColor: entry.color, opacity: 0.6 }}
-              />
+          <>
+            {(entry.value === "Verbrauch" || entry.value === "Bedarf") && (
+              <div className="legend-item flex"></div>
             )}
-            <span>{entry.value}</span>
-          </div>
+            <div key={`item-${index}`} className="legend-item flex">
+              {entry.value === "Verbrauch" || entry.value === "Bedarf" ? (
+                <>{theme.theme === "dark" ? whiteLineSvg : blackLineSvg}</>
+              ) : (
+                <span
+                  className="legend-color"
+                  style={{ backgroundColor: entry.color, opacity: 0.6 }}
+                />
+              )}
+              <span>{entry.value}</span>
+            </div>
+          </>
         ))}
       <style>{`
         .legend-item {

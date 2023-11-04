@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <>
       <div className="flex justify-between">
-        <div className="flex h-16 items-center space-x-1 px-12">
+        <div className="flex h-16 items-center space-x-1 px-6 sm:px-12">
           <Button variant="ghost" className="text-md font-medium">
             <Link
               href="/"
@@ -43,7 +43,7 @@ const Navbar = () => {
             </Link>
           </Button>
         </div>
-        <div className="flex h-16 items-center gap-4 px-12">
+        <div className="flex h-16 w-16 items-center gap-4">
           <DarkModeToggleButton />
         </div>
       </div>
