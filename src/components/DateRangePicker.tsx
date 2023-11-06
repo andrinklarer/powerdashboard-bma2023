@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { format } from "date-fns";
+import { format, subMonths } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
 
@@ -87,8 +87,9 @@ export function DateRangePicker({
             toDate={upperLimit}
             initialFocus
             mode="range"
-            defaultMonth={dateRange?.from}
+            defaultMonth={isMobile ? upperLimit : subMonths(upperLimit, 1)}
             selected={date}
+            fixedWeeks
             onSelect={(range, selected) => {
               if (
                 selected.toDateString() === date?.from?.toDateString() ||

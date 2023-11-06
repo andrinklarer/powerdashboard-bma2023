@@ -4,6 +4,7 @@ import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "~/components/ui/toaster";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -16,6 +17,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       <div className="h-screen bg-background text-foreground">
         <Component {...pageProps} />
       </div>
+      <Toaster />
     </ThemeProvider>
   );
 };
