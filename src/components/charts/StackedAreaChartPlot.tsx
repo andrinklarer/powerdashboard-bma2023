@@ -22,6 +22,7 @@ import { useTheme } from "next-themes";
 import CustomLegend from "./ChartLegend";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "~/lib/utils";
+import LoadingPage from "../LoadingPage";
 
 const PowerDashboardData = (amount: number, dateRange: DateRange) =>
   api.powerDashboard.getAll.useQuery({
@@ -69,7 +70,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   }, [resolvedTheme]);
 
   if (!powerDashboard.data) {
-    return <div>Data still loading!</div>;
+    return <LoadingPage />;
   }
 
   /* Kernkraft */
