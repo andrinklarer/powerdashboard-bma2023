@@ -1,4 +1,3 @@
-import ResponsiveCharts from "~/components/dashboard/ResponsiveDashboard.tsx";
 import Navbar from "../components/Navbar";
 
 export default function Home() {
