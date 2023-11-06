@@ -1,8 +1,8 @@
 import Image from "next/image";
-import QuantityInput from "./NumberInput";
+import QuantityInput from "../NumberInput";
 import { ReactElement, use } from "react";
-import { Button } from "./ui/button";
-import { InformationPopover } from "./InformationPopover";
+import { Button } from "../ui/button";
+import { InformationPopover } from "../InformationPopover";
 import { useIsMobile } from "~/lib/utils";
 
 interface ProductionOptionsProps {

@@ -1,6 +1,5 @@
-import ResponsiveDashboard from "~/components/charts/ResponsiveDashboard.tsx";
+import ResponsiveDashboard from "~/components/dashboard/ResponsiveDashboard";
 import Navbar from "../components/Navbar";
-import Charts from "../components/charts/Charts";
 
 export default function Home() {
   return (

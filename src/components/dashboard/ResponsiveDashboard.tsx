@@ -9,10 +9,10 @@ import {
   efficiencyOfSolarPanels,
 } from "~/lib/consts";
 import { api } from "~/utils/api";
-import ChartSetting from "../ChartSettings";
+import ChartSetting from "./ChartSettings";
 import { DateRangePicker } from "../DateRangePicker";
-import ProductionOptions from "../ProductionOptions";
-import StackedAreaChartPlot from "./StackedAreaChartPlot";
+import ProductionOptions from "./ProductionOptions";
+import StackedAreaChartPlot from "../charts/StackedAreaChartPlot";
 import Link from "next/link";
 import { useIsMobile } from "~/lib/utils";
 
