@@ -7,6 +7,7 @@ import {
   amountOfWindTurbines,
   dataFreshness,
   efficiencyOfSolarPanels,
+  precentageOfElectricCars,
 } from "~/lib/consts";
 import { api } from "~/utils/api";
 import ChartSetting from "./ChartSettings";
@@ -78,6 +79,10 @@ const ResponsiveCharts = () => {
 
   const [scenario, setScenario] = useState<number>(0);
 
+  const [electricCars, setElectricCars] = useState<number>(
+    precentageOfElectricCars,
+  );
+
   const amountToDisplay = calculateTimeDifference(
     getFirstDayOfMonth(latestDate),
     latestDate,
@@ -95,6 +100,7 @@ const ResponsiveCharts = () => {
           nuclearModifier={amountOfNuclear}
           solarEfficiency={solarEfficiency}
           windTurbines={windTurbines}
+          electricCars={electricCars}
         />
       </div>
       <div
@@ -190,6 +196,21 @@ const ResponsiveCharts = () => {
             setAmount={setWindTurbines}
             max={1000}
             defaultValue={windTurbines}
+          />
+          <ProductionOptions
+            iconPath={iconPath + "electricCar.svg"}
+            text="Elektromobilitaet"
+            tooltip={
+              <p>
+                Aktuell sind ca x% der Autos in der Schweiz Elektroautos. Der
+                Zusaetzliche Stromverbrauch wird mit dem Verbrauch der
+                bestehenden Elektroautos und der totalen Anzahl an Autos
+                berrechnet.
+              </p>
+            }
+            setAmount={setElectricCars}
+            max={100}
+            defaultValue={electricCars}
           />
         </div>
       </div>

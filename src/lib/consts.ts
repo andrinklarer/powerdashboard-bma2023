@@ -4,3 +4,7 @@ export const efficiencyOfSolarPanels = 22;
 export const amountOfWindTurbines = 41;
 
 export const dataFreshness = new Date(2023, 8, 30);
+
+export const precentageOfElectricCars = 5;
+
+export const relativePowerConsumptionOfElectricCarsPerDay = 0.9;

@@ -15,6 +15,8 @@ import {
   amountOfWindTurbines,
   defaultChartSize,
   efficiencyOfSolarPanels,
+  precentageOfElectricCars,
+  relativePowerConsumptionOfElectricCarsPerDay,
 } from "~/lib/consts";
 import { api } from "~/utils/api";
 import CustomTooltip from "./ChartTooltip";
@@ -41,6 +43,7 @@ interface StackedAreaChartPlotProps {
   nuclearModifier?: number;
   solarEfficiency?: number;
   windTurbines?: number;
+  electricCars?: number;
 }
 
 const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
@@ -53,6 +56,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   nuclearModifier = amountOfNuclearPowerPlants,
   solarEfficiency = efficiencyOfSolarPanels,
   windTurbines = amountOfWindTurbines,
+  electricCars = precentageOfElectricCars,
 }) => {
   const isMobile = useIsMobile();
 
@@ -123,6 +127,19 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     );
   };
 
+  const calculateConsumption = (value: number) => {
+    return (
+      Math.round(
+        (value +
+          (relativePowerConsumptionOfElectricCarsPerDay /
+            precentageOfElectricCars) *
+            electricCars -
+          relativePowerConsumptionOfElectricCarsPerDay) *
+          100,
+      ) / 100
+    );
+  };
+
   const modifiedData = powerDashboard.data.map((item) => {
     return {
       date: item.date,
@@ -132,7 +149,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
       Speicherkraft: calculateStoragePower(item.Speicherkraft),
       Flusskraft: calculateRiver(item.Flusskraft),
       Kernkraft: calculateNuclear(item.Kernkraft),
-      Verbrauch: item.Verbrauch,
+      Verbrauch: calculateConsumption(item.Verbrauch),
       Produktion: calculateTotalProduction(item),
       Verlust: item.Verlust,
       Bedarf: item.Verbrauch + item.Verlust,
