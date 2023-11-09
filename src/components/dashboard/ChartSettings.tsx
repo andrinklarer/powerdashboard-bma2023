@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch } from "../ui/switch";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   label: string;
@@ -15,7 +16,8 @@ const ChartSetting: React.FC<Props> = ({ disabled = false, ...props }) => {
   }
   return (
     <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
-      <div className="space-y-0.5">
+      <input className="peer hidden" disabled={disabled}></input>
+      <div className="!mt-0 space-y-0.5">
         <input className="peer hidden" disabled={disabled}></input>
         <label
           htmlFor={props.label}
@@ -28,12 +30,20 @@ const ChartSetting: React.FC<Props> = ({ disabled = false, ...props }) => {
         </p>
       </div>
       <Switch
-        className="ml-2"
+        className="ml-2 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
         id={props.label}
         checked={disabled ? false : props.state}
-        disabled={disabled}
         onCheckedChange={() => {
           props.setState(!props.state);
+        }}
+        onClick={() => {
+          if (disabled) {
+            toast({
+              title: "Achtung!",
+              description:
+                "Der Verbrauch muss eingeschaltet sein, um diese Funktion zu nutzen",
+            });
+          }
         }}
       />
     </div>

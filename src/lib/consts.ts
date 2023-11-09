@@ -5,6 +5,6 @@ export const amountOfWindTurbines = 41;
 
 export const dataFreshness = new Date(2023, 8, 30);
 
-export const precentageOfElectricCars = 5;
+export const precentageOfElectricCars = 3.27;
 
-export const relativePowerConsumptionOfElectricCarsPerDay = 0.9;
+export const powerConsumptionOfElectricCarsPerDay = 1.278;

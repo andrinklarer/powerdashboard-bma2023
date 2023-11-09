@@ -15,8 +15,8 @@ import {
   amountOfWindTurbines,
   defaultChartSize,
   efficiencyOfSolarPanels,
+  powerConsumptionOfElectricCarsPerDay,
   precentageOfElectricCars,
-  relativePowerConsumptionOfElectricCarsPerDay,
 } from "~/lib/consts";
 import { api } from "~/utils/api";
 import CustomTooltip from "./ChartTooltip";
@@ -43,7 +43,7 @@ interface StackedAreaChartPlotProps {
   nuclearModifier?: number;
   solarEfficiency?: number;
   windTurbines?: number;
-  electricCars?: number;
+  electricCars?: boolean;
 }
 
 const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
@@ -56,7 +56,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   nuclearModifier = amountOfNuclearPowerPlants,
   solarEfficiency = efficiencyOfSolarPanels,
   windTurbines = amountOfWindTurbines,
-  electricCars = precentageOfElectricCars,
+  electricCars = false,
 }) => {
   const isMobile = useIsMobile();
 
@@ -128,15 +128,13 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   };
 
   const calculateConsumption = (value: number) => {
-    return (
-      Math.round(
-        (value +
-          (relativePowerConsumptionOfElectricCarsPerDay /
-            precentageOfElectricCars) *
-            electricCars -
-          relativePowerConsumptionOfElectricCarsPerDay) *
-          100,
-      ) / 100
+    return Math.round(
+      value +
+        (electricCars
+          ? (powerConsumptionOfElectricCarsPerDay / precentageOfElectricCars) *
+              100 -
+            powerConsumptionOfElectricCarsPerDay
+          : 0),
     );
   };
 

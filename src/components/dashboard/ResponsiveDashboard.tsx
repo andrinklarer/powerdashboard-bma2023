@@ -16,6 +16,9 @@ import ProductionOptions from "./ProductionOptions";
 import StackedAreaChartPlot from "../charts/StackedAreaChartPlot";
 import Link from "next/link";
 import { useIsMobile } from "~/lib/utils";
+import { ScenarioDialog } from "../ScenarioDialog";
+import ScenarioOptions from "./ScenarioOptions";
+import Image from "next/image";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
@@ -63,6 +66,20 @@ const ResponsiveCharts = () => {
   const [showLosses, setShowLosses] = useState<boolean>(false);
   const [hideNuclear, setHideNuclear] = useState<boolean>(false);
 
+  const [electricCars, setElectricCars] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (electricCars && showLosses) {
+      setShowLosses(false);
+    }
+  }, [electricCars]);
+
+  useEffect(() => {
+    if (electricCars && showLosses) {
+      setElectricCars(false);
+    }
+  }, [showLosses]);
+
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
     from: getFirstDayOfMonth(latestDate),
     to: latestDate,
@@ -78,10 +95,6 @@ const ResponsiveCharts = () => {
     useState<number>(amountOfWindTurbines);
 
   const [scenario, setScenario] = useState<number>(0);
-
-  const [electricCars, setElectricCars] = useState<number>(
-    precentageOfElectricCars,
-  );
 
   const amountToDisplay = calculateTimeDifference(
     getFirstDayOfMonth(latestDate),
@@ -167,7 +180,7 @@ const ResponsiveCharts = () => {
             text="Wirkunsgrad der Solaranlagen"
             tooltip={
               <p>
-                Aktuelle Solarpanels haben einen Wirkungsgrad von etwa 22%.
+                Aktuelle Solarpanels haben einen Wirkungsgrad von etwa 21.8%.
                 Technologische Fortschritte könnten diesen Wert erhöhen und die
                 Stromerzeugung bei gleicher Fläche steigern.
               </p>
@@ -197,20 +210,63 @@ const ResponsiveCharts = () => {
             max={1000}
             defaultValue={windTurbines}
           />
-          <ProductionOptions
+          <ScenarioOptions
             iconPath={iconPath + "electricCar.svg"}
-            text="Elektromobilitaet"
-            tooltip={
-              <p>
-                Aktuell sind ca x% der Autos in der Schweiz Elektroautos. Der
-                Zusaetzliche Stromverbrauch wird mit dem Verbrauch der
-                bestehenden Elektroautos und der totalen Anzahl an Autos
-                berrechnet.
-              </p>
+            text="Elektromobilit&auml;t"
+            dialogTitle="Elektromobilit&auml;t"
+            dialogDescription="Einf&uuml;hrung einer Elektroautopflicht"
+            dialogContent={
+              <>
+                <p className="text-muted-foreground">
+                  Von der Gesamtzahl der Personenwagen in der Schweiz machen
+                  2023 Elektroautos 3,27% aus was 155&apos;496 Autos entspricht.
+                  Zusammen verbrauchen sie j&auml;hrlich rund 466
+                  Gigawattstunden (GWh) Strom.{" "}
+                </p>
+                <p className="text-muted-foreground ">
+                  Diese Schätzung basiert auf Angaben von{" "}
+                  <Link
+                    className="underline"
+                    href="https://www.enex.me/blog/energie/wie-viel-strom-brauchen-e-autos-in-der-schweiz"
+                  >
+                    ENEX.ME
+                  </Link>
+                  , dem{" "}
+                  <Link
+                    className="underline"
+                    href="https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/verkehrsinfrastruktur-fahrzeuge/fahrzeuge/strassenfahrzeuge-bestand-motorisierungsgrad.html"
+                  >
+                    Bundesamt für Statistik (BFS)
+                  </Link>{" "}
+                  und folgender Rechnung: Ein Elektroauto verbraucht im Schnitt
+                  20 Kilowattstunden (kWh) für 100 Kilometer. Bei einer
+                  durchschnittlichen Jahresfahrleistung von 15&apos;000
+                  Kilometern mal 155&apos;496 Autos ergibt sich ein
+                  Stromverbrauch von 466 GWh.{" "}
+                </p>
+                <Image
+                  className=""
+                  src={resolvedTheme + "/electricCarLaTeX.svg"}
+                  height="100"
+                  width="1000"
+                  alt="Elektroauto Formel"
+                ></Image>
+                <p className="text-muted-foreground">
+                  Den Stromverbrauch pro Tag falls alle Autos elektrisch
+                  betrieben werden, stammt aus folgender Rechnung:
+                </p>
+                <Image
+                  className="mb-2"
+                  src={resolvedTheme + "/totalElectricCarLaTeX.svg"}
+                  height="100"
+                  width="1000"
+                  alt="Elektroauto Formel"
+                ></Image>
+              </>
             }
-            setAmount={setElectricCars}
-            max={100}
-            defaultValue={electricCars}
+            setState={setElectricCars}
+            state={electricCars}
+            disabled={!showConsumption}
           />
         </div>
       </div>
