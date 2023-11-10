@@ -11,6 +11,7 @@ import {
   Legend,
 } from "recharts";
 import {
+  DiagrammType,
   amountOfNuclearPowerPlants,
   amountOfWindTurbines,
   defaultChartSize,
@@ -26,14 +27,20 @@ import { useEffect, useState } from "react";
 import { useIsMobile } from "~/lib/utils";
 import LoadingPage from "../LoadingPage";
 
-const PowerDashboardData = (amount: number, dateRange: DateRange) =>
+const PowerDashboardData = (dateRange: DateRange) =>
   api.powerDashboard.getAll.useQuery({
-    amount,
+    from: dateRange.from!,
+    to: dateRange.to!,
+  });
+
+const GroupedPowerDashboardData = (dateRange: DateRange) =>
+  api.powerDashboard.getAllByMonth.useQuery({
     from: dateRange.from!,
     to: dateRange.to!,
   });
 
 interface StackedAreaChartPlotProps {
+  diagramType: DiagrammType;
   amount?: number;
   dateRange: DateRange;
   showConsumption?: boolean;
@@ -47,7 +54,7 @@ interface StackedAreaChartPlotProps {
 }
 
 const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
-  amount = defaultChartSize,
+  diagramType,
   dateRange,
   showConsumption = true,
   hideNuclear = false,
@@ -60,7 +67,10 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
 }) => {
   const isMobile = useIsMobile();
 
-  const powerDashboard = PowerDashboardData(amount, dateRange);
+  const powerDashboard =
+    diagramType == DiagrammType.DAY
+      ? PowerDashboardData(dateRange)
+      : GroupedPowerDashboardData(dateRange);
 
   const { resolvedTheme } = useTheme();
   const [tickColor, setTickColor] = useState("#94A3B8");
@@ -77,7 +87,6 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     return <LoadingPage />;
   }
 
-  /* Kernkraft */
   const calculateNuclear = (value: number) =>
     hideNuclear
       ? 0
@@ -85,25 +94,20 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           (value / amountOfNuclearPowerPlants) * nuclearModifier * 10,
         ) / 10;
 
-  /* Kernkraft */
   const calculateRiver = (value: number) => value;
 
-  /* Speicherkraft */
   const calculateStoragePower = (value: number) => value;
 
-  /* Thermische */
   const calculateThermic = (value: number) => value;
 
-  /* Photovoltaik */
   const calculateSolar = (value: number) =>
     Math.round((value / efficiencyOfSolarPanels) * solarEfficiency * 10) / 10;
 
-  /* Wind */
   const calculateWind = (value: number) =>
     Math.round((value / amountOfWindTurbines) * windTurbines * 10) / 10;
 
   const calculateTotalProduction = (item: {
-    id: number;
+    id?: number;
     date: Date;
     Flusskraft: number;
     Kernkraft: number;
@@ -199,7 +203,15 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           <XAxis
             tick={{ fill: tickColor }}
             dataKey="date"
-            tickFormatter={(value: Date) => `${format(value, "dd.MM")}`}
+            tickFormatter={(value: Date) =>
+              `${format(
+                value,
+                diagramType === DiagrammType.DAY ? "dd.MM." : "LLL, yy",
+                {
+                  locale: de,
+                },
+              )}`
+            }
           />
           <YAxis
             tick={isMobile ? renderMobileTick : renderTick}
@@ -212,10 +224,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           />
 
           <Tooltip
-            labelFormatter={(date: Date) =>
-              `${format(date, "cccc, dd.MM.yyyy", { locale: de })}`
-            }
-            content={<CustomTooltip />}
+            content={<CustomTooltip diagramType={diagramType} />}
             labelStyle={{ fontWeight: "bold", borderBottom: "solid" }}
             itemSorter={(i) =>
               [

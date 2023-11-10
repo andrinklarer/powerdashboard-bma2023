@@ -3,6 +3,7 @@ import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import {
+  DiagrammType,
   amountOfNuclearPowerPlants,
   amountOfWindTurbines,
   dataFreshness,
@@ -19,6 +20,7 @@ import { useIsMobile } from "~/lib/utils";
 import { ScenarioDialog } from "../ScenarioDialog";
 import ScenarioOptions from "./ScenarioOptions";
 import Image from "next/image";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./../ui/tabs";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
@@ -68,6 +70,10 @@ const ResponsiveCharts = () => {
 
   const [electricCars, setElectricCars] = useState<boolean>(false);
 
+  const [diagramType, setDiagramType] = useState<DiagrammType>(
+    DiagrammType.DAY,
+  );
+
   useEffect(() => {
     if (electricCars && showLosses) {
       setShowLosses(false);
@@ -105,7 +111,7 @@ const ResponsiveCharts = () => {
     <div className="mb-12 mt-4 grid grid-cols-12">
       <div className="col-span-12 my-2 ml-2 mr-0 h-[600px] lg:col-span-8 lg:my-4 lg:ml-4">
         <StackedAreaChartPlot
-          amount={amountToDisplay}
+          diagramType={diagramType}
           dateRange={dateRange!}
           showConsumption={showConsumption}
           showLosses={showLosses}
@@ -122,15 +128,41 @@ const ResponsiveCharts = () => {
         }`}
       >
         <div className="w-full space-y-2.5">
-          <div className="mb-8 flex items-center justify-between space-x-2 rounded-lg border p-4">
-            <label className="text-md font-medium leading-none">Zeitraum</label>
-            <DateRangePicker
-              lowerLimit={firstDate}
-              upperLimit={latestDate}
-              dateRange={dateRange}
-              setDateRange={setDateRange}
-            />
+          <div className="mb-8 rounded-lg border p-4">
+            <div className=" flex items-center justify-between space-x-2 ">
+              <label className="text-md font-medium leading-none">
+                Zeitraum
+              </label>
+              <DateRangePicker
+                lowerLimit={firstDate}
+                upperLimit={latestDate}
+                dateRange={dateRange}
+                setDateRange={setDateRange}
+              />
+            </div>
+            <hr className="my-2" />
+            <div>
+              <Tabs defaultValue="days" className="w-full">
+                <TabsList className="w-full">
+                  <TabsTrigger
+                    className="w-1/2"
+                    value="days"
+                    onClick={() => setDiagramType(DiagrammType.DAY)}
+                  >
+                    Tage
+                  </TabsTrigger>
+                  <TabsTrigger
+                    className="w-1/2"
+                    value="months"
+                    onClick={() => setDiagramType(DiagrammType.MONTH)}
+                  >
+                    Monate
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </div>
           </div>
+
           <ChartSetting
             label="Verbrauch"
             description="Zeige den Stromverbrauch der Schweiz."
@@ -138,8 +170,8 @@ const ResponsiveCharts = () => {
             setState={setShowConsumption}
           />
           <ChartSetting
-            label="Verluste"
-            description="Zeige die Verluste in der Strom&uuml;bertragung und -verteilung und wie viel Energie wirklich ben&ouml;tigt wird, um unseren Bedarf zu decken."
+            label="Bedarf"
+            description="Zeige den Verbrauch inklusive der Verluste, welche durch die Strom&uuml;bertragung und -verteilung entstehen."
             state={showLosses}
             setState={setShowLosses}
             disabled={!showConsumption}
@@ -149,6 +181,64 @@ const ResponsiveCharts = () => {
             description="Zeige die Stromerzeugnisse ohne Kernkraft."
             state={hideNuclear}
             setState={setHideNuclear}
+          />
+          <ScenarioOptions
+            iconPath={iconPath + "electricCar.svg"}
+            text="Elektromobilit&auml;t"
+            dialogTitle="Elektromobilit&auml;t"
+            dialogDescription="Einf&uuml;hrung einer Elektroautopflicht"
+            dialogContent={
+              <div>
+                <p className="text-muted-foreground">
+                  Von der Gesamtzahl der Personenwagen in der Schweiz machen
+                  2023 Elektroautos 3,27% aus was 155&apos;496 Autos entspricht.
+                  Zusammen verbrauchen sie j&auml;hrlich rund 466
+                  Gigawattstunden (GWh) Strom.{" "}
+                </p>
+                <p className="text-muted-foreground ">
+                  Diese Schätzung basiert auf Angaben von{" "}
+                  <Link
+                    className="underline"
+                    href="https://www.enex.me/blog/energie/wie-viel-strom-brauchen-e-autos-in-der-schweiz"
+                  >
+                    ENEX.ME
+                  </Link>
+                  , dem{" "}
+                  <Link
+                    className="underline"
+                    href="https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/verkehrsinfrastruktur-fahrzeuge/fahrzeuge/strassenfahrzeuge-bestand-motorisierungsgrad.html"
+                  >
+                    Bundesamt für Statistik (BFS)
+                  </Link>{" "}
+                  und folgender Rechnung: Ein Elektroauto verbraucht im Schnitt
+                  20 Kilowattstunden (kWh) für 100 Kilometer. Bei einer
+                  durchschnittlichen Jahresfahrleistung von 15&apos;000
+                  Kilometern mal 155&apos;496 Autos ergibt sich ein
+                  Stromverbrauch von 466 GWh.{" "}
+                </p>
+                <Image
+                  className=""
+                  src={resolvedTheme + "/electricCarLaTeX.svg"}
+                  height="100"
+                  width="1000"
+                  alt="Elektroauto Formel"
+                ></Image>
+                <p className="text-muted-foreground">
+                  Den Stromverbrauch pro Tag falls alle Autos elektrisch
+                  betrieben werden, stammt aus folgender Rechnung:
+                </p>
+                <Image
+                  className="mb-2"
+                  src={resolvedTheme + "/totalElectricCarLaTeX.svg"}
+                  height="100"
+                  width="1000"
+                  alt="Elektroauto Formel"
+                ></Image>
+              </div>
+            }
+            setState={setElectricCars}
+            state={electricCars}
+            disabled={!showConsumption}
           />
         </div>
       </div>
@@ -213,66 +303,7 @@ const ResponsiveCharts = () => {
         </div>
       </div>
       <div className="col-span-12 m-4 mt-4 h-fit lg:m-8 xl:col-span-6 xl:ml-4">
-        <div className="space-y-2.5 rounded  ">
-          <ScenarioOptions
-            iconPath={iconPath + "electricCar.svg"}
-            text="Elektromobilit&auml;t"
-            dialogTitle="Elektromobilit&auml;t"
-            dialogDescription="Einf&uuml;hrung einer Elektroautopflicht"
-            dialogContent={
-              <>
-                <p className="text-muted-foreground">
-                  Von der Gesamtzahl der Personenwagen in der Schweiz machen
-                  2023 Elektroautos 3,27% aus was 155&apos;496 Autos entspricht.
-                  Zusammen verbrauchen sie j&auml;hrlich rund 466
-                  Gigawattstunden (GWh) Strom.{" "}
-                </p>
-                <p className="text-muted-foreground ">
-                  Diese Schätzung basiert auf Angaben von{" "}
-                  <Link
-                    className="underline"
-                    href="https://www.enex.me/blog/energie/wie-viel-strom-brauchen-e-autos-in-der-schweiz"
-                  >
-                    ENEX.ME
-                  </Link>
-                  , dem{" "}
-                  <Link
-                    className="underline"
-                    href="https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/verkehrsinfrastruktur-fahrzeuge/fahrzeuge/strassenfahrzeuge-bestand-motorisierungsgrad.html"
-                  >
-                    Bundesamt für Statistik (BFS)
-                  </Link>{" "}
-                  und folgender Rechnung: Ein Elektroauto verbraucht im Schnitt
-                  20 Kilowattstunden (kWh) für 100 Kilometer. Bei einer
-                  durchschnittlichen Jahresfahrleistung von 15&apos;000
-                  Kilometern mal 155&apos;496 Autos ergibt sich ein
-                  Stromverbrauch von 466 GWh.{" "}
-                </p>
-                <Image
-                  className=""
-                  src={resolvedTheme + "/electricCarLaTeX.svg"}
-                  height="100"
-                  width="1000"
-                  alt="Elektroauto Formel"
-                ></Image>
-                <p className="text-muted-foreground">
-                  Den Stromverbrauch pro Tag falls alle Autos elektrisch
-                  betrieben werden, stammt aus folgender Rechnung:
-                </p>
-                <Image
-                  className="mb-2"
-                  src={resolvedTheme + "/totalElectricCarLaTeX.svg"}
-                  height="100"
-                  width="1000"
-                  alt="Elektroauto Formel"
-                ></Image>
-              </>
-            }
-            setState={setElectricCars}
-            state={electricCars}
-            disabled={!showConsumption}
-          />
-        </div>
+        <div className="space-y-2.5 rounded  "></div>
       </div>
     </div>
   );

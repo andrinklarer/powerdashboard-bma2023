@@ -31,7 +31,7 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
       {payload!
         .filter((data) => data.value !== "Produktion")
         .map((entry, index) => (
-          <div key={`item-${index}`}>
+          <span key={index}>
             {(entry.value === "Verbrauch" || entry.value === "Bedarf") && (
               <div className="legend-item flex"></div>
             )}
@@ -46,7 +46,7 @@ const CustomLegend: React.FC<CustomLegendProps> = ({ payload }) => {
               )}
               <span>{entry.value}</span>
             </div>
-          </div>
+          </span>
         ))}
       <style>{`
         .legend-item {

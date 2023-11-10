@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import React from "react";
 import { Separator } from "../ui/separator";
+import { DiagrammType } from "~/lib/consts";
 
 interface Payload {
   name: string;
@@ -11,12 +12,14 @@ interface Payload {
 
 interface CustomTooltipProps {
   active?: boolean;
+  diagramType: DiagrammType;
   payload?: Payload[];
   label?: Date;
 }
 
 const CustomTooltip: React.FC<CustomTooltipProps> = ({
   active,
+  diagramType,
   payload,
   label,
 }) => {
@@ -31,7 +34,15 @@ const CustomTooltip: React.FC<CustomTooltipProps> = ({
         }}
       >
         <p className="text-md m-0 border-b-2 border-black font-semibold dark:border-white">
-          {`${format(label, "cccc, dd.MM.yyyy", { locale: de })}`}{" "}
+          {`${format(
+            label,
+            diagramType === DiagrammType.DAY
+              ? "cccc, dd.MM.yyyy"
+              : " LLLL yyyy",
+            {
+              locale: de,
+            },
+          )}`}{" "}
         </p>
         {payload
           .map((entry, index) => (
