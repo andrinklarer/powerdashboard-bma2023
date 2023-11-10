@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch } from "../ui/switch";
 import { toast } from "../ui/use-toast";
 
@@ -11,9 +11,12 @@ interface Props {
 }
 
 const ChartSetting: React.FC<Props> = ({ disabled = false, ...props }) => {
-  if (disabled) {
-    props.setState(false);
-  }
+  useEffect(() => {
+    if (disabled) {
+      props.setState(false);
+    }
+  }, [disabled, props.setState]);
+
   return (
     <div className="flex flex-row items-center justify-between space-y-2 rounded-lg border p-4">
       <input className="peer hidden" disabled={disabled}></input>

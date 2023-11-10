@@ -1,6 +1,6 @@
 import Image from "next/image";
 import QuantityInput from "../NumberInput";
-import { ReactElement, use } from "react";
+import { ReactElement, use, useEffect } from "react";
 import { Button } from "../ui/button";
 import { InformationPopover } from "../InformationPopover";
 import { useIsMobile } from "~/lib/utils";
@@ -22,9 +22,11 @@ interface ScenarioOptionsProps {
 
 const ScenarioOptions: React.FC<ScenarioOptionsProps> = ({ ...props }) => {
   const isMobile = useIsMobile();
-  if (props.disabled) {
-    props.setState(false);
-  }
+  useEffect(() => {
+    if (props.disabled) {
+      props.setState(false);
+    }
+  }, [props.disabled, props.setState]);
   return (
     <div className="flex flex-row items-center justify-between rounded-lg border p-3 px-2 sm:p-4 ">
       {isMobile ? (
