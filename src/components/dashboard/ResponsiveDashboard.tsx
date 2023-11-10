@@ -152,7 +152,7 @@ const ResponsiveCharts = () => {
           />
         </div>
       </div>
-      <div className="col-span-12 m-4 mt-4 h-fit lg:m-8 xl:col-span-6">
+      <div className="col-span-12 m-4 mt-4 h-fit lg:m-8 xl:col-span-6 xl:mr-4">
         <div className="space-y-2.5 rounded  ">
           <ProductionOptions
             iconPath={iconPath + "nuclearIcon.svg"}
@@ -210,6 +210,10 @@ const ResponsiveCharts = () => {
             max={1000}
             defaultValue={windTurbines}
           />
+        </div>
+      </div>
+      <div className="col-span-12 m-4 mt-4 h-fit lg:m-8 xl:col-span-6 xl:ml-4">
+        <div className="space-y-2.5 rounded  ">
           <ScenarioOptions
             iconPath={iconPath + "electricCar.svg"}
             text="Elektromobilit&auml;t"

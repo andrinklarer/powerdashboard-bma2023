@@ -28,7 +28,7 @@ const ScenarioOptions: React.FC<ScenarioOptionsProps> = ({ ...props }) => {
     }
   }, [props.disabled, props.setState]);
   return (
-    <div className="flex flex-row items-center justify-between rounded-lg border p-3 px-2 sm:p-4 ">
+    <div className="flex flex-row items-center justify-between rounded-lg border p-3 pl-2 pr-4 sm:p-4 ">
       {isMobile ? (
         <ScenarioDialog
           dialogTitle={props.dialogTitle}
