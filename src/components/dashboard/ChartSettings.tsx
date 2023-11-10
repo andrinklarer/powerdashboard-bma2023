@@ -36,9 +36,7 @@ const ChartSetting: React.FC<Props> = ({ disabled = false, ...props }) => {
         className="ml-2 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
         id={props.label}
         checked={disabled ? false : props.state}
-        onCheckedChange={() => {
-          props.setState(!props.state);
-        }}
+        onCheckedChange={() => !disabled && props.setState(!props.state)}
         onClick={() => {
           if (disabled) {
             toast({

@@ -101,9 +101,7 @@ const ScenarioOptions: React.FC<ScenarioOptionsProps> = ({ ...props }) => {
       <Switch
         className="ml-2 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
         checked={props.disabled ? false : props.state}
-        onCheckedChange={() => {
-          props.setState(!props.state);
-        }}
+        onCheckedChange={() => !props.disabled && props.setState(!props.state)}
         onClick={() => {
           if (props.disabled) {
             toast({
