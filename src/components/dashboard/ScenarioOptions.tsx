@@ -1,12 +1,9 @@
 import Image from "next/image";
-import QuantityInput from "../NumberInput";
-import { ReactElement, use, useEffect } from "react";
-import { Button } from "../ui/button";
-import { InformationPopover } from "../InformationPopover";
+import { ReactElement, useEffect } from "react";
 import { useIsMobile } from "~/lib/utils";
 import { ScenarioDialog } from "../ScenarioDialog";
+import { Button } from "../ui/button";
 import { Switch } from "../ui/switch";
-import { stat } from "fs";
 import { toast } from "../ui/use-toast";
 
 interface ScenarioOptionsProps {
@@ -36,14 +33,6 @@ const ScenarioOptions: React.FC<ScenarioOptionsProps> = ({ ...props }) => {
           dialogContent={props.dialogContent}
           dialogTrigger={
             <div className="flex items-center space-x-4 sm:space-x-6">
-              <div className="h-8 w-8 sm:h-12 sm:w-12">
-                <Image
-                  alt={props.text}
-                  width={64}
-                  height={64}
-                  src={`/${props.iconPath}`}
-                />
-              </div>
               <div className="flex items-center space-x-2 font-semibold">
                 <p className="text-md font-medium leading-none">{props.text}</p>
                 {!isMobile && (
@@ -68,32 +57,36 @@ const ScenarioOptions: React.FC<ScenarioOptionsProps> = ({ ...props }) => {
         ></ScenarioDialog>
       ) : (
         <div className="flex items-center space-x-4 sm:space-x-6">
-          <div className="h-8 w-8 sm:h-12 sm:w-12">
-            <Image
-              alt={props.text}
-              width={64}
-              height={64}
-              src={`/${props.iconPath}`}
-            />
-          </div>
-          <div className="flex items-center space-x-2 font-semibold">
-            <p className="text-md font-medium leading-none">{props.text}</p>
-            {!isMobile && (
-              <ScenarioDialog
-                dialogTitle={props.dialogTitle}
-                dialogDescription={props.dialogDescription}
-                dialogContent={props.dialogContent}
-                dialogTrigger={
-                  <Button
-                    className="m-0 h-6 w-6 rounded-full p-0"
-                    size="icon"
-                    variant="outline"
-                  >
-                    i
-                  </Button>
-                }
-              ></ScenarioDialog>
-            )}
+          <div className="flex items-center space-x-2">
+            <div className="!mt-0 space-y-0.5">
+              <div className="space-x-2">
+                <label
+                  htmlFor={props.text}
+                  className="text-base font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  {props.text}
+                </label>
+                {!isMobile && (
+                  <ScenarioDialog
+                    dialogTitle={props.dialogTitle}
+                    dialogDescription={props.dialogDescription}
+                    dialogContent={props.dialogContent}
+                    dialogTrigger={
+                      <Button
+                        className="m-0 h-6 w-6 rounded-full p-0"
+                        size="icon"
+                        variant="outline"
+                      >
+                        i
+                      </Button>
+                    }
+                  ></ScenarioDialog>
+                )}
+              </div>
+              <p className="text-sm text-muted-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                Rein elektrischer, privater Personenverkehr
+              </p>
+            </div>
           </div>
         </div>
       )}

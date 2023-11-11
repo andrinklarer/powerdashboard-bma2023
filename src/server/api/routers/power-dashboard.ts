@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { addDays } from "date-fns";
+import { addDays, startOfMonth } from "date-fns";
 
 interface PowerData {
   Kernkraft: number;
@@ -62,8 +62,7 @@ export const powerDashboardRouter = createTRPCRouter({
 
       // Process data to extract month and year
       const processedData: ProcessedRecord[] = powerData.map((record) => {
-        const date = new Date(record.date);
-        const yearMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+        const yearMonth = startOfMonth(record.date);
         return { ...record, yearMonth };
       });
 

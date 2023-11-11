@@ -1,4 +1,4 @@
-import { endOfMonth, format, startOfMonth } from "date-fns";
+import { endOfMonth, format, getDaysInMonth, startOfMonth } from "date-fns";
 import { de } from "date-fns/locale";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -130,15 +130,28 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     );
   };
 
-  const calculateConsumption = (value: number) => {
-    return Math.round(
-      value +
-        (electricCars
-          ? (powerConsumptionOfElectricCarsPerDay / precentageOfElectricCars) *
-              100 -
-            powerConsumptionOfElectricCarsPerDay
-          : 0),
-    );
+  const calculateConsumption = (value: number, date: Date) => {
+    if (diagramType === DiagrammType.DAY) {
+      return Math.round(
+        value +
+          (electricCars
+            ? (powerConsumptionOfElectricCarsPerDay /
+                precentageOfElectricCars) *
+                100 -
+              powerConsumptionOfElectricCarsPerDay
+            : 0),
+      );
+    } else {
+      return Math.round(
+        value +
+          (electricCars
+            ? ((powerConsumptionOfElectricCarsPerDay * getDaysInMonth(date)) /
+                precentageOfElectricCars) *
+                100 -
+              powerConsumptionOfElectricCarsPerDay * getDaysInMonth(date)
+            : 0),
+      );
+    }
   };
 
   const modifiedData = powerDashboard.data.map((item) => {
@@ -150,7 +163,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
       Speicherkraft: calculateStoragePower(item.Speicherkraft),
       Flusskraft: calculateRiver(item.Flusskraft),
       Kernkraft: calculateNuclear(item.Kernkraft),
-      Verbrauch: calculateConsumption(item.Verbrauch),
+      Verbrauch: calculateConsumption(item.Verbrauch, item.date),
       Produktion: calculateTotalProduction(item),
       Verlust: item.Verlust,
       Bedarf: item.Verbrauch + item.Verlust,

@@ -1,5 +1,8 @@
 "use client";
+import { isSameMonth, startOfMonth, startOfYear } from "date-fns";
 import { useTheme } from "next-themes";
+import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import {
@@ -8,21 +11,15 @@ import {
   amountOfWindTurbines,
   dataFreshness,
   efficiencyOfSolarPanels,
-  precentageOfElectricCars,
 } from "~/lib/consts";
-import { api } from "~/utils/api";
-import ChartSetting from "./ChartSettings";
-import { DateRangePicker } from "../DateRangePicker";
-import ProductionOptions from "./ProductionOptions";
-import StackedAreaChartPlot from "../charts/StackedAreaChartPlot";
-import Link from "next/link";
 import { useIsMobile } from "~/lib/utils";
-import { ScenarioDialog } from "../ScenarioDialog";
+import { api } from "~/utils/api";
+import { DateRangePicker } from "../DateRangePicker";
+import StackedAreaChartPlot from "../charts/StackedAreaChartPlot";
+import { Tabs, TabsList, TabsTrigger } from "./../ui/tabs";
+import ChartSetting from "./ChartSettings";
+import ProductionOptions from "./ProductionOptions";
 import ScenarioOptions from "./ScenarioOptions";
-import Image from "next/image";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./../ui/tabs";
-import { getMonth, getYear, startOfMonth, startOfYear } from "date-fns";
-import { date } from "zod";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
@@ -101,7 +98,7 @@ const ResponsiveCharts = () => {
   useEffect(() => {
     if (
       diagramType === DiagrammType.MONTH &&
-      getMonth(dateRange.from!) === getMonth(dateRange.to!)
+      isSameMonth(dateRange.to!, dateRange.from!)
     ) {
       setDateRange({
         from: startOfYear(latestDate),
@@ -187,14 +184,14 @@ const ResponsiveCharts = () => {
           />
           <ChartSetting
             label="Bedarf"
-            description="Zeige den Verbrauch inklusive der Verluste, welche durch die Strom&uuml;bertragung und -verteilung entstehen."
+            description="Zeige den Verbrauch + Verluste durch die Strom&uuml;bertragung und Verteilung."
             state={showLosses}
             setState={setShowLosses}
             disabled={!showConsumption}
           />
           <ChartSetting
             label="Kernkraft ausblenden"
-            description="Zeige die Stromerzeugnisse ohne Kernkraft."
+            description="Zeige die Produktion ohne Kernkraft."
             state={hideNuclear}
             setState={setHideNuclear}
           />
@@ -204,7 +201,7 @@ const ResponsiveCharts = () => {
             dialogTitle="Elektromobilit&auml;t"
             dialogDescription="Einf&uuml;hrung einer Elektroautopflicht"
             dialogContent={
-              <div>
+              <div className="space-y-4">
                 <p className="text-muted-foreground">
                   Von der Gesamtzahl der Personenwagen in der Schweiz machen
                   2023 Elektroautos 3,27% aus was 155&apos;496 Autos entspricht.
@@ -244,7 +241,7 @@ const ResponsiveCharts = () => {
                   betrieben werden, stammt aus folgender Rechnung:
                 </p>
                 <Image
-                  className="mb-2"
+                  className="!mb-2 "
                   src={resolvedTheme + "/totalElectricCarLaTeX.svg"}
                   height="100"
                   width="1000"
@@ -258,7 +255,7 @@ const ResponsiveCharts = () => {
           />
         </div>
       </div>
-      <div className="col-span-12 m-4 mt-4 h-fit lg:m-8 xl:col-span-6 xl:mr-4">
+      <div className="col-span-12 m-4 mt-4 h-fit lg:m-8 xl:mr-4 2xl:col-span-6">
         <div className="space-y-2.5 rounded  ">
           <ProductionOptions
             iconPath={iconPath + "nuclearIcon.svg"}
@@ -317,9 +314,6 @@ const ResponsiveCharts = () => {
             defaultValue={windTurbines}
           />
         </div>
-      </div>
-      <div className="col-span-12 m-4 mt-4 h-fit lg:m-8 xl:col-span-6 xl:ml-4">
-        <div className="space-y-2.5 rounded  "></div>
       </div>
     </div>
   );

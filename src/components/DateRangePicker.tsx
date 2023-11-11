@@ -1,26 +1,26 @@
 "use client";
 
-import * as React from "react";
 import {
   addDays,
   addMonths,
   format,
-  getMonth,
-  monthsInQuarter,
-  set,
+  isAfter,
+  isSameDay,
+  isSameMonth,
   subDays,
   subMonths,
 } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
+import * as React from "react";
 import { DateRange } from "react-day-picker";
 
+import { de } from "date-fns/locale";
+import { useEffect } from "react";
+import { DiagrammType } from "~/lib/consts";
 import { cn, useIsMobile } from "./../lib/utils";
 import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { de } from "date-fns/locale";
-import { DiagrammType } from "~/lib/consts";
-import { useEffect } from "react";
 
 interface DateRangePickerProps {
   diagramType: DiagrammType;
@@ -48,7 +48,7 @@ export function DateRangePicker({
   const apply = () => {
     if (
       diagramType === DiagrammType.MONTH &&
-      getMonth(date.to!) === getMonth(date.from!)
+      isSameMonth(date.to!, date.from!)
     ) {
       setDateRange({ from: subMonths(date.from!, 1), to: date.to! });
     } else {
@@ -67,8 +67,8 @@ export function DateRangePicker({
 
     if (!open) {
       setDate({
-        from: dateRange?.from,
-        to: dateRange?.to,
+        from: dateRange.from,
+        to: dateRange.to,
       });
     }
   };
@@ -125,34 +125,32 @@ export function DateRangePicker({
             toDate={upperLimit}
             pagedNavigation={diagramType === DiagrammType.MONTH}
             mode="range"
-            defaultMonth={isMobile ? upperLimit : subMonths(upperLimit, 1)}
+            defaultMonth={isMobile ? date.to! : subMonths(date.to!, 1)}
             selected={date}
             fixedWeeks
             onSelect={(range, selected) => {
               if (diagramType === DiagrammType.DAY) {
-                if (selected.toDateString() === date.from?.toDateString()) {
+                if (isSameDay(selected, date.from!)) {
                   setDate({ from: selected, to: addDays(selected, 1) });
-                } else if (
-                  selected.toDateString() === date.to?.toDateString()
-                ) {
+                } else if (isSameDay(selected, date.to!)) {
                   setDate({ from: subDays(selected, 1), to: selected });
                 } else {
                   setDate(range!);
                 }
               } else {
                 if (
-                  getMonth(selected) === getMonth(date.from!) &&
-                  selected.toDateString() === date.from?.toDateString()
+                  isSameMonth(selected, date.from!) &&
+                  isSameDay(selected, date.from!)
                 ) {
                   setDate({ from: selected, to: addMonths(selected, 1) });
                 } else if (
-                  getMonth(selected) === getMonth(date.to!) &&
-                  selected.toDateString() === date.to?.toDateString()
+                  isSameMonth(selected, date.to!) &&
+                  isSameDay(selected, date.to!)
                 ) {
                   setDate({ from: subMonths(selected, 1), to: selected });
                 } else if (
-                  getMonth(selected) === getMonth(date.from!) &&
-                  selected > date.from!
+                  isSameMonth(selected, date.from!) &&
+                  isAfter(selected, date.from!)
                 ) {
                   setDate({ from: selected, to: date.to! });
                 } else {
