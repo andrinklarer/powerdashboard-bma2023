@@ -21,6 +21,8 @@ import { ScenarioDialog } from "../ScenarioDialog";
 import ScenarioOptions from "./ScenarioOptions";
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./../ui/tabs";
+import { getMonth, getYear, startOfMonth, startOfYear } from "date-fns";
+import { date } from "zod";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
@@ -36,13 +38,9 @@ function getFirstDate() {
   if (data) {
     return data.date;
   } else {
-    return getFirstDayOfMonth(dataFreshness);
+    return startOfMonth(dataFreshness);
   }
 }
-
-const getFirstDayOfMonth = (date: Date) => {
-  return new Date(date.getFullYear(), date.getMonth(), 1);
-};
 
 function calculateTimeDifference(date: Date, date2: Date) {
   const diff = date2.getTime() - date.getTime();
@@ -86,8 +84,8 @@ const ResponsiveCharts = () => {
     }
   }, [showLosses]);
 
-  const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
-    from: getFirstDayOfMonth(latestDate),
+  const [dateRange, setDateRange] = React.useState<DateRange>({
+    from: startOfMonth(latestDate),
     to: latestDate,
   });
 
@@ -100,19 +98,36 @@ const ResponsiveCharts = () => {
   const [windTurbines, setWindTurbines] =
     useState<number>(amountOfWindTurbines);
 
-  const [scenario, setScenario] = useState<number>(0);
+  useEffect(() => {
+    if (
+      diagramType === DiagrammType.MONTH &&
+      getMonth(dateRange.from!) === getMonth(dateRange.to!)
+    ) {
+      setDateRange({
+        from: startOfYear(latestDate),
+        to: latestDate,
+      });
+    } else if (
+      diagramType === DiagrammType.DAY &&
+      dateRange.from!.toDateString() ===
+        startOfYear(latestDate).toDateString() &&
+      dateRange.to!.toDateString() === latestDate.toDateString()
+    ) {
+      setDateRange({
+        from: startOfMonth(latestDate),
+        to: latestDate,
+      });
+    }
+  }, [diagramType]);
 
-  const amountToDisplay = calculateTimeDifference(
-    getFirstDayOfMonth(latestDate),
-    latestDate,
-  );
+  const [scenario, setScenario] = useState<number>(0);
 
   return (
     <div className="mb-12 mt-4 grid grid-cols-12">
-      <div className="col-span-12 my-2 ml-2 mr-0 h-[600px] lg:col-span-8 lg:my-4 lg:ml-4">
+      <div className="col-span-12 my-2 ml-2 mr-0 h-[650px] lg:col-span-8 lg:my-4 lg:ml-4">
         <StackedAreaChartPlot
           diagramType={diagramType}
-          dateRange={dateRange!}
+          dateRange={dateRange}
           showConsumption={showConsumption}
           showLosses={showLosses}
           hideNuclear={hideNuclear}
@@ -134,13 +149,14 @@ const ResponsiveCharts = () => {
                 Zeitraum
               </label>
               <DateRangePicker
+                diagramType={diagramType}
                 lowerLimit={firstDate}
                 upperLimit={latestDate}
                 dateRange={dateRange}
                 setDateRange={setDateRange}
               />
             </div>
-            <hr className="my-2" />
+            <hr className="my-3" />
             <div>
               <Tabs defaultValue="days" className="w-full">
                 <TabsList className="w-full">

@@ -2,8 +2,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { addDays } from "date-fns";
 
-interface AggregatedData {
-  count: number;
+interface PowerData {
   Kernkraft: number;
   Flusskraft: number;
   Speicherkraft: number;
@@ -14,24 +13,16 @@ interface AggregatedData {
   Verbrauch: number;
 }
 
-interface PowerDashboard {
+interface PowerDashboard extends PowerData {
   id: number;
   date: Date;
-  Kernkraft: number;
-  Flusskraft: number;
-  Speicherkraft: number;
-  Photovoltaik: number;
-  Thermische: number;
-  Wind: number;
-  Verlust: number;
-  Verbrauch: number;
 }
 
 interface ProcessedRecord extends PowerDashboard {
   yearMonth: Date;
 }
 
-type GroupedDataType = Record<string, AggregatedData>;
+type GroupedDataType = Record<string, PowerData>;
 
 export const powerDashboardRouter = createTRPCRouter({
   getAll: publicProcedure
@@ -62,7 +53,7 @@ export const powerDashboardRouter = createTRPCRouter({
           },
           where: {
             date: {
-              lte: addDays(input.to, 1),
+              lte: input.to,
               gte: input.from,
             },
           },
@@ -82,7 +73,6 @@ export const powerDashboardRouter = createTRPCRouter({
           const key = record.yearMonth.toISOString();
           if (!acc[key]) {
             acc[key] = {
-              count: 0,
               Kernkraft: 0,
               Flusskraft: 0,
               Speicherkraft: 0,
@@ -93,7 +83,6 @@ export const powerDashboardRouter = createTRPCRouter({
               Verbrauch: 0,
             };
           }
-          acc[key]!.count += 1;
           acc[key]!.Kernkraft += record.Kernkraft;
           acc[key]!.Flusskraft += record.Flusskraft;
           acc[key]!.Speicherkraft += record.Speicherkraft;
@@ -105,24 +94,23 @@ export const powerDashboardRouter = createTRPCRouter({
           return acc;
         },
         {} as GroupedDataType,
-      ); // Explicitly type the initial value
+      );
 
-      // Calculate averages
-      const averages = Object.keys(groupedData).map((key) => {
+      // Calculate summs
+      return Object.keys(groupedData).map((key) => {
         const group = groupedData[key];
         return {
           date: new Date(key),
-          Kernkraft: group!.Kernkraft / group!.count,
-          Flusskraft: group!.Flusskraft / group!.count,
-          Speicherkraft: group!.Speicherkraft / group!.count,
-          Photovoltaik: group!.Photovoltaik / group!.count,
-          Thermische: group!.Thermische / group!.count,
-          Wind: group!.Wind / group!.count,
-          Verlust: group!.Verlust / group!.count,
-          Verbrauch: group!.Verbrauch / group!.count,
+          Kernkraft: group!.Kernkraft,
+          Flusskraft: group!.Flusskraft,
+          Speicherkraft: group!.Speicherkraft,
+          Photovoltaik: group!.Photovoltaik,
+          Thermische: group!.Thermische,
+          Wind: group!.Wind,
+          Verlust: group!.Verlust,
+          Verbrauch: group!.Verbrauch,
         };
       });
-      return averages;
     }),
 
   getLastDate: publicProcedure.query(async ({ ctx }) => {

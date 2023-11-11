@@ -1,31 +1,30 @@
-import { format } from "date-fns";
+import { endOfMonth, format, startOfMonth } from "date-fns";
 import { de } from "date-fns/locale";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import {
-  AreaChart,
   Area,
+  AreaChart,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  Legend,
 } from "recharts";
 import {
   DiagrammType,
   amountOfNuclearPowerPlants,
   amountOfWindTurbines,
-  defaultChartSize,
   efficiencyOfSolarPanels,
   powerConsumptionOfElectricCarsPerDay,
   precentageOfElectricCars,
 } from "~/lib/consts";
-import { api } from "~/utils/api";
-import CustomTooltip from "./ChartTooltip";
-import { useTheme } from "next-themes";
-import CustomLegend from "./ChartLegend";
-import { useEffect, useState } from "react";
 import { useIsMobile } from "~/lib/utils";
+import { api } from "~/utils/api";
 import LoadingPage from "../LoadingPage";
+import CustomLegend from "./ChartLegend";
+import CustomTooltip from "./ChartTooltip";
 
 const PowerDashboardData = (dateRange: DateRange) =>
   api.powerDashboard.getAll.useQuery({
@@ -35,8 +34,8 @@ const PowerDashboardData = (dateRange: DateRange) =>
 
 const GroupedPowerDashboardData = (dateRange: DateRange) =>
   api.powerDashboard.getAllByMonth.useQuery({
-    from: dateRange.from!,
-    to: dateRange.to!,
+    from: startOfMonth(dateRange.from!),
+    to: endOfMonth(dateRange.to!),
   });
 
 interface StackedAreaChartPlotProps {
@@ -94,11 +93,11 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           (value / amountOfNuclearPowerPlants) * nuclearModifier * 10,
         ) / 10;
 
-  const calculateRiver = (value: number) => value;
+  const calculateRiver = (value: number) => Math.round(value * 10) / 10;
 
-  const calculateStoragePower = (value: number) => value;
+  const calculateStoragePower = (value: number) => Math.round(value * 10) / 10;
 
-  const calculateThermic = (value: number) => value;
+  const calculateThermic = (value: number) => Math.round(value * 10) / 10;
 
   const calculateSolar = (value: number) =>
     Math.round((value / efficiencyOfSolarPanels) * solarEfficiency * 10) / 10;
@@ -169,9 +168,15 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   const renderTick = ({ x, y, payload }: RenderTickProps) => {
     return (
       <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={6} textAnchor="end" fill={tickColor}>
-          {payload.value} <tspan fontSize={12}> GWh</tspan>
-        </text>
+        {payload.value >= 10000 ? (
+          <text x={0} y={0} dy={6} textAnchor="end" fill={tickColor}>
+            {payload.value / 1000} <tspan fontSize={12}> TWh</tspan>
+          </text>
+        ) : (
+          <text x={0} y={0} dy={6} textAnchor="end" fill={tickColor}>
+            {payload.value} <tspan fontSize={12}> GWh</tspan>
+          </text>
+        )}
       </g>
     );
   };
@@ -179,14 +184,23 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   const renderMobileTick = ({ x, y, payload }: RenderTickProps) => {
     return (
       <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={5} textAnchor="end" fill={tickColor}>
-          {payload.value}
-          {payload.value !== 0 && (
+        {payload.value >= 10000 ? (
+          <text x={0} y={0} dy={5} textAnchor="end" fill={tickColor}>
+            {payload.value / 1000}
             <tspan x={0} dy={12} fontSize={10} className="font-bold">
-              GWh
+              TWh
             </tspan>
-          )}
-        </text>
+          </text>
+        ) : (
+          <text x={0} y={0} dy={5} textAnchor="end" fill={tickColor}>
+            {payload.value}
+            {payload.value !== 0 && (
+              <tspan x={0} dy={12} fontSize={10} className="font-bold">
+                GWh
+              </tspan>
+            )}
+          </text>
+        )}
       </g>
     );
   };
@@ -206,7 +220,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
             tickFormatter={(value: Date) =>
               `${format(
                 value,
-                diagramType === DiagrammType.DAY ? "dd.MM." : "LLL, yy",
+                diagramType === DiagrammType.DAY ? "dd.MM" : "LLL, yy",
                 {
                   locale: de,
                 },
@@ -215,7 +229,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           />
           <YAxis
             tick={isMobile ? renderMobileTick : renderTick}
-            width={isMobile ? 40 : 70}
+            width={isMobile ? 45 : 75}
           />
           <Legend
             verticalAlign="bottom"

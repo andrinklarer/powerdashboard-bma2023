@@ -1,5 +1,4 @@
-import { Copy } from "lucide-react";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 
 import { Button } from "./ui/button";
 import {
@@ -12,7 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import { Label } from "./ui/label";
 
 export interface ScenarioDialogProps {
   dialogTitle: string;
