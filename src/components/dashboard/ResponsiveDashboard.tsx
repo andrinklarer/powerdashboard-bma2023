@@ -39,11 +39,6 @@ function getFirstDate() {
   }
 }
 
-function calculateTimeDifference(date: Date, date2: Date) {
-  const diff = date2.getTime() - date.getTime();
-  return Math.ceil(diff / (1000 * 3600 * 24));
-}
-
 const ResponsiveCharts = () => {
   const latestDate = getLatestDate();
   const firstDate = getFirstDate();
@@ -117,8 +112,6 @@ const ResponsiveCharts = () => {
     }
   }, [diagramType]);
 
-  const [scenario, setScenario] = useState<number>(0);
-
   return (
     <div className="mb-12 mt-4 grid grid-cols-12">
       <div className="col-span-12 my-2 ml-2 mr-0 h-[650px] lg:col-span-8 lg:my-4 lg:ml-4">
@@ -190,28 +183,27 @@ const ResponsiveCharts = () => {
             disabled={!showConsumption}
           />
           <ChartSetting
-            label="Kernkraft ausblenden"
-            description="Zeige die Produktion ohne Kernkraft."
+            label="Kernkraft"
+            description="Stromproduktion ohne Kernkraft."
             state={hideNuclear}
             setState={setHideNuclear}
           />
           <ScenarioOptions
             iconPath={iconPath + "electricCar.svg"}
-            text="Elektromobilit&auml;t"
+            title="Elektromobilit&auml;t"
             dialogTitle="Elektromobilit&auml;t"
-            dialogDescription="Einf&uuml;hrung einer Elektroautopflicht"
+            dialogDescription="Einf&uuml;hrung einer Elektroautopflicht."
             dialogContent={
               <div className="space-y-4">
-                <p className="text-muted-foreground">
-                  Von der Gesamtzahl der Personenwagen in der Schweiz machen
-                  2023 Elektroautos 3,27% aus was 155&apos;496 Autos entspricht.
-                  Zusammen verbrauchen sie j&auml;hrlich rund 466
-                  Gigawattstunden (GWh) Strom.{" "}
+                <p className="text-justify text-muted-foreground">
+                  Im Jahr 2023 verbrauchen die 155&apos;496 in der Schweiz
+                  eingel&ouml;sten, reinen Elektroautos etwa 466 GWh Strom.{" "}
                 </p>
-                <p className="text-muted-foreground ">
+                <p className="text-justify text-muted-foreground ">
                   Diese Schätzung basiert auf Angaben von{" "}
                   <Link
                     className="underline"
+                    target="_blank"
                     href="https://www.enex.me/blog/energie/wie-viel-strom-brauchen-e-autos-in-der-schweiz"
                   >
                     ENEX.ME
@@ -219,6 +211,7 @@ const ResponsiveCharts = () => {
                   , dem{" "}
                   <Link
                     className="underline"
+                    target="_blank"
                     href="https://www.bfs.admin.ch/bfs/de/home/statistiken/mobilitaet-verkehr/verkehrsinfrastruktur-fahrzeuge/fahrzeuge/strassenfahrzeuge-bestand-motorisierungsgrad.html"
                   >
                     Bundesamt für Statistik (BFS)
@@ -226,24 +219,26 @@ const ResponsiveCharts = () => {
                   und folgender Rechnung: Ein Elektroauto verbraucht im Schnitt
                   20 Kilowattstunden (kWh) für 100 Kilometer. Bei einer
                   durchschnittlichen Jahresfahrleistung von 15&apos;000
-                  Kilometern mal 155&apos;496 Autos ergibt sich ein
-                  Stromverbrauch von 466 GWh.{" "}
+                  Kilometern mal 155&apos;496 Elektroautos ergibt sich ein
+                  Stromverbrauch von 466 GWh. Pro Tag entspricht dies
+                  ungef&auml;hr 1.3 GWh.{" "}
                 </p>
                 <Image
                   className=""
-                  src={resolvedTheme + "/electricCarLaTeX.svg"}
-                  height="100"
+                  src={resolvedTheme + "/LaTeX/eCar.svg"}
+                  height="50"
                   width="1000"
                   alt="Elektroauto Formel"
                 ></Image>
-                <p className="text-muted-foreground">
-                  Den Stromverbrauch pro Tag falls alle Autos elektrisch
-                  betrieben werden, stammt aus folgender Rechnung:
+                <p className="text-justify text-muted-foreground">
+                  Der t&auml;gliche Stromverbrauch unter der Annahme, dass alle
+                  Personenwagen rein elektrisch betrieben werden, basiert auf
+                  folgender Berechnung:
                 </p>
                 <Image
                   className="!mb-2 "
-                  src={resolvedTheme + "/totalElectricCarLaTeX.svg"}
-                  height="100"
+                  src={resolvedTheme + "/LaTeX/eCarTotal.svg"}
+                  height="50"
                   width="1000"
                   alt="Elektroauto Formel"
                 ></Image>
@@ -265,6 +260,7 @@ const ResponsiveCharts = () => {
                 Die Schweiz hat aktuell{" "}
                 <Link
                   className="underline"
+                  target="_blank"
                   href=" https://www.ensi.ch/de/themen/kernkraftwerke-schweiz/"
                 >
                   4 Atomreaktoren
@@ -283,7 +279,14 @@ const ResponsiveCharts = () => {
             text="Wirkunsgrad der Solaranlagen"
             tooltip={
               <p>
-                Aktuelle Solarpanels haben einen Wirkungsgrad von etwa 21.8%.
+                Aktuelle Solarmodule haben einen{" "}
+                <Link
+                  className="underline"
+                  target="_blank"
+                  href="https://www.uvek-gis.admin.ch/BFE/sonnendach/#:~:text=Ab%20September%202022%20wird%20ein%20Modul%2DWirkungsgrad%20von%2020%25%20angenommen"
+                >
+                  Wirkungsgrad von etwa 20%.
+                </Link>{" "}
                 Technologische Fortschritte könnten diesen Wert erhöhen und die
                 Stromerzeugung bei gleicher Fläche steigern.
               </p>
@@ -299,11 +302,12 @@ const ResponsiveCharts = () => {
               <p>
                 In der Schweiz stehen aktuell nur{" "}
                 <Link
+                  target="_blank"
                   className="underline"
-                  href="https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/windenergie.html/#:~:text=2020%20gibt%20es%20in%20unserem,Gesamtleistung%20von%2037%2C2%20MW"
+                  href="https://www.bfe.admin.ch/bfe/de/home/versorgung/erneuerbare-energien/windenergie.html"
                 >
-                  41 Windturbinen.{" "}
-                </Link>
+                  41 Windturbinen.
+                </Link>{" "}
                 Wird eine Windturbine hinzugef&uuml;gt, wird die
                 zus&auml;tzliche Stromproduktion anhand des Durchschnitts der
                 bestehenden Windturbinen berechnet.
