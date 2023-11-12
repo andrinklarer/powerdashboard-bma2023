@@ -86,24 +86,28 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     return <LoadingPage />;
   }
 
+  const roundData = (value: number) =>
+    value > 1000 ? roundingToZeroDezimals(value) : roundingToOneDezimal(value);
+
+  const roundingToOneDezimal = (value: number) => Math.round(value * 10) / 10;
+  const roundingToZeroDezimals = (value: number) => Math.round(value);
+
   const calculateNuclear = (value: number) =>
     hideNuclear
       ? 0
-      : Math.round(
-          (value / amountOfNuclearPowerPlants) * nuclearModifier * 10,
-        ) / 10;
+      : roundData((value / amountOfNuclearPowerPlants) * nuclearModifier);
 
-  const calculateRiver = (value: number) => Math.round(value * 10) / 10;
+  const calculateRiver = (value: number) => roundData(value);
 
-  const calculateStoragePower = (value: number) => Math.round(value * 10) / 10;
+  const calculateStoragePower = (value: number) => roundData(value);
 
-  const calculateThermic = (value: number) => Math.round(value * 10) / 10;
+  const calculateThermic = (value: number) => roundData(value);
 
   const calculateSolar = (value: number) =>
-    Math.round((value / efficiencyOfSolarPanels) * solarEfficiency * 10) / 10;
+    roundData((value / efficiencyOfSolarPanels) * solarEfficiency);
 
   const calculateWind = (value: number) =>
-    Math.round((value / amountOfWindTurbines) * windTurbines * 10) / 10;
+    roundData((value / amountOfWindTurbines) * windTurbines);
 
   const calculateTotalProduction = (item: {
     id?: number;
@@ -117,16 +121,13 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     Verlust: number;
     Verbrauch: number;
   }) => {
-    return (
-      Math.round(
-        (calculateRiver(item.Flusskraft) +
-          calculateNuclear(item.Kernkraft) +
-          calculateStoragePower(item.Speicherkraft) +
-          calculateThermic(item.Thermische) +
-          calculateSolar(item.Photovoltaik) +
-          calculateWind(item.Wind)) *
-          10,
-      ) / 10
+    return roundData(
+      calculateRiver(item.Flusskraft) +
+        calculateNuclear(item.Kernkraft) +
+        calculateStoragePower(item.Speicherkraft) +
+        calculateThermic(item.Thermische) +
+        calculateSolar(item.Photovoltaik) +
+        calculateWind(item.Wind),
     );
   };
 
