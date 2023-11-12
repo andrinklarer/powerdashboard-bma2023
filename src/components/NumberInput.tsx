@@ -65,7 +65,6 @@ export default function QuantityInput({
   max = 100,
   defaultValue = 0,
 }: QuantityInputProps) {
-  const isMobile = useIsMobile();
   return (
     <NumberInput
       onChange={(_event, value) => {
