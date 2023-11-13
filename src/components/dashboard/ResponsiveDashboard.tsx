@@ -282,14 +282,14 @@ const ResponsiveCharts = () => {
                   </Link>
                   , welche aktiv Strom produzieren. Wird ein Reaktor
                   hinzugef&uuml;gt, wird die zus&auml;tzliche Stromproduktion
-                  anhand eines neuen modernen Reaktor berechnet. Eine solche{" "}
+                  anhand eines neuen modernen Reaktors berechnet. Eine solche{" "}
                   <Link
                     href="https://www.ge.com/steam-power/products/steam-turbines/nuclear-arabelle#:~:text=Specifications%20for%20EPR%20and%20CPR1000%20reactors%20(50%20Hz%20only)"
                     className="underline"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    EPR Turbine von General Electric
+                    EPR-Turbine von General Electric
                   </Link>{" "}
                   liefert dem Stromnetz{" "}
                   <Link
@@ -309,7 +309,7 @@ const ResponsiveCharts = () => {
             />
             <ProductionOptions
               iconPath={iconPath + "solarIcon.svg"}
-              text="Wirkunsgrad der Solaranlagen"
+              text="Wirkungsgrad der Solaranlagen"
               tooltip={
                 <p>
                   Aktuelle Solarmodule haben einen{" "}
