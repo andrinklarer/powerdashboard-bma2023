@@ -282,7 +282,25 @@ const ResponsiveCharts = () => {
                   </Link>
                   , welche aktiv Strom produzieren. Wird ein Reaktor
                   hinzugef&uuml;gt, wird die zus&auml;tzliche Stromproduktion
-                  anhand des Durchschnitts der bestehenden Reaktoren berechnet.
+                  anhand eines neuen modernen Reaktor berechnet. Eine solche{" "}
+                  <Link
+                    href="https://www.ge.com/steam-power/products/steam-turbines/nuclear-arabelle"
+                    className="underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    ERP Turbine von General Electric
+                  </Link>{" "}
+                  liefert dem Stromnetz{" "}
+                  <Link
+                    href="https://www.ge.com/steam-power/resources/case-studies/hpc"
+                    className="underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    ca. 1.6 GW
+                  </Link>
+                  .
                 </p>
               }
               setAmount={setAmountOfNuclear}

@@ -14,6 +14,7 @@ import {
 } from "recharts";
 import {
   DiagrammType,
+  amountOfEnergyProducedByNuclearReactorPerDay,
   amountOfNuclearPowerPlants,
   amountOfWindTurbines,
   efficiencyOfSolarPanels,
@@ -89,13 +90,24 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   const roundData = (value: number) =>
     value > 1000 ? roundingToZeroDezimals(value) : roundingToOneDezimal(value);
 
+  const daysPerDataPoint = (date: Date) => {
+    return diagramType === DiagrammType.MONTH ? getDaysInMonth(date) : 1;
+  };
+
   const roundingToOneDezimal = (value: number) => Math.round(value * 10) / 10;
   const roundingToZeroDezimals = (value: number) => Math.round(value);
 
-  const calculateNuclear = (value: number) =>
+  const calculateNuclear = (value: number, date: Date) =>
     hideNuclear
       ? 0
-      : roundData((value / amountOfNuclearPowerPlants) * nuclearModifier);
+      : nuclearModifier > 4
+      ? roundData(
+          value +
+            amountOfEnergyProducedByNuclearReactorPerDay *
+              (nuclearModifier - 4) *
+              daysPerDataPoint(date),
+        )
+      : roundData((value / 4) * nuclearModifier);
 
   const calculateRiver = (value: number) => roundData(value);
 
@@ -123,7 +135,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
   }) => {
     return roundData(
       calculateRiver(item.Flusskraft) +
-        calculateNuclear(item.Kernkraft) +
+        calculateNuclear(item.Kernkraft, item.date) +
         calculateStoragePower(item.Speicherkraft) +
         calculateThermic(item.Thermische) +
         calculateSolar(item.Photovoltaik) +
@@ -163,7 +175,7 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
       Thermische: calculateThermic(item.Thermische),
       Speicherkraft: calculateStoragePower(item.Speicherkraft),
       Flusskraft: calculateRiver(item.Flusskraft),
-      Kernkraft: calculateNuclear(item.Kernkraft),
+      Kernkraft: calculateNuclear(item.Kernkraft, item.date),
       Verbrauch: calculateConsumption(item.Verbrauch, item.date),
       Produktion: calculateTotalProduction(item),
       Verlust: item.Verlust,

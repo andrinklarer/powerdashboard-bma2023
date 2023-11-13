@@ -1,4 +1,5 @@
 export const amountOfNuclearPowerPlants = 4;
+export const amountOfEnergyProducedByNuclearReactorPerDay = 1.6 * 24;
 export const defaultChartSize = 30;
 export const efficiencyOfSolarPanels = 20;
 export const amountOfWindTurbines = 41;

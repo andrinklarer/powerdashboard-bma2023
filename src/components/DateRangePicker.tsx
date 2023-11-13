@@ -142,7 +142,6 @@ export function DateRangePicker({
                   } else {
                     setDate({ from: date.from!, to: selected });
                   }
-                  // setDate(range!);
                 }
               } else {
                 if (
