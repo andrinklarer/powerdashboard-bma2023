@@ -3,6 +3,7 @@
 import {
   addDays,
   addMonths,
+  closestTo,
   format,
   isAfter,
   isSameDay,
@@ -135,7 +136,13 @@ export function DateRangePicker({
                 } else if (isSameDay(selected, date.to!)) {
                   setDate({ from: subDays(selected, 1), to: selected });
                 } else {
-                  setDate(range!);
+                  const closest = closestTo(selected, [date.from!, date.to!]);
+                  if (isSameDay(closest!, date.from!)) {
+                    setDate({ from: selected, to: date.to! });
+                  } else {
+                    setDate({ from: date.from!, to: selected });
+                  }
+                  // setDate(range!);
                 }
               } else {
                 if (
