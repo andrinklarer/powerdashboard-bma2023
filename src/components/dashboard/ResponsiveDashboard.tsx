@@ -362,7 +362,10 @@ const ResponsiveCharts = () => {
               Quellen und Informationen zu den Daten
             </Button>
           </SheetTrigger>{" "}
-          <SheetContent side={"bottom"}>
+          <SheetContent
+            side={"bottom"}
+            className="soverflow-scroll xs:h-fit h-full"
+          >
             <div className="flex items-center justify-center ">
               <div className="grid grid-cols-2 justify-center lg:grid-cols-12 2xl:w-10/12">
                 <div className="col-span-9 lg:pr-8">
