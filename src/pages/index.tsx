@@ -7,10 +7,13 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 
+import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
+
 import Navbar from "../components/Navbar";
 import { Button } from "~/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { AlertTriangle, AlertTriangleIcon } from "lucide-react";
 
 export default function Home() {
   return (
@@ -26,10 +29,10 @@ export default function Home() {
                 </h1>
               </div>
               <div className="col-span-12 p-4 sm:w-10/12 md:w-8/12 2xl:w-6/12">
-                <p className="text-22 mb-2 font-bold">
+                <p className="mb-2 text-22 font-bold">
                   Einzigartige Einblicke in den Stromhaushalt der Schweiz!
                 </p>
-                <p className="text-18 text-justify">
+                <p className="text-justify text-18">
                   Sie können historische und aktuellere Daten bis Ende Oktober
                   2023 einsehen und diese mit diversen Parametern und
                   hypothetischen Szenarien manipulieren. Zusätzlich sind die
@@ -39,41 +42,73 @@ export default function Home() {
                 </p>
               </div>
               <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
-              <div className="col-span-12 mx-2 flex h-fit justify-center space-x-8 sm:col-span-6 md:col-span-4 2xl:col-span-3">
-                <Card className="flex max-w-[450px] flex-wrap justify-end">
-                  <CardHeader className="p-6">
-                    <CardTitle className="text-2xl">
-                      Analyse von historischen und aktuellen Daten
-                    </CardTitle>
-                    <CardDescription className="text-md">
-                      Manipulieren Sie die Stromdaten anhand von diversen
-                      Parametern und Was-Wäre-Wenn-Szenarien.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardFooter className="flex justify-end pt-0">
-                    <Link href="/dashboard">
-                      <Button>Mehr</Button>
-                    </Link>{" "}
-                  </CardFooter>
-                </Card>
+              <div className="col-span-12 mx-2 flex items-stretch justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-6">
+                <div className="flex-grow">
+                  <Card className="flex h-full max-w-[450px] flex-wrap justify-end">
+                    <CardHeader className="p-6">
+                      <CardTitle className="text-2xl">
+                        Analyse von historischen und aktuellen Daten
+                      </CardTitle>
+                      <CardDescription className="text-md">
+                        Manipulieren Sie die Stromdaten anhand von diversen
+                        Parametern und Was-Wäre-Wenn-Szenarien.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardFooter className="items-end pt-0">
+                      <Link href="/dashboard">
+                        <Button>Mehr</Button>
+                      </Link>
+                    </CardFooter>
+                  </Card>
+                </div>
+                <div className=" flex-grow">
+                  <Card className=" flex h-full max-w-[450px] flex-wrap justify-end">
+                    <CardHeader className="">
+                      <CardTitle className="text-2xl">
+                        Übersicht verschiedener Parteien
+                      </CardTitle>
+                      <CardDescription className="text-md">
+                        Erfahren Sie mehr über die Meinungen verschiedener
+                        Parteien zum Themenbereich Strom und Stromerzeugung.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardFooter className="items-end pt-0">
+                      <Link href="/politik">
+                        <Button>Mehr</Button>
+                      </Link>
+                    </CardFooter>
+                  </Card>
+                </div>
               </div>
-              <div className="col-span-12 mx-2 flex justify-center space-x-8 sm:col-span-6 md:col-span-4 2xl:col-span-3">
-                <Card className="flex max-w-[450px] flex-wrap justify-end">
-                  <CardHeader className="">
-                    <CardTitle className="text-2xl">
-                      Übersicht verschiedener Parteien
-                    </CardTitle>
-                    <CardDescription className="text-md">
-                      Erfahren Sie mehr über die Meinungen verschiedener
-                      Parteien zum Themenbereich Strom und Stromerzeugung.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardFooter className="items-end pt-0">
-                    <Link href="/politik">
-                      <Button>Mehr</Button>
-                    </Link>
-                  </CardFooter>
-                </Card>
+              <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
+              <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
+
+              <div className="col-span-12  mx-2 flex justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-6">
+                <Alert>
+                  <AlertTriangle className="mt-[1px] h-6 w-6" />
+                  <AlertTitle className="!pl-9 text-lg font-bold">
+                    Achtung!
+                  </AlertTitle>
+                  <AlertDescription className="!pl-9">
+                    <div className="mt-2 space-y-2 text-base text-muted-foreground">
+                      <p>
+                        Die hier dargestellten Statistiken sollten nicht als
+                        offizielle Quelle für wissenschaftliche oder kritische
+                        Bildungszwecke verwendet werden. Sie dienen allein der
+                        Illustration von Was-Wäre-Wenn-Szenarien und sollen zum
+                        Nachdenken im Bereich der Energieversorgung anregen.
+                      </p>
+                      <p>
+                        Die angepassten Parameter werden auf die gesamte
+                        historische Statistik übertragen und dienen nicht als
+                        Vorschau auf künftige Daten oder repräsentativ für
+                        Vergangenes. Auch berücksichtigen die Berechnungen nicht
+                        die aktuellen Entwicklungen, wie beispielsweise die
+                        Anzahl der Autos zu Beginn des Jahres 2023.
+                      </p>
+                    </div>
+                  </AlertDescription>
+                </Alert>
               </div>
             </div>
           </div>

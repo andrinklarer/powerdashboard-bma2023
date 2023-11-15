@@ -57,7 +57,7 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       screens: { xs: "475px" },
-      fontSize: { 22: "1.375rem", 20: "1.25rem", 18: "1.125rem" },
+      fontSize: { 22: "1.375rem", 20: "1.25rem", 18: "1.125rem", 16: "1rem" },
 
       keyframes: {
         "accordion-down": {
