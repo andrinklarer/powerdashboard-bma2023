@@ -13,7 +13,16 @@ import Navbar from "../components/Navbar";
 import { Button } from "~/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { AlertTriangle, AlertTriangleIcon } from "lucide-react";
+import {
+  AlertTriangle,
+  AlertTriangleIcon,
+  Glasses,
+  LineChart,
+  Search,
+  SearchCode,
+  Users,
+} from "lucide-react";
+import { Separator } from "@radix-ui/react-separator";
 
 export default function Home() {
   return (
@@ -43,46 +52,112 @@ export default function Home() {
               </div>
               <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
               <div className="col-span-12 mx-2 flex items-stretch justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-6">
-                <div className="flex-grow">
-                  <Card className="flex h-full max-w-[450px] flex-wrap justify-end">
-                    <CardHeader className="p-6">
-                      <CardTitle className="text-2xl">
-                        Analyse von historischen und aktuellen Daten
-                      </CardTitle>
-                      <CardDescription className="text-md">
-                        Manipulieren Sie die Stromdaten anhand von diversen
-                        Parametern und Was-Wäre-Wenn-Szenarien.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardFooter className="items-end pt-0">
-                      <Link href="/dashboard">
-                        <Button>Mehr</Button>
-                      </Link>
-                    </CardFooter>
-                  </Card>
-                </div>
-                <div className=" flex-grow">
-                  <Card className=" flex h-full max-w-[450px] flex-wrap justify-end">
-                    <CardHeader className="">
-                      <CardTitle className="text-2xl">
-                        Übersicht verschiedener Parteien
-                      </CardTitle>
-                      <CardDescription className="text-md">
-                        Erfahren Sie mehr über die Meinungen verschiedener
-                        Parteien zum Themenbereich Strom und Stromerzeugung.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardFooter className="items-end pt-0">
-                      <Link href="/politik">
-                        <Button>Mehr</Button>
-                      </Link>
-                    </CardFooter>
-                  </Card>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div className="flex-grow">
+                    <Card className="flex h-full max-w-[450px] flex-wrap justify-end">
+                      <CardHeader className="p-6">
+                        <CardTitle className="flex items-center ">
+                          <div className="text-2xl font-bold tracking-tight">
+                            Analyse von historischen und aktuellen Daten
+                          </div>
+                          <LineChart className="h-8 w-8 flex-shrink-0" />
+                        </CardTitle>
+                        <CardDescription className="text-md">
+                          Manipulieren Sie die Stromdaten anhand von diversen
+                          Parametern und Was-Wäre-Wenn-Szenarien.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardFooter className="items-end pt-0">
+                        <Link href="/dashboard">
+                          <Button>Mehr</Button>
+                        </Link>
+                      </CardFooter>
+                    </Card>
+                  </div>
+                  <div className="flex-grow">
+                    <Card className=" flex h-full max-w-[450px] flex-wrap justify-end">
+                      <CardHeader className="">
+                        <CardTitle className="flex items-center ">
+                          <div className="text-2xl font-bold tracking-tight">
+                            Übersicht verschiedener Parteien
+                          </div>
+                          <Users className="mr-2 h-8 w-8 flex-shrink-0" />
+                        </CardTitle>
+                        <CardDescription className="text-md">
+                          Erfahren Sie mehr über die Meinungen verschiedener
+                          Parteien zum Themenbereich Strom und Stromerzeugung.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardFooter className="items-end pt-0">
+                        <Link href="/politik">
+                          <Button>Mehr</Button>
+                        </Link>
+                      </CardFooter>
+                    </Card>
+                  </div>
                 </div>
               </div>
               <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
               <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
 
+              {/*  */}
+              <div className="col-span-12 mx-2 flex items-stretch justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-6">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div className="flex-grow">
+                    <Card className="flex h-full max-w-[450px] flex-wrap justify-end">
+                      <CardHeader className="p-6">
+                        <CardTitle className="flex items-center ">
+                          <Search className="h-8 w-8 flex-shrink-0" />
+                          <Separator
+                            orientation="vertical"
+                            className="ml-2 mr-3 h-4/6 w-[1px] bg-zinc-400"
+                          />
+                          <div className="text-2xl font-bold tracking-tight">
+                            Analyse von historischen und aktuellen Daten
+                          </div>
+                        </CardTitle>
+                        <CardDescription className="text-md">
+                          Manipulieren Sie die Stromdaten anhand von diversen
+                          Parametern und Was-Wäre-Wenn-Szenarien.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardFooter className="items-end pt-0">
+                        <Link href="/dashboard">
+                          <Button>Mehr</Button>
+                        </Link>
+                      </CardFooter>
+                    </Card>
+                  </div>
+                  <div className="flex-grow">
+                    <Card className=" flex h-full max-w-[450px] flex-wrap justify-end">
+                      <CardHeader className="">
+                        <CardTitle className="flex items-center ">
+                          <Users className="h-8 w-8 flex-shrink-0" />
+                          <Separator
+                            orientation="vertical"
+                            className="ml-2 mr-3 h-4/6 w-[1px] bg-zinc-400"
+                          />
+                          <div className="text-2xl font-bold tracking-tight">
+                            Übersicht verschiedener Parteien
+                          </div>
+                        </CardTitle>
+                        <CardDescription className="text-md">
+                          Erfahren Sie mehr über die Meinungen verschiedener
+                          Parteien zum Themenbereich Strom und Stromerzeugung.
+                        </CardDescription>
+                      </CardHeader>
+                      <CardFooter className="items-end pt-0">
+                        <Link href="/politik">
+                          <Button>Mehr</Button>
+                        </Link>
+                      </CardFooter>
+                    </Card>
+                  </div>
+                </div>
+              </div>
+              <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
+              <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
+              {/*  */}
               <div className="col-span-12  mx-2 flex justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-6">
                 <Alert>
                   <AlertTriangle className="mt-[1px] h-6 w-6" />

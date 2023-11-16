@@ -31,6 +31,7 @@ import {
   SheetTrigger,
 } from "./../ui/sheet";
 import { Button } from "../ui/button";
+import { Separator } from "@radix-ui/react-separator";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();
@@ -364,7 +365,7 @@ const ResponsiveCharts = () => {
           </SheetTrigger>{" "}
           <SheetContent
             side={"bottom"}
-            className="soverflow-scroll xs:h-fit h-full"
+            className="soverflow-scroll h-full xs:h-fit"
           >
             <div className="flex items-center justify-center ">
               <div className="grid grid-cols-2 justify-center lg:grid-cols-12 2xl:w-10/12">
@@ -434,6 +435,20 @@ const ResponsiveCharts = () => {
                       className="underline"
                     >
                       Stromverbrauch Swissgrid
+                    </a>
+                  </p>
+                  <div className="flex justify-center sm:justify-start">
+                    <Separator className="mb-1 mt-2 h-[1px] w-1/12 max-w-[32px] shrink-0 bg-border" />
+                  </div>
+                  <p>
+                    Icons:{" "}
+                    <a
+                      href="https://www.flaticon.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline"
+                    >
+                      flaticon.com
                     </a>
                   </p>
                 </div>
