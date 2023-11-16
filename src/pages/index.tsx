@@ -1,6 +1,5 @@
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -9,20 +8,11 @@ import {
 
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 
-import Navbar from "../components/Navbar";
-import { Button } from "~/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
-import {
-  AlertTriangle,
-  AlertTriangleIcon,
-  Glasses,
-  LineChart,
-  Search,
-  SearchCode,
-  Users,
-} from "lucide-react";
 import { Separator } from "@radix-ui/react-separator";
+import { AlertTriangle, LineChart, Search, Users } from "lucide-react";
+import Link from "next/link";
+import { Button } from "~/components/ui/button";
+import Navbar from "../components/Navbar";
 
 export default function Home() {
   return (
