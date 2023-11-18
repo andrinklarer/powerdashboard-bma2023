@@ -11,37 +11,37 @@ const Navbar = () => {
     <>
       <div className="flex justify-between">
         <div className="flex h-16 items-center space-x-1 px-6 sm:px-12">
-          <Button variant="ghost" className="text-md font-medium">
-            <Link
-              href="/"
-              legacyBehavior
-              passHref
-              className="text-md p-2 font-medium hover:text-primary/80"
-            >
+          <Link
+            href="/"
+            legacyBehavior
+            passHref
+            className="text-md p-2 font-medium hover:text-primary/80"
+          >
+            <Button variant="ghost" className="text-md font-medium">
               Home
-            </Link>
-          </Button>
-          <Button variant="ghost" className="text-md font-medium">
-            <Link
-              href="/dashboard"
-              legacyBehavior
-              passHref
-              className="p-2 text-sm font-medium hover:text-primary/80"
-            >
+            </Button>
+          </Link>
+          <Link
+            href="/dashboard"
+            legacyBehavior
+            passHref
+            className="p-2 text-sm font-medium hover:text-primary/80"
+          >
+            <Button variant="ghost" className="text-md font-medium">
               Dashboard
-            </Link>
-          </Button>
+            </Button>
+          </Link>
 
-          <Button variant="ghost" className="text-md font-medium">
-            <Link
-              href="/politik"
-              legacyBehavior
-              passHref
-              className="p-2 text-sm font-medium hover:text-primary/80"
-            >
+          <Link
+            href="/politik"
+            legacyBehavior
+            passHref
+            className="p-2 text-sm font-medium hover:text-primary/80"
+          >
+            <Button variant="ghost" className="text-md font-medium">
               Politik
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
         <div className="flex h-16 w-16 items-center gap-4">
           <DarkModeToggleButton />

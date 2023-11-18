@@ -17,22 +17,19 @@ const DarkModeToggleButton = () => {
     }
   }, [resolvedTheme]);
 
-  {
-    /* <a href="https://www.flaticon.com/free-icons/night" title="night icons">Night icons created by rsetiawan - Flaticon</a> */
-  }
-  {
-    /* <a href="https://www.flaticon.com/free-icons/sun" title="sun icons">Sun icons created by Good Ware - Flaticon</a>  */
-  }
   return (
-    <Button variant="ghost" className="p-2">
+    <Button
+      variant="ghost"
+      className="p-2"
+      onClick={() => {
+        setTheme(resolvedTheme === "dark" ? "light" : "dark");
+      }}
+    >
       <Image
         src={iconPath}
         width={30}
         height={30}
         alt="light mode / dark mode switch"
-        onClick={() => {
-          setTheme(resolvedTheme === "dark" ? "light" : "dark");
-        }}
       />
     </Button>
   );
