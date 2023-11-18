@@ -20,10 +20,10 @@ export default function Home() {
       <div className=" flex">
         <main className="relative flex-grow ">
           <div className="flex">
-            <div className=" grid grid-cols-12 justify-items-center gap-4 space-y-8">
-              <div className=" col-span-12 w-full bg-[url('/title.png')] bg-cover  bg-center pb-16 drop-shadow-2xl">
+            <div className="grid grid-cols-12 justify-items-center gap-4 space-y-8">
+              <div className="col-span-12 w-full bg-[url('/title.png')] bg-cover bg-center pb-16 shadow-xl">
                 <Navbar />
-                <h1 className="xs pt-32 text-center text-4xl font-bold shadow-white xs:text-5xl sm:text-6xl">
+                <h1 className="text-shadow-sm pt-32 text-center text-4xl font-bold xs:text-5xl sm:text-6xl">
                   Powerdashboard
                 </h1>
               </div>
@@ -41,56 +41,6 @@ export default function Home() {
                 </p>
               </div>
               <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
-              <div className="col-span-12 mx-2 flex items-stretch justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-6">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  <div className="flex-grow">
-                    <Card className="flex h-full max-w-[450px] flex-wrap justify-end">
-                      <CardHeader className="p-6">
-                        <CardTitle className="flex items-center ">
-                          <div className="text-2xl font-bold tracking-tight">
-                            Analyse von historischen und aktuellen Daten
-                          </div>
-                          <LineChart className="h-8 w-8 flex-shrink-0" />
-                        </CardTitle>
-                        <CardDescription className="text-md">
-                          Manipulieren Sie die Stromdaten anhand von diversen
-                          Parametern und Was-Wäre-Wenn-Szenarien.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardFooter className="items-end pt-0">
-                        <Link href="/dashboard">
-                          <Button>Mehr</Button>
-                        </Link>
-                      </CardFooter>
-                    </Card>
-                  </div>
-                  <div className="flex-grow">
-                    <Card className=" flex h-full max-w-[450px] flex-wrap justify-end">
-                      <CardHeader className="">
-                        <CardTitle className="flex items-center ">
-                          <div className="text-2xl font-bold tracking-tight">
-                            Übersicht verschiedener Parteien
-                          </div>
-                          <Users className="mr-2 h-8 w-8 flex-shrink-0" />
-                        </CardTitle>
-                        <CardDescription className="text-md">
-                          Erfahren Sie mehr über die Meinungen verschiedener
-                          Parteien zum Themenbereich Strom und Stromerzeugung.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardFooter className="items-end pt-0">
-                        <Link href="/politik">
-                          <Button>Mehr</Button>
-                        </Link>
-                      </CardFooter>
-                    </Card>
-                  </div>
-                </div>
-              </div>
-              <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
-              <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
-
-              {/*  */}
               <div className="col-span-12 mx-2 flex items-stretch justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-6">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div className="flex-grow">
@@ -147,7 +97,6 @@ export default function Home() {
               </div>
               <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
               <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
-              {/*  */}
               <div className="col-span-12  mx-2 flex justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-6">
                 <Alert>
                   <AlertTriangle className="mt-[1px] h-6 w-6" />
@@ -178,16 +127,6 @@ export default function Home() {
             </div>
           </div>
         </main>
-        <style>{`
-        .text-stroke {
-        }
-        .legend-color {
-          width: 16px;
-          height: 16px;
-          display: inline-block;
-          margin-right: 5px;
-        }
-      `}</style>
       </div>
     </>
   );
