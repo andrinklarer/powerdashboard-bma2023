@@ -365,7 +365,7 @@ const ResponsiveCharts = () => {
           </SheetTrigger>{" "}
           <SheetContent
             side={"bottom"}
-            className="h-full overflow-scroll xs:h-fit"
+            className="h-full overflow-auto xs:h-fit"
           >
             <div className="flex items-center justify-center ">
               <div className="grid grid-cols-2 justify-center lg:grid-cols-12 2xl:w-10/12">
