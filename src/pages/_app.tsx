@@ -16,6 +16,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       enableSystem={true}
     >
       <Head>
+        <title>Dashboard des Schweizerenergiehaushaltes</title>
+        <meta
+          name="description"
+          content="Erhalten sie einzigartige Einblicke in den Stromhaushalt der Schweiz. Analysieren Sie historische und aktuelle Daten, manipulieren Sie diese mit verschiedenen Parametern und erkunden Sie hypothetische Szenarien. Informieren Sie sich über die Standpunkte verschiedener Parteien zur Stromversorgung. Ein interaktives Tool zur Förderung des Verständnisses und der Diskussion über Energieversorgung und -politik."
+        />
         <link
           rel="preload"
           href="/dark/LaTeX/eCar.svg"

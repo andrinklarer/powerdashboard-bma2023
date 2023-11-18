@@ -30,7 +30,7 @@ module.exports = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
-        transparentBackground: "hsla(var(--background), 0.8)",
+        transparentBackground: "hsla(var(--background), 0.85)",
 
         foreground: "hsl(var(--foreground))",
         primary: {
