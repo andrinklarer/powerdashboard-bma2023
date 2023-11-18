@@ -16,6 +16,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       enableSystem={true}
     >
       <Head>
+        <title>Dashboard des Schweizerenergiehaushaltes</title>
         <link
           rel="preload"
           href="/dark/LaTeX/eCar.svg"

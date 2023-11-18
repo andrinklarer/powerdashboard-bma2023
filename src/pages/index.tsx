@@ -21,7 +21,7 @@ export default function Home() {
         <main className="relative flex-grow ">
           <div className="flex">
             <div className="grid grid-cols-12 justify-items-center gap-4 space-y-8">
-              <div className="col-span-12 w-full bg-[url('/title.png')] bg-cover bg-center pb-16 shadow-xl">
+              <div className="col-span-12 w-full bg-[url('/title.webp')] bg-cover bg-center pb-16 shadow-xl">
                 <Navbar />
                 <h1 className="text-shadow-sm pt-32 text-center text-4xl font-bold xs:text-5xl sm:text-6xl">
                   Powerdashboard
