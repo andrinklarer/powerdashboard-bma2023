@@ -45,8 +45,7 @@ const PoliticsCard = ({
                   src={partyImage}
                   alt={partyName}
                   width={400} 
-                  height={220}
-                  layout="responsive" 
+                  height={220} 
                   objectFit="contain" 
                 />
               </div>
@@ -60,7 +59,7 @@ const PoliticsCard = ({
       </CardHeader>
       <CardFooter className="w-full justify-around pt-0">
         <Link href={partyProgramLink} className="m-1">
-          <Button>
+          <Button variant="outline">
             Zum Parteiprogram
             <svg
               className="ml-2 h-3.5 w-3.5"

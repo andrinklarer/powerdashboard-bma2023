@@ -27,7 +27,7 @@ const politicsJson = [
   },
   {
     partyComment:
-      'Die EDU sieht die aktuelle Stromversorgungslage kritisch, insbesondere hinsichtlich der Versorgungssicherheit und der Abhängigkeit von fossilen Brennstoffen und Importen.',
+      "Die EDU sieht die aktuelle Stromversorgungslage kritisch, insbesondere hinsichtlich der Versorgungssicherheit und der Abhängigkeit von fossilen Brennstoffen und Importen.",
     partyImageSource:
       "https://www.edu-sh.ch/app/download/8813876386/Logo_EDU-UDF_d_ES_gross.jpg?t=1502204674",
     partyProgramLink: "https://www.edu-schweiz.ch/positionen/",
@@ -35,6 +35,81 @@ const politicsJson = [
     partyName: "EDU",
     linkToParty: "https://www.edu-schweiz.ch",
     readMoreLink: "politik/edu",
+  },
+  {
+    partyComment:
+      '"Die Schweiz muss nicht zwischen einer sicheren oder einer sauberen Energieversorgung entscheiden. Für eine resiliente Energieversorgung wollen wir in den richtigen, nachhaltigen Energiemix investieren und uns gleichzeitig mit unseren Nachbarländern weiter vernetzen."',
+    partyImageSource:
+      "https://grunliberale.ch/dam/jcr:06b7f00f-08c1-45b6-8d37-82ebecb1e193/Test%20Logo%202.png",
+    partyProgramLink: "https://grunliberale.ch/themen.html",
+    partyImage: "/politik/gruenliberale-logo.png",
+    partyName: "Grünliberale",
+    linkToParty: "https://grunliberale.ch",
+    readMoreLink: "politik/gruenliberale",
+  },
+  {
+    partyComment:
+      '"Die Mitte ist überzeugt, dass der Entscheid zur Energiestrategie 2050 richtig war. [...] Hier haben wir nun einen massiven Aufholbedarf."',
+    partyImageSource:
+      "https://die-mitte.ampersand.company/wp-content/uploads/2021/04/11205711/die-mitte-logo.svg",
+    partyProgramLink: "https://bs.die-mitte.ch/themen/parteiprogramm/",
+    partyImage: "/politik/diemitte-logo.svg",
+    partyName: "Die Mitte",
+    linkToParty: "https://die-mitte.ch",
+    readMoreLink: "politik/diemitte",
+  },
+  {
+    partyComment:
+      '"Durch die zunehmende Elektrifizierung aufgrund der Dekarbonisierung wird der Stromverbrauch derSchweiz bis 2050 ansteigen. Dies erfordert einen raschen Zubau an erneuerbaren Energien, um den zukünftigenzusätzlichen Bedarf decken zu können."',
+    partyImageSource:
+      "https://djm-bucket01.fra1.digitaloceanspaces.com/assets/diejungemitte.ch/logo-1.png",
+    partyProgramLink: "https://diejungemitte.ch/unsere-politik",
+    partyImage: "/politik/diejungemitte-logo.png",
+    partyName: "Die Junge Mitte",
+    linkToParty: "https://diejungemitte.ch",
+    readMoreLink: "politik/diejungemitte",
+  },
+  {
+    partyComment:
+      '"Unsere aktuelle Stromversorgung ist wenig nachhaltig, da wir aufgrund der gescheiterten Energiestrategie 2050 auf u.a. Kohlenstrom aus Deutschland und Polen angewiesen sind, was weder ökonomisch, noch ökologisch nachhaltig ist. [...]"',
+    partyImageSource:
+      "https://jungfreisinnige.ch/wp-content/uploads/2023/04/logo-blau.svg",
+    partyProgramLink: "https://jungfreisinnige.ch/politik/",
+    partyImage: "/politik/jungfreisinnige-logo.svg",
+    partyName: "Jungfreisinnige",
+    linkToParty: "https://jungfreisinnige.ch",
+    readMoreLink: "politik/jungfreisinnige",
+  },
+  {
+    partyComment:
+      '"Unser aktuelles Stromversorgungssystem ist [...] im internationalen Vergleich in Bezug auf Nachhaltigkeit und Sicherheit eher gut situiert. Der zunehmende Importbedarf im Winter ist allerdings suboptimal."',
+    partyImageSource:
+      "https://apidata.ch.jglp.ch/uploads/medium_jglp_schweiz_logo_web_4bdb5de878.jpg",
+    partyProgramLink: "https://jungegrunliberale.ch/unsere-politik#positionen",
+    partyImage: "/politik/jungegrunliberale-logo.jpg",
+    partyName: "Junge Grünliberale",
+    linkToParty: "https://jungegrunliberale.ch",
+    readMoreLink: "politik/jungegrunliberale",
+  },
+  {
+    partyComment:
+      '"Wir setzen uns für eine nachhaltigere Energiepolitik ein, die sich stärker auf erneuerbare Quellen wie Wind-, Solar- und Geothermie stützt und weg von fossilen und nuklearen Energieformen bewegt."',
+    partyImageSource: "https://www.jungegruene.ch/img/redesign2015/logo_de.svg",
+    partyProgramLink: "https://www.jungegruene.ch/unsere-politik",
+    partyImage: "/politik/jungegruene-logo.svg",
+    partyName: "Junge Grüne",
+    linkToParty: "https://www.jungegruene.ch",
+    readMoreLink: "politik/jungegruene",
+  },
+  {
+    partyComment:
+      '"Entsprechend bewertet die Junge EDU Schweiz die aktuelle Lage als sehr volatil ein, was für die Stromversorgungssituation der Schweiz nachteilig ist."',
+    partyImageSource: "https://jedu.ch/wp-content/uploads/sites/23/2022/07/Banner_JEDU-1-300x152.png",
+    partyProgramLink: "https://jedu.ch/partei/",
+    partyImage: "/politik/jedu-logo.png",
+    partyName: "Junge EDU",
+    linkToParty: "https://jedu.ch",
+    readMoreLink: "politik/jedu",
   },
 ];
 

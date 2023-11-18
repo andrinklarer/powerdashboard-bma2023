@@ -8,12 +8,12 @@ import { Button } from "./ui/button";
 const DarkModeToggleButton = () => {
   const { resolvedTheme, setTheme } = useTheme();
 
-  const [iconPath, setIconPath] = useState("dark/themeToggle.svg");
+  const [iconPath, setIconPath] = useState("/dark/themeToggle.svg");
 
   useEffect(() => {
     // Set the icon path as soon as provided dynamically based on the resolved theme
     if (resolvedTheme) {
-      setIconPath(`${resolvedTheme}/themeToggle.svg`);
+      setIconPath(`/${resolvedTheme}/themeToggle.svg`);
     }
   }, [resolvedTheme]);
 
