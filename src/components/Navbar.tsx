@@ -9,7 +9,7 @@ import { Button } from "./ui/button";
 const Navbar = () => {
   return (
     <>
-      <div className="flex justify-between">
+      <div className="bg-transparentBackground flex justify-between ">
         <div className="flex h-16 items-center space-x-1 px-6 sm:px-12">
           <Link
             href="/"

@@ -17,13 +17,13 @@ import Navbar from "../components/Navbar";
 export default function Home() {
   return (
     <>
-      <div className="flex">
+      <div className=" flex">
         <main className="relative flex-grow ">
-          <Navbar />
           <div className="flex">
-            <div className="grid grid-cols-12 justify-items-center gap-4 space-y-8">
-              <div className="col-span-12 mt-16 ">
-                <h1 className="text-4xl font-bold sm:text-6xl ">
+            <div className=" grid grid-cols-12 justify-items-center gap-4 space-y-8">
+              <div className=" col-span-12 w-full bg-[url('/title.png')] bg-cover  bg-center pb-16 drop-shadow-2xl">
+                <Navbar />
+                <h1 className="xs pt-32 text-center text-4xl font-bold shadow-white xs:text-5xl sm:text-6xl">
                   Powerdashboard
                 </h1>
               </div>
@@ -178,6 +178,16 @@ export default function Home() {
             </div>
           </div>
         </main>
+        <style>{`
+        .text-stroke {
+        }
+        .legend-color {
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          margin-right: 5px;
+        }
+      `}</style>
       </div>
     </>
   );
