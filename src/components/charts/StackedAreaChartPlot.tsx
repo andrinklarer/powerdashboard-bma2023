@@ -101,13 +101,13 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
     hideNuclear
       ? 0
       : nuclearModifier > 4
-      ? roundData(
-          value +
-            amountOfEnergyProducedByNuclearReactorPerDay *
-              (nuclearModifier - 4) *
-              daysPerDataPoint(date),
-        )
-      : roundData((value / 4) * nuclearModifier);
+        ? roundData(
+            value +
+              amountOfEnergyProducedByNuclearReactorPerDay *
+                (nuclearModifier - 4) *
+                daysPerDataPoint(date),
+          )
+        : roundData((value / 4) * nuclearModifier);
 
   const calculateRiver = (value: number) => roundData(value);
 
@@ -178,7 +178,6 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
       Kernkraft: calculateNuclear(item.Kernkraft, item.date),
       Verbrauch: calculateConsumption(item.Verbrauch, item.date),
       Produktion: calculateTotalProduction(item),
-      Verlust: item.Verlust,
       Bedarf: item.Verbrauch + item.Verlust,
     };
   });
@@ -266,20 +265,8 @@ const StackedAreaChartPlot: React.FC<StackedAreaChartPlotProps> = ({
           <Tooltip
             content={<CustomTooltip diagramType={diagramType} />}
             labelStyle={{ fontWeight: "bold", borderBottom: "solid" }}
-            itemSorter={(i) =>
-              [
-                "Produktion",
-                "Verbrauch",
-                "Verlust",
-                "Wind",
-                "Thermische",
-                "Solar",
-                "Speicherkraft",
-                "Flusskraft",
-                "Kernkraft",
-              ].indexOf(i.dataKey!.toString())
-            }
           />
+
           {!hideNuclear && (
             <Area
               type="monotone"
