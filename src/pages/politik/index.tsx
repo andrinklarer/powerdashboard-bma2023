@@ -7,17 +7,6 @@ import PoliticsCard from "~/components/PoliticsCard";
 const politicsJson = [
   {
     partyComment:
-      '"Eine Strom-Mangellage ist die grösste Bedrohung für unser Land und wird gemäss Bund bereits in naher Zukunft Realität – mit katastrophalen Folgen für die Menschen in der Schweiz."',
-    partyImageSource:
-      "https://www.svp.ch/wp-content/themes/svp2022/images/SVP_Logo_de.png",
-    partyProgramLink: "https://www.svp.ch/positionen/parteiprogramme/",
-    partyImage: "/politik/svp-logo.webp",
-    partyName: "SVP",
-    linkToParty: "https://www.svp.ch",
-    readMoreLink: "politik/svp",
-  },
-  {
-    partyComment:
       '"Die SP Schweiz sieht die aktuelle Stromversorgungssicherheit als ungenügend, erstens, abhängig von fossilen Energie-Importen; zweitens,unsere AKWs älter werden; drittens, erneuerbare Energien nicht genügend ausgebaut."',
     partyImageSource:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Logo_der_Sozialdemokratischen_Partei_der_Schweiz_2009%2C_single.svg/1950px-Logo_der_Sozialdemokratischen_Partei_der_Schweiz_2009%2C_single.svg.png",
@@ -37,6 +26,17 @@ const politicsJson = [
     partyName: "Die Mitte",
     linkToParty: "https://die-mitte.ch",
     readMoreLink: "politik/diemitte",
+  },
+  {
+    partyComment:
+      '"Eine Strom-Mangellage ist die grösste Bedrohung für unser Land und wird gemäss Bund bereits in naher Zukunft Realität – mit katastrophalen Folgen für die Menschen in der Schweiz."',
+    partyImageSource:
+      "https://www.svp.ch/wp-content/themes/svp2022/images/SVP_Logo_de.png",
+    partyProgramLink: "https://www.svp.ch/positionen/parteiprogramme/",
+    partyImage: "/politik/svp-logo.webp",
+    partyName: "SVP",
+    linkToParty: "https://www.svp.ch",
+    readMoreLink: "politik/svp",
   },
   {
     partyComment:
@@ -65,17 +65,6 @@ const politicsJson = [
 const youngPoliticsJson = [
   {
     partyComment:
-      '"Unsere aktuelle Stromversorgung ist wenig nachhaltig, da wir aufgrund der gescheiterten Energiestrategie 2050 auf u.a. Kohlenstrom aus Deutschland und Polen angewiesen sind, was weder ökonomisch, noch ökologisch nachhaltig ist. [...]"',
-    partyImageSource:
-      "https://jungfreisinnige.ch/wp-content/uploads/2023/04/logo-blau.svg",
-    partyProgramLink: "https://jungfreisinnige.ch/politik/",
-    partyImage: "/politik/jungfreisinnige-logo.svg",
-    partyName: "Jungfreisinnige",
-    linkToParty: "https://jungfreisinnige.ch",
-    readMoreLink: "politik/jungfreisinnige",
-  },
-  {
-    partyComment:
       '"Wir setzen uns für eine nachhaltigere Energiepolitik ein, die sich stärker auf erneuerbare Quellen wie Wind-, Solar- und Geothermie stützt und weg von fossilen und nuklearen Energieformen bewegt."',
     partyImageSource: "https://www.jungegruene.ch/img/redesign2015/logo_de.svg",
     partyProgramLink: "https://www.jungegruene.ch/unsere-politik",
@@ -94,6 +83,17 @@ const youngPoliticsJson = [
     partyName: "Die Junge Mitte",
     linkToParty: "https://diejungemitte.ch",
     readMoreLink: "politik/diejungemitte",
+  },
+  {
+    partyComment:
+      '"Unsere aktuelle Stromversorgung ist wenig nachhaltig, da wir aufgrund der gescheiterten Energiestrategie 2050 auf u.a. Kohlenstrom aus Deutschland und Polen angewiesen sind, was weder ökonomisch, noch ökologisch nachhaltig ist. [...]"',
+    partyImageSource:
+      "https://jungfreisinnige.ch/wp-content/uploads/2023/04/logo-blau.svg",
+    partyProgramLink: "https://jungfreisinnige.ch/politik/",
+    partyImage: "/politik/jungfreisinnige-logo.svg",
+    partyName: "Jungfreisinnige",
+    linkToParty: "https://jungfreisinnige.ch",
+    readMoreLink: "politik/jungfreisinnige",
   },
   {
     partyComment:
