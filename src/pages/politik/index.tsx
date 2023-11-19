@@ -62,6 +62,7 @@ const politicsJson = [
     readMoreLink: "politik/edu",
   },
 ];
+
 const youngPoliticsJson = [
   {
     partyComment:
