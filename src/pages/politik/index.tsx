@@ -1,3 +1,4 @@
+import { Separator } from "@radix-ui/react-separator";
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 import Navbar from "~/components/Navbar";
@@ -28,14 +29,14 @@ const politicsJson = [
   },
   {
     partyComment:
-      "Die EDU sieht die aktuelle Stromversorgungslage kritisch, insbesondere hinsichtlich der Versorgungssicherheit und der Abhängigkeit von fossilen Brennstoffen und Importen.",
+      '"Die Mitte ist überzeugt, dass der Entscheid zur Energiestrategie 2050 richtig war. [...] Hier haben wir nun einen massiven Aufholbedarf."',
     partyImageSource:
-      "https://www.edu-sh.ch/app/download/8813876386/Logo_EDU-UDF_d_ES_gross.jpg?t=1502204674",
-    partyProgramLink: "https://www.edu-schweiz.ch/positionen/",
-    partyImage: "/politik/edu-logo.webp",
-    partyName: "EDU",
-    linkToParty: "https://www.edu-schweiz.ch",
-    readMoreLink: "politik/edu",
+      "https://die-mitte.ampersand.company/wp-content/uploads/2021/04/11205711/die-mitte-logo.svg",
+    partyProgramLink: "https://bs.die-mitte.ch/themen/parteiprogramm/",
+    partyImage: "/politik/diemitte-logo.svg",
+    partyName: "Die Mitte",
+    linkToParty: "https://die-mitte.ch",
+    readMoreLink: "politik/diemitte",
   },
   {
     partyComment:
@@ -48,16 +49,40 @@ const politicsJson = [
     linkToParty: "https://grunliberale.ch",
     readMoreLink: "politik/gruenliberale",
   },
+
   {
     partyComment:
-      '"Die Mitte ist überzeugt, dass der Entscheid zur Energiestrategie 2050 richtig war. [...] Hier haben wir nun einen massiven Aufholbedarf."',
+      "Die EDU sieht die aktuelle Stromversorgungslage kritisch, insbesondere hinsichtlich der Versorgungssicherheit und der Abhängigkeit von fossilen Brennstoffen und Importen.",
     partyImageSource:
-      "https://die-mitte.ampersand.company/wp-content/uploads/2021/04/11205711/die-mitte-logo.svg",
-    partyProgramLink: "https://bs.die-mitte.ch/themen/parteiprogramm/",
-    partyImage: "/politik/diemitte-logo.svg",
-    partyName: "Die Mitte",
-    linkToParty: "https://die-mitte.ch",
-    readMoreLink: "politik/diemitte",
+      "https://www.edu-sh.ch/app/download/8813876386/Logo_EDU-UDF_d_ES_gross.jpg?t=1502204674",
+    partyProgramLink: "https://www.edu-schweiz.ch/positionen/",
+    partyImage: "/politik/edu-logo.webp",
+    partyName: "EDU",
+    linkToParty: "https://www.edu-schweiz.ch",
+    readMoreLink: "politik/edu",
+  },
+];
+const youngPoliticsJson = [
+  {
+    partyComment:
+      '"Unsere aktuelle Stromversorgung ist wenig nachhaltig, da wir aufgrund der gescheiterten Energiestrategie 2050 auf u.a. Kohlenstrom aus Deutschland und Polen angewiesen sind, was weder ökonomisch, noch ökologisch nachhaltig ist. [...]"',
+    partyImageSource:
+      "https://jungfreisinnige.ch/wp-content/uploads/2023/04/logo-blau.svg",
+    partyProgramLink: "https://jungfreisinnige.ch/politik/",
+    partyImage: "/politik/jungfreisinnige-logo.svg",
+    partyName: "Jungfreisinnige",
+    linkToParty: "https://jungfreisinnige.ch",
+    readMoreLink: "politik/jungfreisinnige",
+  },
+  {
+    partyComment:
+      '"Wir setzen uns für eine nachhaltigere Energiepolitik ein, die sich stärker auf erneuerbare Quellen wie Wind-, Solar- und Geothermie stützt und weg von fossilen und nuklearen Energieformen bewegt."',
+    partyImageSource: "https://www.jungegruene.ch/img/redesign2015/logo_de.svg",
+    partyProgramLink: "https://www.jungegruene.ch/unsere-politik",
+    partyImage: "/politik/jungegruene-logo.svg",
+    partyName: "Junge Grüne",
+    linkToParty: "https://www.jungegruene.ch",
+    readMoreLink: "politik/jungegruene",
   },
   {
     partyComment:
@@ -72,17 +97,6 @@ const politicsJson = [
   },
   {
     partyComment:
-      '"Unsere aktuelle Stromversorgung ist wenig nachhaltig, da wir aufgrund der gescheiterten Energiestrategie 2050 auf u.a. Kohlenstrom aus Deutschland und Polen angewiesen sind, was weder ökonomisch, noch ökologisch nachhaltig ist. [...]"',
-    partyImageSource:
-      "https://jungfreisinnige.ch/wp-content/uploads/2023/04/logo-blau.svg",
-    partyProgramLink: "https://jungfreisinnige.ch/politik/",
-    partyImage: "/politik/jungfreisinnige-logo.svg",
-    partyName: "Jungfreisinnige",
-    linkToParty: "https://jungfreisinnige.ch",
-    readMoreLink: "politik/jungfreisinnige",
-  },
-  {
-    partyComment:
       '"Unser aktuelles Stromversorgungssystem ist [...] im internationalen Vergleich in Bezug auf Nachhaltigkeit und Sicherheit eher gut situiert. Der zunehmende Importbedarf im Winter ist allerdings suboptimal."',
     partyImageSource:
       "https://apidata.ch.jglp.ch/uploads/medium_jglp_schweiz_logo_web_4bdb5de878.jpg",
@@ -91,16 +105,6 @@ const politicsJson = [
     partyName: "Junge Grünliberale",
     linkToParty: "https://jungegrunliberale.ch",
     readMoreLink: "politik/jungegrunliberale",
-  },
-  {
-    partyComment:
-      '"Wir setzen uns für eine nachhaltigere Energiepolitik ein, die sich stärker auf erneuerbare Quellen wie Wind-, Solar- und Geothermie stützt und weg von fossilen und nuklearen Energieformen bewegt."',
-    partyImageSource: "https://www.jungegruene.ch/img/redesign2015/logo_de.svg",
-    partyProgramLink: "https://www.jungegruene.ch/unsere-politik",
-    partyImage: "/politik/jungegruene-logo.svg",
-    partyName: "Junge Grüne",
-    linkToParty: "https://www.jungegruene.ch",
-    readMoreLink: "politik/jungegruene",
   },
   {
     partyComment:
@@ -131,10 +135,29 @@ const Politics = () => {
       <div className="flex">
         <main className="relative flex-grow">
           <Navbar />
-          <div className="mt-4"></div>
-          <div className="col-span-12 mx-2 flex items-stretch justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-4">
-            <div className="grid grid-cols-1 justify-center gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+          <div className="my-16 text-center text-5xl font-bold">
+            <h2>Partei&uuml;berblick</h2>
+          </div>
+
+          <div className="mx-2 flex justify-center">
+            <div className="mb-16 grid grid-cols-1 justify-center gap-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
               {politicsJson.map((item) => (
+                <PoliticsCard
+                  partyProgramLink={item.partyProgramLink}
+                  partyImageSource={item.partyImageSource}
+                  partyComment={item.partyComment}
+                  partyImage={"/" + iconPath + item.partyImage}
+                  partyName={item.partyName}
+                  linkToParty={item.linkToParty}
+                  readMoreLink={item.readMoreLink}
+                  key={item.partyName}
+                />
+              ))}
+              <div className="col-span-1 mb-12 mt-24 md:col-span-2 2xl:col-span-3">
+                <Separator className="h-[1px] w-full" />
+                <h2 className="text-center text-5xl font-bold">Jungparteien</h2>
+              </div>
+              {youngPoliticsJson.map((item) => (
                 <PoliticsCard
                   partyProgramLink={item.partyProgramLink}
                   partyImageSource={item.partyImageSource}

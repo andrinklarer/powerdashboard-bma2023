@@ -31,7 +31,7 @@ export default function Home() {
                 <p className="mb-2 text-22 font-bold">
                   Einzigartige Einblicke in den Stromhaushalt der Schweiz!
                 </p>
-                <p className="text-justify text-18">
+                <p className="text-justify text-18 tracking-tight opacity-90">
                   Sie können historische und aktuellere Daten bis Ende Oktober
                   2023 einsehen und diese mit diversen Parametern und
                   hypothetischen Szenarien manipulieren. Zusätzlich sind die
@@ -52,7 +52,7 @@ export default function Home() {
                             orientation="vertical"
                             className="ml-2 mr-3 h-4/6 w-[1px] bg-zinc-400"
                           />
-                          <div className="text-2xl font-bold tracking-tight">
+                          <div className="text-xl font-bold tracking-tight">
                             Analyse von historischen und aktuellen Daten
                           </div>
                         </CardTitle>
@@ -77,7 +77,7 @@ export default function Home() {
                             orientation="vertical"
                             className="ml-2 mr-3 h-4/6 w-[1px] bg-zinc-400"
                           />
-                          <div className="text-2xl font-bold tracking-tight">
+                          <div className="text-xl font-bold tracking-tight">
                             Übersicht verschiedener Parteien
                           </div>
                         </CardTitle>

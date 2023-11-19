@@ -30,7 +30,7 @@ const PoliticsCard = ({
   partyProgramLink,
 }: PoliticsCard) => {
   return (
-    <Card className="flex max-h-[520px] max-w-[450px] flex-wrap">
+    <Card className="flex max-w-[450px] flex-wrap">
       <CardHeader className="p-6">
         <CardTitle className="flex items-center justify-center">
           <div className=" text-center text-2xl font-bold tracking-tight">
@@ -52,7 +52,7 @@ const PoliticsCard = ({
           {partyComment}
         </CardDescription>
       </CardHeader>
-      <CardFooter className="w-full justify-around pt-0">
+      <CardFooter className="w-full items-end justify-around pt-0">
         <Link href={partyProgramLink} className="m-1">
           <Button variant="outline">
             Zum Parteiprogram
