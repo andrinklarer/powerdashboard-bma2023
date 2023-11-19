@@ -1,4 +1,5 @@
-import React from "react";
+import { useTheme } from "next-themes";
+import React, { useEffect, useState } from "react";
 import Navbar from "~/components/Navbar";
 import PoliticsCard from "~/components/PoliticsCard";
 
@@ -9,7 +10,7 @@ const politicsJson = [
     partyImageSource:
       "https://www.svp.ch/wp-content/themes/svp2022/images/SVP_Logo_de.png",
     partyProgramLink: "https://www.svp.ch/positionen/parteiprogramme/",
-    partyImage: "/politik/svp-logo.png",
+    partyImage: "/politik/svp-logo.webp",
     partyName: "SVP",
     linkToParty: "https://www.svp.ch",
     readMoreLink: "politik/svp",
@@ -20,7 +21,7 @@ const politicsJson = [
     partyImageSource:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Logo_der_Sozialdemokratischen_Partei_der_Schweiz_2009%2C_single.svg/1950px-Logo_der_Sozialdemokratischen_Partei_der_Schweiz_2009%2C_single.svg.png",
     partyProgramLink: "https://www.sp-ps.ch/wofuer-wir-stehen/parteiprogramm/",
-    partyImage: "/politik/sp-logo.png",
+    partyImage: "/politik/sp-logo.svg",
     partyName: "SP",
     linkToParty: "https://www.sp-ps.ch",
     readMoreLink: "politik/sp",
@@ -31,7 +32,7 @@ const politicsJson = [
     partyImageSource:
       "https://www.edu-sh.ch/app/download/8813876386/Logo_EDU-UDF_d_ES_gross.jpg?t=1502204674",
     partyProgramLink: "https://www.edu-schweiz.ch/positionen/",
-    partyImage: "/politik/edu-logo.jpg",
+    partyImage: "/politik/edu-logo.webp",
     partyName: "EDU",
     linkToParty: "https://www.edu-schweiz.ch",
     readMoreLink: "politik/edu",
@@ -42,7 +43,7 @@ const politicsJson = [
     partyImageSource:
       "https://grunliberale.ch/dam/jcr:06b7f00f-08c1-45b6-8d37-82ebecb1e193/Test%20Logo%202.png",
     partyProgramLink: "https://grunliberale.ch/themen.html",
-    partyImage: "/politik/gruenliberale-logo.png",
+    partyImage: "/politik/gruenliberale-logo.svg",
     partyName: "Grünliberale",
     linkToParty: "https://grunliberale.ch",
     readMoreLink: "politik/gruenliberale",
@@ -64,7 +65,7 @@ const politicsJson = [
     partyImageSource:
       "https://djm-bucket01.fra1.digitaloceanspaces.com/assets/diejungemitte.ch/logo-1.png",
     partyProgramLink: "https://diejungemitte.ch/unsere-politik",
-    partyImage: "/politik/diejungemitte-logo.png",
+    partyImage: "/politik/diejungemitte-logo.webp",
     partyName: "Die Junge Mitte",
     linkToParty: "https://diejungemitte.ch",
     readMoreLink: "politik/diejungemitte",
@@ -86,7 +87,7 @@ const politicsJson = [
     partyImageSource:
       "https://apidata.ch.jglp.ch/uploads/medium_jglp_schweiz_logo_web_4bdb5de878.jpg",
     partyProgramLink: "https://jungegrunliberale.ch/unsere-politik#positionen",
-    partyImage: "/politik/jungegrunliberale-logo.jpg",
+    partyImage: "/politik/jungegrunliberale-logo.webp",
     partyName: "Junge Grünliberale",
     linkToParty: "https://jungegrunliberale.ch",
     readMoreLink: "politik/jungegrunliberale",
@@ -104,16 +105,27 @@ const politicsJson = [
   {
     partyComment:
       '"Entsprechend bewertet die Junge EDU Schweiz die aktuelle Lage als sehr volatil ein, was für die Stromversorgungssituation der Schweiz nachteilig ist."',
-    partyImageSource: "https://jedu.ch/wp-content/uploads/sites/23/2022/07/Banner_JEDU-1-300x152.png",
+    partyImageSource:
+      "https://jedu.ch/wp-content/uploads/sites/23/2022/07/Banner_JEDU-1-300x152.png",
     partyProgramLink: "https://jedu.ch/partei/",
-    partyImage: "/politik/jedu-logo.png",
+    partyImage: "/politik/jedu-logo.webp",
     partyName: "Junge EDU",
     linkToParty: "https://jedu.ch",
     readMoreLink: "politik/jedu",
   },
 ];
 
-const politics = () => {
+const Politics = () => {
+  const { resolvedTheme } = useTheme();
+  const [iconPath, setIconPath] = useState("dark");
+
+  useEffect(() => {
+    // Set the icon path as soon as provided dynamically based on the resolved theme
+    if (resolvedTheme) {
+      setIconPath(`${resolvedTheme}`);
+    }
+  }, [resolvedTheme]);
+
   return (
     <>
       <div className="flex">
@@ -127,7 +139,7 @@ const politics = () => {
                   partyProgramLink={item.partyProgramLink}
                   partyImageSource={item.partyImageSource}
                   partyComment={item.partyComment}
-                  partyImage={item.partyImage}
+                  partyImage={"/" + iconPath + item.partyImage}
                   partyName={item.partyName}
                   linkToParty={item.linkToParty}
                   readMoreLink={item.readMoreLink}
@@ -142,4 +154,4 @@ const politics = () => {
   );
 };
 
-export default politics;
+export default Politics;
