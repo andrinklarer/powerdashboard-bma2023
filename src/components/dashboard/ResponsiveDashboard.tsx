@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { DateRange } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
 import {
   DiagrammType,
   amountOfNuclearPowerPlants,
@@ -21,17 +21,15 @@ import ChartSetting from "./ChartSettings";
 import ProductionOptions from "./ProductionOptions";
 import ScenarioOptions from "./ScenarioOptions";
 
+import { Separator } from "@radix-ui/react-separator";
+import { Button } from "../ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "./../ui/sheet";
-import { Button } from "../ui/button";
-import { Separator } from "@radix-ui/react-separator";
 
 function getLatestDate() {
   const { data } = api.powerDashboard.getLastDate.useQuery();

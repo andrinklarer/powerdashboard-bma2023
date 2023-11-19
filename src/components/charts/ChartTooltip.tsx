@@ -1,7 +1,6 @@
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import React from "react";
-import { Separator } from "../ui/separator";
 import { DiagrammType } from "~/lib/consts";
 
 interface Payload {

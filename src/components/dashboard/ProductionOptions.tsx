@@ -1,9 +1,9 @@
 import Image from "next/image";
-import QuantityInput from "../NumberInput";
-import { ReactElement, use } from "react";
-import { Button } from "../ui/button";
-import { InformationPopover } from "../InformationPopover";
+import type { ReactElement } from "react";
 import { useIsMobile } from "~/lib/utils";
+import { InformationPopover } from "../InformationPopover";
+import QuantityInput from "../NumberInput";
+import { Button } from "../ui/button";
 
 interface ProductionOptionsProps {
   setAmount: React.Dispatch<React.SetStateAction<number>>;

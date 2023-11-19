@@ -1,6 +1,5 @@
-import { ReactElement, useState } from "react";
+import { type ReactElement, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import { useIsMobile } from "~/lib/utils";
 
 export interface InformationPopoverProps {
   popoverContent: ReactElement;

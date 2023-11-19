@@ -2,7 +2,7 @@ import { endOfMonth, format, getDaysInMonth, startOfMonth } from "date-fns";
 import { de } from "date-fns/locale";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { DateRange } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
 import {
   Area,
   AreaChart,

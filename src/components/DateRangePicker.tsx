@@ -13,7 +13,7 @@ import {
 } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import * as React from "react";
-import { DateRange } from "react-day-picker";
+import type { DateRange } from "react-day-picker";
 
 import { de } from "date-fns/locale";
 import { useEffect } from "react";

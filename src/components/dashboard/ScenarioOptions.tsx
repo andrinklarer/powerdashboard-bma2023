@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { ReactElement, useEffect } from "react";
+import { useEffect, type ReactElement } from "react";
 import { useIsMobile } from "~/lib/utils";
 import { ScenarioDialog } from "../ScenarioDialog";
 import { Button } from "../ui/button";

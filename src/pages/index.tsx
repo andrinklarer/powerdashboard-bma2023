@@ -9,7 +9,7 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "~/components/ui/alert";
 
 import { Separator } from "@radix-ui/react-separator";
-import { AlertTriangle, LineChart, Search, Users } from "lucide-react";
+import { AlertTriangle, Search, Users } from "lucide-react";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import Navbar from "../components/Navbar";
@@ -23,7 +23,7 @@ export default function Home() {
             <div className="grid grid-cols-12 justify-items-center gap-4 space-y-8">
               <div className="col-span-12 w-full bg-[url('/title.webp')] bg-cover bg-center pb-16 shadow-xl">
                 <Navbar />
-                <h1 className="text-shadow-sm pt-32 text-center text-4xl font-bold xs:text-5xl sm:text-6xl">
+                <h1 className="pt-32 text-center text-4xl font-bold text-shadow-sm xs:text-5xl sm:text-6xl">
                   Powerdashboard
                 </h1>
               </div>
@@ -97,8 +97,8 @@ export default function Home() {
               </div>
               <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
               <div className="hidden md:col-span-2 md:block 2xl:col-span-3"></div>
-              <div className="col-span-12  mx-2 flex justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-6">
-                <Alert>
+              <div className="col-span-12 mx-2 flex justify-center space-x-8 sm:col-span-12 md:col-span-8 2xl:col-span-6">
+                <Alert className="mb-16">
                   <AlertTriangle className="mt-[1px] h-6 w-6" />
                   <AlertTitle className="!pl-9 text-lg font-bold">
                     Achtung!
