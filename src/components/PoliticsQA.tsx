@@ -30,7 +30,7 @@ const PoliticsQA = (questionPage: questionPage) => (
     <div className="grid grid-cols-12 sm:justify-items-center gap-4 space-y-8 pt-8">
       {questionPage.content.map((item, index) => (
         <>
-          <div className="col-span-12 sm:w-10/12 md:w-8/12 2xl:w-6/12">
+          <div key={"response."+index} className="col-span-12 sm:w-10/12 md:w-8/12 2xl:w-6/12">
             <div className="sm:text-md md:text-xl  font-bold">
               {index + 1}. {item.question}
             </div>
@@ -39,8 +39,8 @@ const PoliticsQA = (questionPage: questionPage) => (
               {item.responseList ? (
                 <div className="pt-2">
                   <ul className="list-disc list-inside">
-                    {item.responseList.map((responseListItem) => (
-                      <li className="pl-3">{responseListItem}</li>
+                    {item.responseList.map((responseListItem,index1) => (
+                      <li className="pl-3" key={"responseList."+index1}>{responseListItem}</li>
                     ))}
                   </ul>
                 </div>

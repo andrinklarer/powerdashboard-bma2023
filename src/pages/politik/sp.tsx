@@ -64,7 +64,7 @@ const questionPage = {
   ],
 };
 
-const sp = () => {
+const Sp = () => {
   const { resolvedTheme } = useTheme();
   const [iconPath, setIconPath] = useState("dark");
 
@@ -100,4 +100,4 @@ const sp = () => {
   );
 };
 
-export default sp;
+export default Sp;

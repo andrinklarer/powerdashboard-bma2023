@@ -44,7 +44,7 @@ const questionPage = {
   ],
 };
 
-const diemitte = () => {
+const DieMitte = () => {
   const { resolvedTheme } = useTheme();
   const [iconPath, setIconPath] = useState("dark");
 
@@ -80,4 +80,4 @@ const diemitte = () => {
   );
 };
 
-export default diemitte;
+export default DieMitte;

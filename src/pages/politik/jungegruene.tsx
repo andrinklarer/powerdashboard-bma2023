@@ -61,7 +61,7 @@ const questionPage = {
   ],
 };
 
-const jungegruene = () => {
+const JungeGruene = () => {
   const { resolvedTheme } = useTheme();
   const [iconPath, setIconPath] = useState("dark");
 
@@ -97,4 +97,4 @@ const jungegruene = () => {
   );
 };
 
-export default jungegruene;
+export default JungeGruene;

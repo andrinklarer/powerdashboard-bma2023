@@ -47,7 +47,7 @@ const questionPage = {
   ],
 };
 
-const diejungemitte = () => {
+const JungeGrunliberale = () => {
   const { resolvedTheme } = useTheme();
   const [iconPath, setIconPath] = useState("dark");
 
@@ -83,4 +83,4 @@ const diejungemitte = () => {
   );
 };
 
-export default diejungemitte;
+export default JungeGrunliberale;

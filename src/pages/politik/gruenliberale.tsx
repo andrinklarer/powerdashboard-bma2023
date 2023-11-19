@@ -70,7 +70,7 @@ const questionPage = {
 //   source: "",
 // },
 
-const gruenliberale = () => {
+const Gruenliberale = () => {
   const { resolvedTheme } = useTheme();
   const [iconPath, setIconPath] = useState("dark");
 
@@ -106,4 +106,4 @@ const gruenliberale = () => {
   );
 };
 
-export default gruenliberale;
+export default Gruenliberale;

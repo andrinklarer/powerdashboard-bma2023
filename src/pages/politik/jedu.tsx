@@ -65,7 +65,7 @@ const questionPage = {
   ],
 };
 
-const diejungemitte = () => {
+const Jedu = () => {
   const { resolvedTheme } = useTheme();
   const [iconPath, setIconPath] = useState("dark");
 
@@ -101,4 +101,4 @@ const diejungemitte = () => {
   );
 };
 
-export default diejungemitte;
+export default Jedu;

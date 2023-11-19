@@ -62,7 +62,7 @@ const questionPage = {
   ],
 };
 
-const edu = () => {
+const Edu = () => {
   const { resolvedTheme } = useTheme();
   const [iconPath, setIconPath] = useState("dark");
 
@@ -98,4 +98,4 @@ const edu = () => {
   );
 };
 
-export default edu;
+export default Edu;

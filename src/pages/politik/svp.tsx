@@ -61,7 +61,7 @@ const questionPage = {
   ],
 };
 
-const svp = () => {
+const Svp = () => {
   return (
     <>
       <div className="flex">
@@ -87,4 +87,4 @@ const svp = () => {
   );
 };
 
-export default svp;
+export default Svp;
