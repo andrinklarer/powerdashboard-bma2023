@@ -193,12 +193,6 @@ const ResponsiveCharts = () => {
               setState={setShowLosses}
               disabled={!showConsumption}
             />
-            <ChartSetting
-              label="Kernkraft"
-              description="Stromproduktion ohne Kernkraft."
-              state={hideNuclear}
-              setState={setHideNuclear}
-            />
             <ScenarioOptions
               iconPath={iconPath + "electricCar.svg"}
               title="Elektromobilit&auml;t"
@@ -260,6 +254,12 @@ const ResponsiveCharts = () => {
               setState={setElectricCars}
               state={electricCars}
               disabled={!showConsumption}
+            />
+            <ChartSetting
+              label="Kernkraft"
+              description="Stromproduktion ohne Kernkraft."
+              state={hideNuclear}
+              setState={setHideNuclear}
             />
           </div>
         </div>
