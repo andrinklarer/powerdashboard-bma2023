@@ -55,7 +55,7 @@ const PoliticsCard = ({
       <CardFooter className="w-full items-end justify-around pt-0">
         <Link href={partyProgramLink} className="m-1">
           <Button variant="outline">
-            Zum Parteiprogram
+            Zum Parteiprogramm
             <svg
               className="ml-2 h-3.5 w-3.5"
               aria-hidden="true"
