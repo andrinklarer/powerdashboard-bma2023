@@ -188,7 +188,7 @@ const ResponsiveCharts = () => {
             />
             <ChartSetting
               label="Bedarf"
-              description="Zeige den Verbrauch + Verluste durch die Strom&uuml;bertragung und Verteilung."
+              description="Zeige den Verbrauch inklusive Netzverluste und dem Verbrauch der Speicherpumpen."
               state={showLosses}
               setState={setShowLosses}
               disabled={!showConsumption}
@@ -256,7 +256,7 @@ const ResponsiveCharts = () => {
               disabled={!showConsumption}
             />
             <ChartSetting
-              label="Kernkraft"
+              label="Kernkraft abschalten"
               description="Stromproduktion ohne Kernkraft."
               state={hideNuclear}
               setState={setHideNuclear}
