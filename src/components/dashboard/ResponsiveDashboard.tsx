@@ -256,7 +256,7 @@ const ResponsiveCharts = () => {
               disabled={!showConsumption}
             />
             <ChartSetting
-              label="Kernkraft abschalten"
+              label="Kernkraft ausblenden"
               description="Stromproduktion ohne Kernkraft."
               state={hideNuclear}
               setState={setHideNuclear}
