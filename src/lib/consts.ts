@@ -4,7 +4,7 @@ export const defaultChartSize = 30;
 export const efficiencyOfSolarPanels = 20;
 export const amountOfWindTurbines = 41;
 
-export const dataFreshness = new Date(2023, 8, 30);
+export const dataFreshness = new Date(2023, 9, 31);
 
 export const precentageOfElectricCars = 3.27;
 
