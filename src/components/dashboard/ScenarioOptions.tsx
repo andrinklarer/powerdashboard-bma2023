@@ -39,7 +39,7 @@ const ScenarioOptions: React.FC<ScenarioOptionsProps> = ({ ...props }) => {
               {props.title}
             </label>
             <p className="text-sm text-muted-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              Rein elektrischer, privater Personenverkehr
+              Rein elektrischer, privater Personenverkehr.
             </p>
           </div>
         }
@@ -91,7 +91,7 @@ const ScenarioOptions: React.FC<ScenarioOptionsProps> = ({ ...props }) => {
               ></ScenarioDialog>
             </div>
             <p className="text-sm text-muted-foreground peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              Rein elektrischer, privater Personenverkehr
+              Rein elektrischer, privater Personenverkehr.
             </p>
           </div>
         </div>

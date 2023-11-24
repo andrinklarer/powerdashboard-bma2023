@@ -135,7 +135,7 @@ const Politics = () => {
     <>
       <div className="flex">
         <main className="relative flex-grow">
-          <Navbar />
+          <Navbar politik />
           <div className="my-16 text-center text-5xl font-bold">
             <h2>Partei&uuml;berblick</h2>
           </div>

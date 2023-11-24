@@ -5,11 +5,21 @@ import Link from "next/link";
 import { Separator } from "./ui/separator";
 import DarkModeToggleButton from "./DarkModeToggle";
 import { Button } from "./ui/button";
+import { boolean } from "zod";
 
-const Navbar = () => {
+interface NavbarProps {
+  home?: boolean;
+  dashboard?: boolean;
+  politik?: boolean;
+}
+const Navbar = ({
+  home = false,
+  dashboard = false,
+  politik = false,
+}: NavbarProps) => {
   return (
     <>
-      <div className="bg-transparentBackground flex justify-between ">
+      <div className="flex justify-between bg-transparentBackground ">
         <div className="flex h-16 items-center space-x-1 px-6 sm:px-12">
           <Link
             href="/"
@@ -17,7 +27,10 @@ const Navbar = () => {
             passHref
             className="text-md p-2 font-medium hover:text-primary/80"
           >
-            <Button variant="ghost" className="text-md font-medium">
+            <Button
+              variant="ghost"
+              className={`text-md ${home ? "font-bold" : "font-medium"}`}
+            >
               Home
             </Button>
           </Link>
@@ -27,7 +40,10 @@ const Navbar = () => {
             passHref
             className="p-2 text-sm font-medium hover:text-primary/80"
           >
-            <Button variant="ghost" className="text-md font-medium">
+            <Button
+              variant="ghost"
+              className={`text-md ${dashboard ? "font-bold" : "font-medium"}`}
+            >
               Dashboard
             </Button>
           </Link>
@@ -38,7 +54,10 @@ const Navbar = () => {
             passHref
             className="p-2 text-sm font-medium hover:text-primary/80"
           >
-            <Button variant="ghost" className="text-md font-medium">
+            <Button
+              variant="ghost"
+              className={`text-md ${politik ? "font-bold" : "font-medium"}`}
+            >
               Politik
             </Button>
           </Link>
