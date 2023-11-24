@@ -267,7 +267,7 @@ const ResponsiveCharts = () => {
           <div className="space-y-2.5 rounded  ">
             <ProductionOptions
               iconPath={iconPath + "nuclearIcon.svg"}
-              text="Anzahl Reaktoren in der Schweiz"
+              text="Anzahl Atomreaktoren"
               tooltip={
                 <p>
                   Die Schweiz hat aktuell{" "}
