@@ -6,6 +6,7 @@ import "~/styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "~/components/ui/toaster";
 import Head from "next/head";
+import { Analytics } from "@vercel/analytics/react";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
@@ -48,6 +49,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       </Head>
       <div className="h-screen bg-background text-foreground">
         <Component {...pageProps} />
+        <Analytics />
       </div>
       <Toaster />
     </ThemeProvider>
