@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const questionPage = {
   partyName: "Junge SVP",
   partyURL: "https://www.jsvp.ch/",
-  partyImage: "/politik/jsvp-logo.png",
+  partyImage: "/politik/jsvp-logo.webp",
   source:
     "https://www.jsvp.ch/wp-content/uploads/2022/10/JSVP-Parteiprogramm_2019-2023.pdf",
   content: [
