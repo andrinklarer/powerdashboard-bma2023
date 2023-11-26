@@ -85,7 +85,7 @@ const politicsJson = [
 const youngPoliticsJson = [
   {
     partyComment:
-      'Die JUSO betont die Bedeutung einer CO2-neutralen Stromversorgung und unterstützt die Beschleunigung des Ausbaus erneuerbarer Energien.',
+      "Die JUSO betont die Bedeutung einer CO2-neutralen Stromversorgung und unterstützt die Beschleunigung des Ausbaus erneuerbarer Energien.",
     partyImageSource: "",
     partyProgramLink: "https://juso.ch/de/positionspapiere/programm/",
     partyImage: "/politik/juso-logo.svg",
@@ -95,7 +95,18 @@ const youngPoliticsJson = [
   },
   {
     partyComment:
-      'Die Junge SVP legt starken Nachdruck auf Eigenverantwortung und freie Marktwirtschaft, was darauf hindeuten könnte, dass sie die Stromversorgung unter diesen Gesichtspunkten bewerten würde, einschließlich einer möglichen Befürwortung der Nutzung von Kernkraft und anderen Energiequellen, die zur wirtschaftlichen Unabhängigkeit beitragen.',
+      '"Durch die zunehmende Elektrifizierung aufgrund der Dekarbonisierung wird der Stromverbrauch derSchweiz bis 2050 ansteigen. Dies erfordert einen raschen Zubau an erneuerbaren Energien, um den zukünftigenzusätzlichen Bedarf decken zu können."',
+    partyImageSource:
+      "https://djm-bucket01.fra1.digitaloceanspaces.com/assets/diejungemitte.ch/logo-1.png",
+    partyProgramLink: "https://diejungemitte.ch/unsere-politik",
+    partyImage: "/politik/diejungemitte-logo.webp",
+    partyName: "Die Junge Mitte",
+    linkToParty: "https://diejungemitte.ch",
+    readMoreLink: "politik/diejungemitte",
+  },
+  {
+    partyComment:
+      "Die Junge SVP legt starken Nachdruck auf Eigenverantwortung und freie Marktwirtschaft, was darauf hindeuten könnte, dass sie die Stromversorgung unter diesen Gesichtspunkten bewerten würde, einschließlich einer möglichen Befürwortung der Nutzung von Kernkraft und anderen Energiequellen, die zur wirtschaftlichen Unabhängigkeit beitragen.",
     partyImageSource: "",
     partyProgramLink: "https://juso.ch/de/positionspapiere/programm/",
     partyImage: "/politik/jsvp-logo.png",
@@ -112,17 +123,6 @@ const youngPoliticsJson = [
     partyName: "Junge Grüne",
     linkToParty: "https://www.jungegruene.ch",
     readMoreLink: "politik/jungegruene",
-  },
-  {
-    partyComment:
-      '"Durch die zunehmende Elektrifizierung aufgrund der Dekarbonisierung wird der Stromverbrauch derSchweiz bis 2050 ansteigen. Dies erfordert einen raschen Zubau an erneuerbaren Energien, um den zukünftigenzusätzlichen Bedarf decken zu können."',
-    partyImageSource:
-      "https://djm-bucket01.fra1.digitaloceanspaces.com/assets/diejungemitte.ch/logo-1.png",
-    partyProgramLink: "https://diejungemitte.ch/unsere-politik",
-    partyImage: "/politik/diejungemitte-logo.webp",
-    partyName: "Die Junge Mitte",
-    linkToParty: "https://diejungemitte.ch",
-    readMoreLink: "politik/diejungemitte",
   },
   {
     partyComment:

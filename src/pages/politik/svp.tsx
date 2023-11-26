@@ -57,7 +57,7 @@ const questionPage = {
         "Wie trägt die SVP dazu bei, den Fortschritt in der Entwicklung neuer Energiespeichertechnologien und effizienterer, nachhaltiger Produktionsmethoden zu fördern?",
       /* erweitere text hier */
       response:
-        '"ist für Technologieoffenheit und unterstützt neue Technologien wie synthetische Treibstoffe und neue Speichertechnologien; spricht sich gegen Technologieverbote wie beispielsweise ein Ölheizungsverbot oder ein Fahrverbot für Benzin- oder Dieselautos aus."',
+        '"Die SVP ist für Technologieoffenheit und unterstützt neue Technologien wie synthetische Treibstoffe und neue Speichertechnologien. Die SVP spricht sich gegen Technologieverbote wie beispielsweise ein Ölheizungsverbot oder ein Fahrverbot für Benzin- oder Dieselautos aus."',
       source: "https://www.svp.ch/wp-content/uploads/230726_Parteiprogramm.pdf",
     },
   ],
