@@ -40,6 +40,26 @@ const politicsJson = [
   },
   {
     partyComment:
+      '"Die Stromversorgungssicherheit ist durch die unsichere Ausgangslage nach dem Entscheid für einen KKW-Ausstieg und dem zu langsamen Ausbau der erneuerbaren Energien gefährdet. Der Stromverbrauch wird bis 2050 deutlich steigen, und der zusätzliche Strom muss möglichst CO2-neutral produziert werden, um die Klimaziele nicht zu gefährden."',
+    partyImageSource: "",
+    partyProgramLink: "https://gruene.ch/agenda-2023",
+    partyImage: "/politik/gruene-logo.svg",
+    partyName: "Grüne",
+    linkToParty: "https://gruene.ch",
+    readMoreLink: "politik/gruene",
+  },
+  {
+    partyComment:
+      "Die FDP sieht den Ausbau der erneuerbaren Energien als notwendig an und fordert eine pragmatische Lösung, die sowohl die Versorgungssicherheit gewährleistet als auch die Klimaziele berücksichtigt.",
+    partyImageSource: "",
+    partyProgramLink: "https://www.fdp.ch/positionen",
+    partyImage: "/politik/fdp-logo.svg",
+    partyName: "FDP Die Liberalen",
+    linkToParty: "https://www.fdp.ch",
+    readMoreLink: "politik/fdp",
+  },
+  {
+    partyComment:
       '"Die Schweiz muss nicht zwischen einer sicheren oder einer sauberen Energieversorgung entscheiden. Für eine resiliente Energieversorgung wollen wir in den richtigen, nachhaltigen Energiemix investieren und uns gleichzeitig mit unseren Nachbarländern weiter vernetzen."',
     partyImageSource:
       "https://grunliberale.ch/dam/jcr:06b7f00f-08c1-45b6-8d37-82ebecb1e193/Test%20Logo%202.png",
@@ -49,7 +69,6 @@ const politicsJson = [
     linkToParty: "https://grunliberale.ch",
     readMoreLink: "politik/gruenliberale",
   },
-
   {
     partyComment:
       "Die EDU sieht die aktuelle Stromversorgungslage kritisch, insbesondere hinsichtlich der Versorgungssicherheit und der Abhängigkeit von fossilen Brennstoffen und Importen.",
@@ -64,6 +83,26 @@ const politicsJson = [
 ];
 
 const youngPoliticsJson = [
+  {
+    partyComment:
+      'Die JUSO betont die Bedeutung einer CO2-neutralen Stromversorgung und unterstützt die Beschleunigung des Ausbaus erneuerbarer Energien.',
+    partyImageSource: "",
+    partyProgramLink: "https://juso.ch/de/positionspapiere/programm/",
+    partyImage: "/politik/juso-logo.svg",
+    partyName: "JUSO",
+    linkToParty: "https://juso.ch/",
+    readMoreLink: "politik/juso",
+  },
+  {
+    partyComment:
+      'Die Junge SVP legt starken Nachdruck auf Eigenverantwortung und freie Marktwirtschaft, was darauf hindeuten könnte, dass sie die Stromversorgung unter diesen Gesichtspunkten bewerten würde, einschließlich einer möglichen Befürwortung der Nutzung von Kernkraft und anderen Energiequellen, die zur wirtschaftlichen Unabhängigkeit beitragen.',
+    partyImageSource: "",
+    partyProgramLink: "https://juso.ch/de/positionspapiere/programm/",
+    partyImage: "/politik/jsvp-logo.png",
+    partyName: "Junge SVP",
+    linkToParty: "https://www.jsvp.ch/",
+    readMoreLink: "politik/jsvp",
+  },
   {
     partyComment:
       '"Wir setzen uns für eine nachhaltigere Energiepolitik ein, die sich stärker auf erneuerbare Quellen wie Wind-, Solar- und Geothermie stützt und weg von fossilen und nuklearen Energieformen bewegt."',
