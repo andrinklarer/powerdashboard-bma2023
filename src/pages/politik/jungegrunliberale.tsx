@@ -32,7 +32,8 @@ const questionPage = {
     },
     {
       /* erweitere antwort hier */
-      question: "Welche entscheidenden Schritte müssen ergriffen werden, damit wir in der Schweiz eine zuverlässige und nachhaltige Stromversorgung für die Zukunft sicherstellen können?",
+      question:
+        "Welche entscheidenden Schritte müssen ergriffen werden, damit wir in der Schweiz eine zuverlässige und nachhaltige Stromversorgung für die Zukunft sicherstellen können?",
       response:
         "Die zunehmende Verbreitung von E-Mobilität und Wärmepumpen zur Ablösung fossiler Energieträger ist zu begrüssen. Es wird so in Summe weniger Energie verbraucht, aber mehr Strom. Deshalb braucht es strategische Investitionen ins Strom-Versorgungssystem. Einerseits ist das Netz auszubauen. Sowohl das lokale Verteilnetz wie auch das internationale Verteilnetz. Andererseits braucht es mehr PV (und Wind), insbesondere auch Anlagen die Winterstrom produzieren wie Alpine Solaranlagen oder Anlagen mit hohem Anstellwinkel.",
       responseList: [
@@ -66,7 +67,6 @@ const JungeGrunliberale = () => {
           <PoliticsQA
             partyImage={"/" + iconPath + questionPage.partyImage}
             partyURL={questionPage.partyURL}
-            partyName={questionPage.partyName}
             content={questionPage.content}
           />
           <div className="mb-20 flex justify-center pt-10 sm:text-sm md:text-lg">

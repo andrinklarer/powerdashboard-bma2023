@@ -79,7 +79,6 @@ const DieJungeMitte = () => {
           <PoliticsQA
             partyImage={"/" + iconPath + questionPage.partyImage}
             partyURL={questionPage.partyURL}
-            partyName={questionPage.partyName}
             content={questionPage.content}
           />
           <div className="mb-20 flex justify-center pt-10 sm:text-sm md:text-lg">
