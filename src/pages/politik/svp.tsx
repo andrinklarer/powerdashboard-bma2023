@@ -1,11 +1,13 @@
 import Navbar from "~/components/Navbar";
 import Link from "next/link";
 import PoliticsQA from "~/components/PoliticsQA";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const questionPage = {
   partyName: "SVP",
   partyURL: "https://www.svp.ch",
-  partyImage: "/politik/svp-logo.png",
+  partyImage: "/politik/svp-logo.webp",
   source: "https://www.svp.ch/wp-content/uploads/230726_Parteiprogramm.pdf",
   content: [
     {
@@ -62,13 +64,22 @@ const questionPage = {
 };
 
 const Svp = () => {
+  const { resolvedTheme } = useTheme();
+  const [iconPath, setIconPath] = useState("dark");
+
+  useEffect(() => {
+    // Set the icon path as soon as provided dynamically based on the resolved theme
+    if (resolvedTheme) {
+      setIconPath(`${resolvedTheme}`);
+    }
+  }, [resolvedTheme]);
   return (
     <>
       <div className="flex">
         <main className="relative flex-grow">
           <Navbar />
           <PoliticsQA
-            partyImage={questionPage.partyImage}
+            partyImage={"/" + iconPath + questionPage.partyImage}
             partyURL={questionPage.partyURL}
             partyName={questionPage.partyName}
             content={questionPage.content}

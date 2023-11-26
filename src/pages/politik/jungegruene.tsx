@@ -24,7 +24,8 @@ const questionPage = {
       source: "",
     },
     {
-      question: "Welche entscheidenden Schritte müssen ergriffen werden, damit wir in der Schweiz eine zuverlässige und nachhaltige Stromversorgung für die Zukunft sicherstellen können?",
+      question:
+        "Welche entscheidenden Schritte müssen ergriffen werden, damit wir in der Schweiz eine zuverlässige und nachhaltige Stromversorgung für die Zukunft sicherstellen können?",
       response:
         "Um eine zuverlässige und nachhaltige Stromversorgung in der Schweiz zu gewährleisten, sind aus Sicht der Jungen Grünen folgende Schritte zentral:",
       responseList: [
@@ -45,17 +46,22 @@ const questionPage = {
     },
     {
       question: "Welche Bedenken haben Sie in Bezug auf Atomkraft?",
-      response: "Nukleare Katastrophen, Radioaktiver Abfall, Gesundheitsrisiken, Kosten",
+      response:
+        "Nukleare Katastrophen, Radioaktiver Abfall, Gesundheitsrisiken, Kosten",
       source: "",
     },
     {
-      question: "Wie soll die Produktion der Atomkraftwerke kompensiert werden?",
-      response: "Die Abschaltung der Atomkraftwerke in der Schweiz soll durch den Ausbau erneuerbarer Energien, insbesondere Wasserkraft, Sonnenenergie und Windkraft, sowie durch erhöhte Energieeffizienz und den Einsatz von Speichertechnologien kompensiert werden.",
+      question:
+        "Wie soll die Produktion der Atomkraftwerke kompensiert werden?",
+      response:
+        "Die Abschaltung der Atomkraftwerke in der Schweiz soll durch den Ausbau erneuerbarer Energien, insbesondere Wasserkraft, Sonnenenergie und Windkraft, sowie durch erhöhte Energieeffizienz und den Einsatz von Speichertechnologien kompensiert werden.",
       source: "",
     },
     {
-      question: "Wie trägt Ihre Partei dazu bei, den Fortschritt in der Entwicklung neuer Energiespeichertechnologien und effizienterer, nachhaltiger Produktionsmethoden zu fördern?",
-      response: "Die Jungen Grünen setzent sich für politische Rahmenbedingungen ein, die Forschung und Investitionen in neue Energiespeichertechnologien und effizientere, nachhaltige Produktionsmethoden fördern, und unterstützt Bildungsinitiativen und öffentliche Diskurse zu diesen Themen.",
+      question:
+        "Wie trägt Ihre Partei dazu bei, den Fortschritt in der Entwicklung neuer Energiespeichertechnologien und effizienterer, nachhaltiger Produktionsmethoden zu fördern?",
+      response:
+        "Die Jungen Grünen setzent sich für politische Rahmenbedingungen ein, die Forschung und Investitionen in neue Energiespeichertechnologien und effizientere, nachhaltige Produktionsmethoden fördern, und unterstützt Bildungsinitiativen und öffentliche Diskurse zu diesen Themen.",
       source: "",
     },
   ],
@@ -80,7 +86,6 @@ const JungeGruene = () => {
           <PoliticsQA
             partyImage={"/" + iconPath + questionPage.partyImage}
             partyURL={questionPage.partyURL}
-            partyName={questionPage.partyName}
             content={questionPage.content}
           />
           <div className="mb-20 flex justify-center pt-10 sm:text-sm md:text-lg">

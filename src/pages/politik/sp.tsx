@@ -20,8 +20,7 @@ const questionPage = {
     {
       question: "Wie stufen Sie die aktuelle Stromversorgungslage ein?",
       /* erweitere text hier */
-      response:
-        '"Angespannt"',
+      response: '"Angespannt"',
       source: "https://www.svp.ch/wp-content/uploads/230726_Parteiprogramm.pdf",
     },
     {
@@ -34,8 +33,7 @@ const questionPage = {
     {
       question: "Braucht die Schweiz Atomkraftwerke?",
       /* erweitere text hier */
-      response:
-        '"Nein"',
+      response: '"Nein"',
       source: "https://www.svp.ch/wp-content/uploads/230726_Parteiprogramm.pdf",
     },
     {
