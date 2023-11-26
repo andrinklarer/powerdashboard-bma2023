@@ -7,7 +7,7 @@ import PoliticsCard from "~/components/PoliticsCard";
 const politicsJson = [
   {
     partyComment:
-      '"Die SP Schweiz sieht die aktuelle Stromversorgungssicherheit als ungenügend, erstens, abhängig von fossilen Energie-Importen; zweitens,unsere AKWs älter werden; drittens, erneuerbare Energien nicht genügend ausgebaut."',
+      '"Die SP Schweiz sieht die aktuelle Stromversorgungssicherheit als ungenügend, erstens, abhängig von fossilen Energie-Importen; zweitens, unsere AKWs älter werden; drittens, erneuerbare Energien nicht genügend ausgebaut."',
     partyImageSource:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Logo_der_Sozialdemokratischen_Partei_der_Schweiz_2009%2C_single.svg/1950px-Logo_der_Sozialdemokratischen_Partei_der_Schweiz_2009%2C_single.svg.png",
     partyProgramLink: "https://www.sp-ps.ch/wofuer-wir-stehen/parteiprogramm/",
@@ -109,7 +109,7 @@ const youngPoliticsJson = [
       "Die Junge SVP legt starken Nachdruck auf Eigenverantwortung und freie Marktwirtschaft, was darauf hindeuten könnte, dass sie die Stromversorgung unter diesen Gesichtspunkten bewerten würde, einschließlich einer möglichen Befürwortung der Nutzung von Kernkraft und anderen Energiequellen, die zur wirtschaftlichen Unabhängigkeit beitragen.",
     partyImageSource: "",
     partyProgramLink: "https://juso.ch/de/positionspapiere/programm/",
-    partyImage: "/politik/jsvp-logo.png",
+    partyImage: "/politik/jsvp-logo.webp",
     partyName: "Junge SVP",
     linkToParty: "https://www.jsvp.ch/",
     readMoreLink: "politik/jsvp",
