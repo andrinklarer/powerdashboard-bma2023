@@ -40,7 +40,7 @@ const politicsJson = [
   },
   {
     partyComment:
-      '"Die Stromversorgungssicherheit ist durch die unsichere Ausgangslage nach dem Entscheid für einen KKW-Ausstieg und dem zu langsamen Ausbau der erneuerbaren Energien gefährdet. Der Stromverbrauch wird bis 2050 deutlich steigen, und der zusätzliche Strom muss möglichst CO2-neutral produziert werden, um die Klimaziele nicht zu gefährden."',
+      'Die zentrale Rolle der erneuerbaren Energien und der Nachhaltigkeit wird von den Grünen hervorgehoben, weshalb sie der Ansicht sind, dass die aktuelle Situation der Stromversorgung in der Schweiz in diesen Bereichen optimiert werden muss.',
     partyImageSource: "",
     partyProgramLink: "https://gruene.ch/agenda-2023",
     partyImage: "/politik/gruene-logo.svg",
